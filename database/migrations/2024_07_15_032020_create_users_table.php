@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('username')->unique();
+            $table->string('email', 100)->unique()->nullable();
             $table->string('password');
-            $table->enum('role', ['Admin', 'Member']);
+            $table->enum('role', ['admin', 'member'])->default('Member');
             $table->boolean('aktif')->default(true);
 
             // Profil
@@ -25,11 +25,9 @@ return new class extends Migration
 
             // Kontak
             $table->string('telepon', 30)->unique()->nullable();
-            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
 
             $table->timestamps();
-            $table->index('username');
             $table->index('email');
             $table->index('telepon');
         });
@@ -40,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user');
     }
 };

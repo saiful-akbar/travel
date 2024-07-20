@@ -1,6 +1,5 @@
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan storage:link
-php artisan migrate:fresh --seed
-php artisan optimize:clear
+composer install --optimize-autoloader --no-dev
+
+php artisan view:cache
+php artisan event:cache
+php artisan config:cache

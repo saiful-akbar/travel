@@ -3,13 +3,22 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasUlids;
+
+    protected $table = 'user';
+    protected $keyType = 'string';
+    public $incrementing = false;
+
 
     /**
      * The attributes that are mass assignable.
@@ -17,9 +26,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'role',
+        'aktif',
+        'foto',
+        'nama_lengkap',
+        'jenis_kelamin',
+        'telepon',
     ];
 
     /**
@@ -29,7 +43,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -42,6 +55,42 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'admin' => 'boolean',
+            'aktif' => 'boolean',
         ];
+    }
+
+    /**
+     * Merubah value pada foto saat diambil.
+     *
+     * @return Attribute
+     */
+    public function foto(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => is_null($value) ? null : asset("/storage/$value")
+        );
+    }
+
+    /**
+     * Merubah value pada role saat diisi.
+     *
+     * @return Attribute
+     */
+    public function role(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => strtolower($value)
+        );
+    }
+
+    /**
+     * Get all of the pesanan for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pesanan(): HasMany
+    {
+        return $this->hasMany(Pesanan::class, 'user_id', 'id');
     }
 }
