@@ -42,14 +42,14 @@ class UserSeeder extends Seeder
             User::create($user);
         }
 
-        for ($i = 1; $i <= 100; $i++) {
-            User::create([
-                'email' => "user-$i@gmail.com",
-                'password' => bcrypt('password123'),
-                'role' => 'member',
-                'nama_lengkap' => "User $i",
-                'jenis_kelamin' => 'P',
-            ]);
-        }
+        // for ($i = 1; $i <= 100; $i++) {
+        //     User::create([
+        //         'email' => "user-$i@gmail.com",
+        //         'password' => bcrypt('password123'),
+        //         'role' => 'member',
+        //         'nama_lengkap' => "User $i",
+        //         'jenis_kelamin' => 'P',
+        //     ]);
+        // }
     }
 }

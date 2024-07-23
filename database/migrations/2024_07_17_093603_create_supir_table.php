@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('supir', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('nama', 100);
+            $table->string('foto', 100)->nullable();
+            $table->string('nama_lengkap', 100);
+            $table->date('tanggal_lahir')->nullable();
             $table->timestamps();
         });
     }

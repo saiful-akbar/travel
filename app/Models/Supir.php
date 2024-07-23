@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasTimestamp;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -9,14 +10,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Supir extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, HasTimestamp;
 
     protected $table = 'supir';
     protected $keyType = 'string';
     public $incrementing = false;
 
     protected $fillable = [
-        'nama'
+        'foto',
+        'nama_lengkap',
+        'tanggal_lahir',
     ];
 
     /**

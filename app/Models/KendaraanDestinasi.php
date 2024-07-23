@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasTimestamp;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class KendaraanDestinasi extends Pivot
 {
-    use HasUlids;
+    use HasUlids, HasTimestamp;
 
     protected $table = 'kendaraan_destinasi';
     protected $keyType = 'string';

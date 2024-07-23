@@ -41,7 +41,7 @@ if (!function_exists('storage')) {
      * @param boolean|null $secure
      * @return string
      */
-    function storage(string $path, ?bool $secure = null): string
+    function storage(string $path = '/', ?bool $secure = null): string
     {
         return asset('storage/' . ltrim($path, '/'), $secure);
     }
@@ -67,12 +67,12 @@ if (!function_exists('avatar')) {
      *
      * @return string
      */
-    function avatar(): string
+    function avatar(?string $url = null): string
     {
-        if (is_null(user()?->foto)) {
-            return asset('assets/dashboard/images/photo_empty.jpg');
+        if (!is_null($url)) {
+            return $url;
         }
 
-        return user()?->foto;
+        return asset('assets/dashboard/images/photo_empty.jpg');
     }
 }

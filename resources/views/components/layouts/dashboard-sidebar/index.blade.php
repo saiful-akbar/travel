@@ -7,7 +7,7 @@
             <div class="navbar-nav nav-vertical navbar-vertical-without-icons pt-2">
                 <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                     @foreach ($menus as $menu)
-                        <span class="dropdown-header mt-4">{{ $menu['name'] }}</span>
+                        <span class="dropdown-header {{ $loop->iteration > 1 ? 'mt-4' : '' }}">{{ $menu['name'] }}</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
     
                         <div id="{{ str_replace(' ', '', $menu['name']) }}">

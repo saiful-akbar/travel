@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('aktif')->default(true);
 
             // Profil
-            $table->string('foto', 50)->nullable();
+            $table->string('foto', 100)->nullable();
             $table->string('nama_lengkap', 100);
             $table->enum('jenis_kelamin', ['L', 'P']);
 
