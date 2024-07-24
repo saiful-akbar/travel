@@ -24,8 +24,8 @@ return new class extends Migration
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->foreignUlid('kendaraan_id')
-                ->constrained('kendaraan')
+            $table->foreignUlid('unit_kendaraan_id')
+                ->constrained('unit_kendaraan')
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
 

@@ -66,7 +66,7 @@ class UpdateUserRequest extends FormRequest implements UpdateRequest
              * Jika sudah hapus foto lama.
              */
             if (!is_null($this->user->foto)) {
-                Storage::disk('public')->delete(str_replace(storage(), '', $this->user->foto));
+                Storage::disk('public')->delete($this->user->foto);
             }
 
             /**

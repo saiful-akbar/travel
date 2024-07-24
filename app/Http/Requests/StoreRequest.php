@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Database\Eloquent\Model;
+
 interface StoreRequest
 {
     /**
-     * Method untuk insert data user baru
+     * Undocumented function
      *
-     * @return void
+     * @return Model|null
      */
-    public function insert(): void;
+    public function insert(): ?Model;
 }

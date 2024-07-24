@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('kendaraan', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->string('merek', 100);
             $table->string('tipe', 100);
             $table->integer('kapasitas');
-            $table->string('gambar', 50)->nullable();
+            $table->string('gambar', 100)->nullable();
             $table->text('deskripsi')->nullable();
             $table->timestamps();
         });

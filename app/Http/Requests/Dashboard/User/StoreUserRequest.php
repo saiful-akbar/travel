@@ -4,6 +4,7 @@ namespace App\Http\Requests\Dashboard\User;
 
 use App\Models\User;
 use App\Http\Requests\StoreRequest;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserRequest extends FormRequest implements StoreRequest
@@ -38,9 +39,9 @@ class StoreUserRequest extends FormRequest implements StoreRequest
     /**
      * Tambahkan data user baru ke database.
      *
-     * @return void
+     * @return null|Model
      */
-    public function insert(): void
+    public function insert(): ?Model
     {
         /**
          * Tampung data request dari form.
@@ -69,6 +70,6 @@ class StoreUserRequest extends FormRequest implements StoreRequest
         /**
          * Tambahkan dan simpan ke database.
          */
-        User::create($data);
+        return User::create($data);
     }
 }

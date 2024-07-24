@@ -19,7 +19,7 @@ class Pesanan extends Model
     protected $fillable = [
         'user_id',
         'supir_id',
-        'kendaraan_id',
+        'unit_kendaraan_id',
         'destinasi_id',
         'tanggal_keberangkatan',
         'tanggal_kepulangan',
@@ -56,9 +56,9 @@ class Pesanan extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function kendaraan(): BelongsTo
+    public function unitKendaraan(): BelongsTo
     {
-        return $this->belongsTo(Kendaraan::class, 'kendaraan_id', 'id');
+        return $this->belongsTo(UnitKendaraan::class, 'unit_kendaraan_id', 'id');
     }
 
     /**

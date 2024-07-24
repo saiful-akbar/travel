@@ -1,8 +1,12 @@
 <x-layouts.dashboard title="User">
     <x-slot:header-action>
-        <x-button type="link" href="{{ route('dashboard.user.create') }}" color="primary"
-            start-icon="bi-person-plus-fill" gradient>
-            Tambah
+        <x-button
+            type="link"
+            href="{{ route('dashboard.user.create') }}"
+            color="primary"
+            start-icon="bi-person-plus-fill"
+        >
+            Tambah User
         </x-button>
     </x-slot:header-action>
 
@@ -38,12 +42,14 @@
                     name: 'nama_lengkap',
                     dir: 'asc'
                 },
-                columns: [{
+                columns: [
+                    {
                         data: 'foto',
                         name: 'foto',
                         title: 'Foto',
                         render: (data) => {
-                            const url = data === null ? "{{ avatar() }}" : data;
+                            const baseUrl = $('meta[name=base-url]').attr('content');
+                            const url = data === null ? "{{ avatar() }}" : App.storageUrl(data);
 
                             return `
                                 <span class="avatar avatar-circle avatar-sm">
@@ -127,32 +133,10 @@
 
         <script>
             const handleDelete = (id) => {
-                bootbox.confirm({
-                    message: 'Yakin ingin menghapus user ini?',
-                    buttons: {
-                        confirm: {
-                            className: 'btn-danger btn-sm',
-                            label: `
-                                <i class="bi-trash me-1"></i>
-                                <span>Hapus</span>
-                            `,
-                        },
-                        cancel: {
-                            className: 'btn-secondary btn-sm',
-                            label: `
-                                <i class="bi-x-lg me-1"></i>
-                                <span>Batal</span>
-                            `,
-                        }
-                    },
-                    callback: function(result) {
-                        if (result) {
-                            const formDelete = $('#formDeleteUser');
-                            const baseUrl = $('meta[name=base-url]').attr('content');
-
-                            formDelete.attr('action', `${baseUrl}/user/${id}`);
-                            formDelete.submit();
-                        }
+                App.destroy('Yakin ingin menghapus user ini?', (result) => {
+                    if (result) {
+                        $('#formDeleteUser').attr('action', App.dashboardUrl(`/user/${id}`));
+                        $('#formDeleteUser').submit();
                     }
                 });
             }

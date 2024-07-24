@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Traits\HasTimestamp;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,8 +21,20 @@ class UnitKendaraan extends Model
     protected $fillable = [
         'kendaraan_id',
         'tahun',
-        'nomor_kendaraan'
+        'nomor'
     ];
+
+    /**
+     * Merubah value nomor ketika di-insert.
+     *
+     * @return Attribute
+     */
+    public function nomor(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => strtoupper($value),
+        );
+    }
 
     /**
      * Get the kendaraan that owns the UnitKendaraan
@@ -30,5 +44,15 @@ class UnitKendaraan extends Model
     public function kendaraan(): BelongsTo
     {
         return $this->belongsTo(Kendaraan::class, 'kendaraan_id', 'id');
+    }
+
+    /**
+     * Get all of the pesanan for the Kendaraan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pesanan(): HasMany
+    {
+        return $this->hasMany(Pesanan::class, 'unit_kendaraan_id', 'id');
     }
 }

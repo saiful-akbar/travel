@@ -6,10 +6,9 @@ use App\Http\Requests\DataTableRequest;
 use App\Models\Supir;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Yajra\DataTables\Facades\DataTables;
 
-class SupirRequest extends FormRequest implements JsonResponse
+class SupirRequest extends FormRequest implements DataTableRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +21,25 @@ class SupirRequest extends FormRequest implements JsonResponse
     public function dataTable(): JsonResponse
     {
         return DataTables::of(Supir::query())
-            ->addColumns('actions', function (Supir $supir) {
+            ->addColumn('action', function (Supir $supir) {
                 return '
-                    <a href="' . route('dashboard.supir.edit', ['supir' => $supir->id]) . '" class="btn btn-icon btn-danger btn-sm">
+                    <a
+                        href="' . route('dashboard.supir.edit', ['supir' => $supir->id]) . '"
+                        class="btn btn-icon btn-warning btn-sm me-1"
+                        role="button"
+                        title="Edit"
+                    >
                         <i class="bi-pencil"></i>
                     </a>
+
+                    <button
+                        type="button"
+                        class="btn btn-icon btn-sm btn-danger"
+                        onclick="handleDelete(`' . $supir->id . '`)"
+                        title="Hapus"
+                    >
+                        <i class="bi-trash"></i>
+                    </button>
                 ';
             })->toJson();
     }

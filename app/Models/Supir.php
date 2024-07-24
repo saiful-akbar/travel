@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasTimestamp;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Supir extends Model
 {
-    use HasFactory, HasUuids, HasTimestamp;
+    use HasFactory, HasUlids, HasTimestamp;
 
     protected $table = 'supir';
     protected $keyType = 'string';
@@ -19,6 +20,7 @@ class Supir extends Model
     protected $fillable = [
         'foto',
         'nama_lengkap',
+        'jenis_kelamin',
         'tanggal_lahir',
     ];
 

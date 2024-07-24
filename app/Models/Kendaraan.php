@@ -18,6 +18,7 @@ class Kendaraan extends Model
     public $incrementing = false;
 
     protected $fillable = [
+        'merek',
         'tipe',
         'kapasitas',
         'gambar',
@@ -45,15 +46,5 @@ class Kendaraan extends Model
             ->using(KendaraanDestinasi::class)
             ->withPivot('harga')
             ->withTimestamps();
-    }
-
-    /**
-     * Get all of the pesanan for the Kendaraan
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function pesanan(): HasMany
-    {
-        return $this->hasMany(Pesanan::class, 'kendaraan_id', 'id');
     }
 }

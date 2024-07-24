@@ -15,7 +15,9 @@ trait HasTimestamp
     public function createdAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d M Y, H:i')
+            get: fn ($value) => Carbon::parse($value)
+                ->timezone(config('app.timezone'))
+                ->format('d M Y, H:i'),
         );
     }
 
@@ -27,7 +29,9 @@ trait HasTimestamp
     public function updatedAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d M Y, H:i')
+            get: fn ($value) => Carbon::parse($value)
+                ->timezone(config('app.timezone'))
+                ->format('d M Y, H:i'),
         );
     }
 }

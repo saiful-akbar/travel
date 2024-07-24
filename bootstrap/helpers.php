@@ -67,12 +67,12 @@ if (!function_exists('avatar')) {
      *
      * @return string
      */
-    function avatar(?string $url = null): string
+    function avatar(?string $path = null): string
     {
-        if (!is_null($url)) {
-            return $url;
+        if (!is_null($path)) {
+            return storage($path);
         }
 
-        return asset('assets/dashboard/images/photo_empty.jpg');
+        return dashboard_asset('images/photo_empty.jpg');
     }
 }

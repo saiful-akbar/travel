@@ -29,7 +29,7 @@ class DeleteUserRequest extends FormRequest implements DeleteRequest
          * Jika ada hapus foto dari storage
          */
         if (!is_null($this->user->foto)) {
-            Storage::disk('public')->delete(str_replace(storage(), '', $this->user->foto));
+            Storage::disk('public')->delete($this->user->foto);
         }
 
         /**

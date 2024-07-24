@@ -5,16 +5,6 @@
         </x-button>
     </x-slot:header-action>
 
-    @if ($errors->any())
-        <x-alert variant="danger" class="mb-4">
-            <ul class="m-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </x-alert>
-    @endif
-
     <form action="{{ route('dashboard.user.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 
@@ -30,8 +20,7 @@
                             <label class="col-sm-3 col-form-label form-label">Foto</label>
 
                             <div class="col-sm-9">
-                                <label for="foto"
-                                    class="avatar avatar-xl avatar-circle avatar-uploader me-5 border-lg">
+                                <label for="foto" class="avatar avatar-xl avatar-circle avatar-uploader me-5 border-lg">
                                     <img src="{{ avatar() }}" alt="foto" class="avatar-img" id="photoPreview">
                                     <input type="file" id="foto" name="foto" class="d-none">
                                 </label>
@@ -49,12 +38,24 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <input required type="text" name="nama_lengkap" id="nama_lengkap"
-                                    placeholder="Masukan nama lengkap..." value="{{ old('nama_lengkap') }}"
-                                    class="form-control form-control-light @error('nama_lengkap') is-invalid @enderror">
+                                <input
+                                    required
+                                    type="text"
+                                    placeholder="Masukan nama lengkap..."
+                                    name="nama_lengkap"
+                                    id="nama_lengkap"
+                                    value="{{ old('nama_lengkap') }}"
+                                    @class([
+                                        'form-control',
+                                        'form-control-light',
+                                        'is-invalid' => $errors->has('nama_lengkap'),
+                                    ])
+                                >
 
                                 @error('nama_lengkap')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -66,12 +67,24 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <input required type="email" name="email" id="email"
-                                    placeholder="Masukan nama lengkap..." value="{{ old('email') }}"
-                                    class="form-control form-control-light @error('email') is-invalid @enderror">
+                                <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    value="{{ old('email') }}"
+                                    placeholder="Masukan alamat email..."
+                                    @class([
+                                        'form-control',
+                                        'form-control-light',
+                                        'is-invalid' => $errors->has('email'),
+                                    ])
+                                >
 
                                 @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -84,9 +97,19 @@
 
                             <div class="col-sm-9">
                                 <div class="input-group @error('password') is-invalid @enderror">
-                                    <input required type="password" name="password" id="password"
-                                        placeholder="Masukan password..." value="{{ old('password') }}"
-                                        class="form-control form-control-light @error('password') is-invalid @enderror">
+                                    <input
+                                        required
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        value="{{ old('password') }}"
+                                        placeholder="Masukan password..."
+                                        @class([
+                                            'form-control',
+                                            'form-control-light',
+                                            'is-invalid' => $errors->has('password'),
+                                        ])
+                                    >
 
                                     <button id="togglePassword" type="button" class="input-group-text">
                                         <i id="togglePasswordIcon" class="bi-eye-slash"></i>
@@ -108,12 +131,25 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <div class="input-group input-group-sm-vertical  @error('role') is-invalid @enderror">
-                                    <label class="form-control form-control-light @error('role') is-invalid @enderror"
-                                        for="admin">
+                                <div class="input-group input-group-sm-vertical @error('role') is-invalid @enderror">
+                                    <label
+                                        for="admin"
+                                        @class([
+                                            'form-control',
+                                            'form-control-light',
+                                            'is-invalid' => $errors->has('role'),
+                                        ])
+                                    >
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="role" value="admin"
-                                                id="admin" @checked(old('role') === 'admin') required>
+                                            <input
+                                                required
+                                                type="radio"
+                                                name="role"
+                                                id="admin"
+                                                value="admin"
+                                                class="form-check-input"
+                                                @checked(old('role') === 'admin')
+                                            >
 
                                             <span class="form-check-label">
                                                 Admin
@@ -121,11 +157,24 @@
                                         </span>
                                     </label>
 
-                                    <label class="form-control form-control-light @error('role') is-invalid @enderror"
-                                        for="member">
+                                    <label
+                                        for="member"
+                                        @class([
+                                            'form-control',
+                                            'form-control-light',
+                                            'is-invalid' => $errors->has('role'),
+                                        ])
+                                    >
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="role" value="member"
-                                                id="member" @checked(old('role') === 'member') required>
+                                            <input
+                                                required
+                                                type="radio"
+                                                name="role"
+                                                id="member"
+                                                value="member"
+                                                class="form-check-input"
+                                                @checked(old('role') === 'member')
+                                            >
 
                                             <span class="form-check-label">
                                                 Member
@@ -135,7 +184,9 @@
                                 </div>
 
                                 @error('role')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -147,14 +198,25 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <div
-                                    class="input-group input-group-sm-vertical  @error('status') is-invalid @enderror">
+                                <div class="input-group input-group-sm-vertical  @error('status') is-invalid @enderror">
                                     <label
-                                        class="form-control form-control-light @error('status') is-invalid @enderror"
-                                        for="aktif">
+                                        for="active"
+                                        @class([
+                                            "form-control",
+                                            "form-control-light",
+                                            "is-invalid" => $errors->has('status')
+                                        ])
+                                    >
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="status"
-                                                id="aktif" value="1" @checked(old('status') == '1') required>
+                                            <input
+                                                required
+                                                type="radio"
+                                                name="status"
+                                                id="active"
+                                                value="1"
+                                                class="form-check-input"
+                                                @checked(old('status') == '1')
+                                            >
 
                                             <span class="form-check-label">
                                                 Aktif
@@ -163,11 +225,23 @@
                                     </label>
 
                                     <label
-                                        class="form-control form-control-light @error('status') is-invalid @enderror"
-                                        for="inactive">
+                                        for="inactive"
+                                        @class([
+                                            "form-control",
+                                            "form-control-light",
+                                            "is-invalid" => $errors->has('status')
+                                        ])
+                                    >
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="status"
-                                                id="inactive" value="0" @checked(old('status') == '0') required>
+                                            <input
+                                                required
+                                                type="radio"
+                                                name="status"
+                                                id="inactive"
+                                                value="0"
+                                                class="form-check-input"
+                                                @checked(old('status') == '0')
+                                            >
 
                                             <span class="form-check-label">
                                                 Tidak Aktif
@@ -177,7 +251,9 @@
                                 </div>
 
                                 @error('status')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -189,14 +265,25 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <div
-                                    class="input-group input-group-sm-vertical  @error('jenis_kelamin') is-invalid @enderror">
+                                <div class="input-group input-group-sm-vertical @error('jenis_kelamin') is-invalid @enderror">
                                     <label
-                                        class="form-control form-control-light @error('jenis_kelamin') is-invalid @enderror"
-                                        for="L">
+                                        for="L"
+                                        @class([
+                                            "form-control",
+                                            "form-control-light",
+                                            "is-invalid" => $errors->has('jenis_kelamin')
+                                        ])
+                                    >
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="jenis_kelamin"
-                                                id="L" value="L" @checked(old('jenis_kelamin') === 'L') required>
+                                            <input
+                                                required
+                                                type="radio"
+                                                name="jenis_kelamin"
+                                                id="L"
+                                                value="L"
+                                                class="form-check-input"
+                                                @checked(old('jenis_kelamin') === 'L')
+                                            >
 
                                             <span class="form-check-label">
                                                 Laki - Laki
@@ -205,11 +292,23 @@
                                     </label>
 
                                     <label
-                                        class="form-control form-control-light @error('jenis_kelamin') is-invalid @enderror"
-                                        for="P">
+                                        for="P"
+                                        @class([
+                                            "form-control",
+                                            "form-control-light",
+                                            "is-invalid" => $errors->has('jenis_kelamin')
+                                        ])
+                                    >
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="jenis_kelamin"
-                                                id="P" value="P" @checked(old('jenis_kelamin') === 'P') required>
+                                            <input
+                                                required
+                                                type="radio"
+                                                name="jenis_kelamin"
+                                                id="P"
+                                                value="P"
+                                                class="form-check-input"
+                                                @checked(old('jenis_kelamin') === 'P')
+                                            >
 
                                             <span class="form-check-label">
                                                 Perempuan
@@ -219,7 +318,9 @@
                                 </div>
 
                                 @error('jenis_kelamin')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -231,23 +332,43 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <input type="number" name="telepon" id="telepon" placeholder="Masukan no telp..."
+                                <input
+                                    type="number"
+                                    name="telepon"
+                                    id="telepon"
                                     value="{{ old('telepon') }}"
-                                    class="form-control form-control-light @error('telepon') is-invalid @enderror">
+                                    placeholder="Masukan no telp..."
+                                    @class([
+                                        'form-control',
+                                        'form-control-light',
+                                        'is-invalid' => $errors->has('telepon'),
+                                    ])
+                                >
 
                                 @error('telepon')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button type="submit" color="success" start-icon="bi-save">
+                        <x-button
+                            type="submit"
+                            color="success"
+                            start-icon="bi-save"
+                        >
                             Simpan
                         </x-button>
-
-                        <x-button type="reset" color="secondary" start-icon="bi-x-lg" class="ms-2">
+                        
+                        <x-button
+                            type="reset"
+                            color="secondary"
+                            start-icon="bi-x-lg"
+                            class="ms-2"
+                        >
                             Reset
                         </x-button>
                     </div>
@@ -257,8 +378,6 @@
     </form>
 
     <x-slot:script>
-
-        {{-- foto preview --}}
         <script>
             $('#foto').change(function(e) {
                 if (e.target.files.length > 0) {
@@ -267,7 +386,6 @@
             });
         </script>
 
-        {{-- fungsi untuk meanmpilkan atau menyembunyikan password --}}
         <script>
             $('#togglePassword').click(function(e) {
                 e.preventDefault();
@@ -285,6 +403,5 @@
                 }
             });
         </script>
-
     </x-slot:script>
 </x-layouts.dashboard>

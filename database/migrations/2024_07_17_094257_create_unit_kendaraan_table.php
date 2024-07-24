@@ -20,7 +20,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
 
             $table->year('tahun');
-            $table->string('nomor_kendaraan', 20);
+            $table->string('nomor', 20)->unique();
             $table->timestamps();
         });
     }

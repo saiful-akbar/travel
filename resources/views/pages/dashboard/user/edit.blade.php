@@ -5,20 +5,8 @@
         </x-button>
     </x-slot:header-action>
 
-    {{-- Alert error --}}
-    @if ($errors->any())
-        <x-alert variant="danger" class="mb-4">
-            <ul class="m-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </x-alert>
-    @endif
-
     {{-- Form --}}
-    <form action="{{ route('dashboard.user.update', ['user' => $user->id]) }}" method="post"
-        enctype="multipart/form-data">
+    <form action="{{ route('dashboard.user.update', ['user' => $user->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('patch')
 

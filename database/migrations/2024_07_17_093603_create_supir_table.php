@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('foto', 100)->nullable();
             $table->string('nama_lengkap', 100);
+            $table->enum('jenis_kelamin', ['L', 'P']);
             $table->date('tanggal_lahir')->nullable();
             $table->timestamps();
         });

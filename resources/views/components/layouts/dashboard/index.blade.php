@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="base-url" content="{{ url('/dashboard') }}">
+        <meta name="base-url" content="{{ url('/') }}">
 
         {{-- Title --}}
         <title>{{ $title }} - {{ config('app.name') }} Dashboard</title>
@@ -14,15 +14,15 @@
         <link rel="shortcut icon" href="{{ dashboard_asset('favicon.ico') }}">
 
         {{-- Google font --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
 
         {{-- CSS --}}
         <link rel="stylesheet" href="{{ dashboard_asset('css/vendor.min.css') }}">
         <link rel="stylesheet" href="{{ dashboard_asset('css/theme.minc619.css?v=1.0') }}">
-        <link rel="preload" href="{{ dashboard_asset('css/theme.min.css') }}" data-hs-appearance="default"
-            as="style">
-        <link rel="preload" href="{{ dashboard_asset('css/theme-dark.min.css') }}" data-hs-appearance="dark"
-            as="style">
+        <link rel="preload" href="{{ dashboard_asset('css/theme.min.css') }}" data-hs-appearance="default" as="style">
+        <link rel="preload" href="{{ dashboard_asset('css/theme-dark.min.css') }}" data-hs-appearance="dark" as="style">
         <link rel="stylesheet" href="{{ dashboard_asset('vendor/datatables/datatables.min.css') }}">
 
         <style data-hs-appearance-onload-styles>
@@ -47,7 +47,7 @@
 
         <script src="{{ dashboard_asset('js/head.js') }}"></script>
 
-        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         @isset($style)
             {{ $style }}
@@ -55,8 +55,7 @@
     </head>
 
 
-    <body id="dashboard"
-        class="has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-closed-mode splitted-content">
+    <body id="dashboard" class="has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-closed-mode splitted-content">
         <script src="{{ dashboard_asset('js/theme-appearance.js') }}"></script>
 
         {{-- Sidebar --}}
@@ -89,20 +88,29 @@
                         </div>
 
                         @isset($headerContent)
-                            {{ $headerContent }}
+                            <div class="mt-3">
+                                {{ $headerContent }}
+                            </div>
                         @endisset
                     </div>
 
                     {{-- Alert notifikasi --}}
                     @session('alert')
-                        <div class="row">
-                            <div class="col-12">
-                                <x-alert class="mb-4" variant="{{ session('alert')['variant'] }}">
-                                    {{ session('alert')['message'] }}
-                                </x-alert>
-                            </div>
-                        </div>
+                        <x-alert class="mb-5" variant="{{ session('alert')['variant'] }}">
+                            {{ session('alert')['message'] }}
+                        </x-alert>
                     @endsession
+
+                    {{-- Alert error --}}
+                    @if ($errors->any())
+                        <x-alert variant="danger" class="mb-5">
+                            <ul class="m-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </x-alert>
+                    @endif
 
                     {{ $slot }}
                 </div>
@@ -118,11 +126,10 @@
         {{-- JS Plugins --}}
         <script src="{{ dashboard_asset('js/vendor.min.js') }}"></script>
         <script src="{{ dashboard_asset('js/theme.min.js') }}"></script>
-        <script src="{{ dashboard_asset('js/init.js') }}"></script>
-        <script src="{{ dashboard_asset('js/switcher.js') }}"></script>
+        <script src="{{ dashboard_asset('js/app.js') }}"></script>
         <script src="{{ dashboard_asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ dashboard_asset('vendor/bootbox/bootbox.all.min.js') }}"></script>
-        <script src="{{ dashboard_asset('vendor/datatables/datatables.js') }}"></script>
+        <script src="{{ dashboard_asset('vendor/datatables/datatables.min.js') }}"></script>
 
         {{-- Logout --}}
         <script>

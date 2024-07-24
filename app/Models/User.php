@@ -62,18 +62,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Merubah value pada foto saat diambil.
-     *
-     * @return Attribute
-     */
-    public function foto(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => is_null($value) ? null : asset("/storage/$value")
-        );
-    }
-
-    /**
      * Merubah value pada role saat diisi.
      *
      * @return Attribute
