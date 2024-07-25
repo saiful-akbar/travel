@@ -5,7 +5,7 @@
         </x-button>
     </x-slot:header-action>
 
-    <form action="{{ route('dashboard.user.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('dashboard.user.store') }}" method="post" enctype="multipart/form-data" id="formCreateUser">
         @csrf
 
         <div class="row justify-content-lg-center">
@@ -378,6 +378,8 @@
     </form>
 
     <x-slot:script>
+
+        {{-- image preview --}}
         <script>
             $('#foto').change(function(e) {
                 if (e.target.files.length > 0) {
@@ -386,6 +388,14 @@
             });
         </script>
 
+        {{-- reset foto --}}
+        <script>
+            $('#formCreateUser button[type=reset]').click(function (e) {
+                $('#photoPreview').attr('src', '{{ avatar() }}');
+            });
+        </script>
+
+        {{-- Toggle password --}}
         <script>
             $('#togglePassword').click(function(e) {
                 e.preventDefault();
@@ -403,5 +413,6 @@
                 }
             });
         </script>
+
     </x-slot:script>
 </x-layouts.dashboard>

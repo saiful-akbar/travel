@@ -6,7 +6,12 @@
     </x-slot:header-action>
 
     {{-- Form --}}
-    <form action="{{ route('dashboard.user.update', ['user' => $user->id]) }}" method="post" enctype="multipart/form-data">
+    <form
+        id="formEditUser"
+        action="{{ route('dashboard.user.update', ['user' => $user->id]) }}"
+        method="post"
+        enctype="multipart/form-data"
+    >
         @csrf
         @method('patch')
 
@@ -260,6 +265,13 @@
                 if (e.target.files.length > 0) {
                     $('#photoPreview').attr('src', URL.createObjectURL(e.target.files[0]));
                 }
+            });
+        </script>
+
+        {{-- reset foto --}}
+        <script>
+            $('#formEditUser button[type=reset]').click(function (e) {
+                $('#photoPreview').attr('src', '{{ avatar($user->foto) }}');
             });
         </script>
 

@@ -206,18 +206,26 @@
         {{-- Image preview --}}
         <script>
             $('#gambar').change(function (e) { 
-                if(e.target.files.length > 0) {
-                    $('#imagePreview').attr('src', URL.createObjectURL(e.target.files[0]));
+                if(this.files.length > 0) {
+                    $('#imagePreview').attr('src', URL.createObjectURL(this.files[0]));
                 }
             });
         </script>
 
         {{-- Reset image --}}
-        <script>
-            $('#formCreateKendaraan button[type=reset]').click(function(e) {
-                $('#imagePreview').attr('src', "{{ asset('assets/dashboard/images/image_empty.jpg') }}");
-            });
-        </script>
+        @isset($kendaraan->gambar)
+            <script>
+                $('#formEditKendaraan button[type=reset]').click(function(e) {
+                    $('#imagePreview').attr('src', '{{ storage($kendaraan->gambar) }}');
+                });
+            </script>
+        @else
+            <script>
+                $('#formEditKendaraan button[type=reset]').click(function(e) {
+                    $('#imagePreview').attr('src', '{{ asset("assets/dashboard/images/image_empty.jpg") }}');
+                });
+            </script>
+        @endisset
 
     </x-slot:script>
 </x-layouts.dashboard>

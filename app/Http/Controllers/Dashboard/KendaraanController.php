@@ -57,7 +57,7 @@ class KendaraanController extends Controller
         return to_route('dashboard.kendaraan.unit', ['kendaraan' => $request->insert()])
             ->with('alert', [
                 'variant' => 'success',
-                'message' => 'Data kendaraan berhasil ditambahkan.'
+                'message' => 'Data kendaraan berhasil ditambahkan. Silahkan tambahkan data unit kendaraan.'
             ]);
     }
 

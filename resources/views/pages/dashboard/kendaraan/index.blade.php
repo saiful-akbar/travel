@@ -92,7 +92,7 @@
                     {
                         data: 'jumlah_unit',
                         name: 'jumlah_unit',
-                        title: 'Jumlah Unit',
+                        title: 'Jmlh Unit',
                     },
                     {
                         data: 'created_at',

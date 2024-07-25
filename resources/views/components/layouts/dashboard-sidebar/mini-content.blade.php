@@ -80,7 +80,7 @@
           <div class="dropdown-item-text">
             <div class="d-flex align-items-center">
               <div class="avatar avatar-sm avatar-circle">
-                <img class="avatar-img" src="{{ avatar() }}" alt="Foto">
+                <img class="avatar-img" src="{{ avatar(user()->foto) }}" alt="Foto">
               </div>
 
               <div class="flex-grow-1 ms-3">

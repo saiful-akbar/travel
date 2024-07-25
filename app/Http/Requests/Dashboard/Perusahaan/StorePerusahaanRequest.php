@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard\Perusahaan;
 
 use App\Models\Perusahaan;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
