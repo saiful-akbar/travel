@@ -26,9 +26,9 @@
     </form>
 
     <x-slot:script>
+        
+        {{-- data table --}}
         <script>
-
-            // Data table
             $('#supirTable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -94,17 +94,19 @@
                     },
                 ]
             })
+        </script>
 
-            // Fungsi konfirmasi delete supir.
+        {{-- Handle delete --}}
+        <script>
             function handleDelete(id) {
-                App.destroy('Yakin ingin menghapus supir ini?', (result) => {
+                App.destroy('Supir', (result) => {
                     if (result) {
                         $('#formDeleteSupir').attr('action', App.dashboardUrl(`/supir/${id}`));
                         $('#formDeleteSupir').submit();
                     }
                 })
             }
-
         </script>
+
     </x-slot:script>
 </x-layouts.dashboard>

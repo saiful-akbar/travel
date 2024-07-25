@@ -23,16 +23,4 @@ class Perusahaan extends Model
         'email',
         'alamat',
     ];
-
-    /**
-     * Merubah value logo saat diambil.
-     *
-     * @return Attribute
-     */
-    public function logo(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => is_null($value) ? null : storage($value),
-        );
-    }
 }

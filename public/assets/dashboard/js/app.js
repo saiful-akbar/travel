@@ -104,19 +104,24 @@ class App {
    * @param {string} message
    * @param {function} callback
    */
-  static destroy(message, callback) {
+  static destroy(title, callback) {
     bootbox.confirm({
-      message,
+      size: "small",
+      title: `Hapus ${title}`,
+      message: `
+        <div>Yakin ingin menghapus ${title.toLowerCase()} ini ?</div>
+        <div>${title} yang dihapus tidak dapat dipulihkan kembali.</div>
+      `,
       buttons: {
         confirm: {
-          className: "btn-danger btn-sm",
+          className: "btn-danger",
           label: `
             <i class="bi-trash me-1"></i>
             <span>Hapus</span>
           `,
         },
         cancel: {
-          className: "btn-secondary btn-sm",
+          className: "btn-secondary",
           label: `
             <i class="bi-x-lg me-1"></i>
             <span>Batal</span>

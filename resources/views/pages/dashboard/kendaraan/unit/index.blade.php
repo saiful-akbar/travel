@@ -159,9 +159,11 @@
         {{-- handle delete --}}
         <script>
             function handleDelete(kendaraanId, unitId) {
-                App.destroy('Yakin ingin menghpau unit ini?', function(result) {
-                    $('#formDeleteUnit').attr('action', App.dashboardUrl(`/kendaraan/${kendaraanId}/unit/${unitId}`));
-                    $('#formDeleteUnit').submit();
+                App.destroy('Unit', function(deleted) {
+                    if(deleted) {
+                        $('#formDeleteUnit').attr('action', App.dashboardUrl(`/kendaraan/${kendaraanId}/unit/${unitId}`));
+                        $('#formDeleteUnit').submit();
+                    }
                 });
             }
         </script>

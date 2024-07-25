@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\KendaraanController;
+use App\Http\Controllers\Dashboard\PerusahaanController;
 use App\Http\Controllers\Dashboard\SupirController;
 use App\Http\Controllers\Dashboard\UserController;
 
@@ -16,7 +17,7 @@ Route::controller(HomeController::class)
     });
 
 /**
- * User
+ * Master User
  */
 Route::controller(UserController::class)
     ->name('.user')
@@ -31,7 +32,7 @@ Route::controller(UserController::class)
     });
 
 /**
- * Supir
+ * Master Supir
  */
 Route::controller(SupirController::class)
     ->name('.supir')
@@ -46,7 +47,7 @@ Route::controller(SupirController::class)
     });
 
 /**
- * Kendaraan
+ * Master Kendaraan
  */
 Route::controller(KendaraanController::class)
     ->name('.kendaraan')
@@ -66,4 +67,15 @@ Route::controller(KendaraanController::class)
                 Route::post('/', 'storeUnit')->name('.store');
                 Route::delete('/{unit}', 'destroyUnit')->name('.destroy');
             });
+    });
+
+/**
+ * Master Perusahaan
+ */
+Route::controller(PerusahaanController::class)
+    ->name('.perusahaan')
+    ->prefix('/perusahaan')
+    ->group(function (): void {
+        Route::get('/', 'index');
+        Route::post('/', 'store')->name('.store');
     });

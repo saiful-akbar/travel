@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['L', 'P']);
 
             // Kontak
-            $table->string('telepon', 30)->unique()->nullable();
+            $table->string('telepon', 20)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
 
             $table->timestamps();

@@ -22,11 +22,14 @@
         </div>
     </div>
 
+    {{-- Form delete --}}
     <form id="formDeleteUser" method="post">
         @csrf @method('delete')
     </form>
 
     <x-slot:script>
+
+        {{-- Datatable --}}
         <script>
             $("#userTable").DataTable({
                 processing: true,
@@ -130,9 +133,10 @@
             });
         </script>
 
+        {{-- Handle delete --}}
         <script>
             const handleDelete = (id) => {
-                App.destroy('Yakin ingin menghapus user ini?', (result) => {
+                App.destroy('User', (result) => {
                     if (result) {
                         $('#formDeleteUser').attr('action', App.dashboardUrl(`/user/${id}`));
                         $('#formDeleteUser').submit();
@@ -140,5 +144,6 @@
                 });
             }
         </script>
+
     </x-slot:script>
 </x-layouts.dashboard>

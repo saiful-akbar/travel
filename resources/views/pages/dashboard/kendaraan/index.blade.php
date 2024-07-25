@@ -59,12 +59,25 @@
                         name: 'gambar',
                         title: 'Gambar',
                         render: (data, type, row) => {
+                            if (data === null) {
+                                return `
+                                    <img
+                                        src="{{ dashboard_asset('images/image_empty.jpg') }}"
+                                        alt="Gambar"
+                                        width="100"
+                                        height="70"
+                                        class="rounded-2 border border-2"
+                                        style="object-fit: cover; object-position: center;"
+                                    />
+                                `;
+                            }
+
                             return `
                                 <img
                                     src="${App.url(`/storage/${data}`)}"
                                     alt="Gambar"
                                     width="100"
-                                    height="80"
+                                    height="70"
                                     class="rounded-2 border border-2"
                                     style="object-fit: contain; object-position: center;"
                                 />
@@ -105,7 +118,7 @@
         {{-- Handle hapus --}}
         <script>
             function handleDelete(id) {
-                App.destroy('Yakin ingin menghapus kendaraan ini?', (result) => {
+                App.destroy('Kendaraan', (result) => {
                     if (result) {
                         $('#formDeleteKendaraan').attr('action', App.dashboardUrl(`/kendaraan/${id}`))
                         $('#formDeleteKendaraan').submit();

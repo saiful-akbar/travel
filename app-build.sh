@@ -1,3 +1,5 @@
+npm run build
+
 composer install --optimize-autoloader --no-dev
 
 php artisan view:cache

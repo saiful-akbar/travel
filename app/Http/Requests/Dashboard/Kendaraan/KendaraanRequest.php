@@ -52,34 +52,32 @@ class KendaraanRequest extends FormRequest implements DataTableRequest
          */
         return DataTables::of($query)->addColumn('action', function (Kendaraan $model) {
             return "
-                <div class='btn btn-group'>
-                    <a
-                        href='" . route('dashboard.kendaraan.unit', ['kendaraan' => $model->id]) . "'
-                        class='btn btn-sm btn-icon btn-white'
-                        title='Unit Kendaraan'
-                        role='button'
-                    >
-                        <i class='bi-car-front'></i>
-                    </a>
+                <a
+                    href='" . route('dashboard.kendaraan.unit', ['kendaraan' => $model->id]) . "'
+                    class='btn btn-sm btn-icon btn-info rounded-pill'
+                    title='Unit Kendaraan'
+                    role='button'
+                >
+                    <i class='bi-car-front'></i>
+                </a>
 
-                    <a
-                        href='" . route('dashboard.kendaraan.edit', ['kendaraan' => $model->id]) . "'
-                        class='btn btn-sm btn-icon btn-white'
-                        title='Edit'
-                        role='button'
-                    >
-                        <i class='bi-pencil'></i>
-                    </a>
+                <a
+                    href='" . route('dashboard.kendaraan.edit', ['kendaraan' => $model->id]) . "'
+                    class='btn btn-sm btn-icon btn-warning rounded-pill'
+                    title='Edit'
+                    role='button'
+                >
+                    <i class='bi-pencil'></i>
+                </a>
 
-                    <button
-                        type='button'
-                        class='btn btn-sm btn-icon btn-white'
-                        title='Hapus'
-                        onclick='handleDelete(`{$model->id}`)'
-                    >
-                        <i class='bi-trash'></i>
-                    </button>
-                </div>
+                <button
+                    type='button'
+                    class='btn btn-sm btn-icon btn-danger rounded-pill'
+                    title='Hapus'
+                    onclick='handleDelete(`{$model->id}`)'
+                >
+                    <i class='bi-trash'></i>
+                </button>
             ";
         })->toJson();
     }

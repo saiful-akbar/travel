@@ -32,7 +32,7 @@ class StoreUserRequest extends FormRequest implements StoreRequest
             'foto'          => 'nullable|mimes:png,jpg,jpeg,webp|max:1024',
             'nama_lengkap'  => 'required|string|max:100',
             'jenis_kelamin' => 'required|in:L,P',
-            'telepon'       => 'nullable|string|max:30|unique:user,telepon',
+            'telepon'       => 'nullable|regex:/^[0-9]{10,13}+$/|unique:user,telepon',
         ];
     }
 
