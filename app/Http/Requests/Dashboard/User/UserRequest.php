@@ -40,21 +40,23 @@ class UserRequest extends FormRequest implements DataTableRequest
         return DataTables::of(User::query())
             ->addColumn('action', function (User $model) {
                 return "
-                    <a
-                        class='btn btn-warning btn-icon btn-sm'
-                        title='Edit'
-                        href='" . route('dashboard.user.edit', ['user' => $model->id]) . "'
-                    >
-                        <i class='bi-pencil'></i>
-                    </a>
+                    <div class='btn-group'>
+                        <a
+                            class='btn btn-white btn-icon btn-sm'
+                            href='" . route('dashboard.user.edit', ['user' => $model->id]) . "'
+                            title='Edit'
+                        >
+                            <i class='bi-pencil'></i>
+                        </a>
 
-                    <button
-                        class='btn btn-danger btn-icon btn-sm'
-                        title='Hapus'
-                        onclick='handleDelete(`{$model->id}`)'
-                    >
-                        <i class='bi-trash'></i>
-                    </button>
+                        <button
+                            class='btn btn-white btn-icon btn-sm'
+                            title='Hapus'
+                            onclick='handleDelete(`{$model->id}`)'
+                        >
+                            <i class='bi-trash'></i>
+                        </button>
+                    </div>
                 ";
             })->toJson();
     }

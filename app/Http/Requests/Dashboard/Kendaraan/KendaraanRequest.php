@@ -52,21 +52,34 @@ class KendaraanRequest extends FormRequest implements DataTableRequest
          */
         return DataTables::of($query)->addColumn('action', function (Kendaraan $model) {
             return "
-                <a
-                    href='" . route('dashboard.kendaraan.unit', ['kendaraan' => $model->id]) . "'
-                    class='btn btn-sm btn-icon btn-info me-1'
-                    title='Unit Kendaraan'
-                >
-                    <i class='bi-car-front'></i>
-                </a>
+                <div class='btn btn-group'>
+                    <a
+                        href='" . route('dashboard.kendaraan.unit', ['kendaraan' => $model->id]) . "'
+                        class='btn btn-sm btn-icon btn-white'
+                        title='Unit Kendaraan'
+                        role='button'
+                    >
+                        <i class='bi-car-front'></i>
+                    </a>
 
-                <a href='#' class='btn btn-sm btn-icon btn-warning me-1' title='Edit'>
-                    <i class='bi-pencil'></i>
-                </a>
+                    <a
+                        href='" . route('dashboard.kendaraan.edit', ['kendaraan' => $model->id]) . "'
+                        class='btn btn-sm btn-icon btn-white'
+                        title='Edit'
+                        role='button'
+                    >
+                        <i class='bi-pencil'></i>
+                    </a>
 
-                <button class='btn btn-sm btn-icon btn-danger me-1' title='Hapus' onclick='handleDelete(`{$model->id}`)'>
-                    <i class='bi-trash'></i>
-                </button>
+                    <button
+                        type='button'
+                        class='btn btn-sm btn-icon btn-white'
+                        title='Hapus'
+                        onclick='handleDelete(`{$model->id}`)'
+                    >
+                        <i class='bi-trash'></i>
+                    </button>
+                </div>
             ";
         })->toJson();
     }

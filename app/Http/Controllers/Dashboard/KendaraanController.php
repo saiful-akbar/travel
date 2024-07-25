@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Kendaraan;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dadshboard\Kendaraan\StoreUnitKendaraanRequest;
+use App\Http\Requests\Dashboard\Kendaraan\DeleteKendaraanRequest;
+use App\Http\Requests\Dashboard\Kendaraan\DeleteUnitKendaraanRequest;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Dashboard\Kendaraan\KendaraanRequest;
 use App\Http\Requests\Dashboard\Kendaraan\StoreKendaraanRequest;
+use App\Http\Requests\Dashboard\Kendaraan\UpdateKendaraanRequest;
+use App\Models\UnitKendaraan;
 
 class KendaraanController extends Controller
 {
@@ -59,6 +62,51 @@ class KendaraanController extends Controller
     }
 
     /**
+     * Menampilkan halaman edit kendaraan.
+     *
+     * @param Kendaraan $kendaraan
+     * @return View
+     */
+    public function edit(Kendaraan $kendaraan): View
+    {
+        return view('pages.dashboard.kendaraan.edit', compact('kendaraan'));
+    }
+
+    /**
+     * Perbarui data kendaraan di database.
+     *
+     * @param UpdateKendaraanRequest $request
+     * @param Kendaraan $kendaraan
+     * @return RedirectResponse
+     */
+    public function update(UpdateKendaraanRequest $request, Kendaraan $kendaraan): RedirectResponse
+    {
+        $request->update();
+
+        return to_route('dashboard.kendaraan')->with('alert', [
+            'variant' => 'success',
+            'message' => 'Kendaraan berhasil diperbarui.',
+        ]);
+    }
+
+    /**
+     * Hapus kendaraan dari database.
+     *
+     * @param DeleteKendaraanRequest $request
+     * @param Kendaraan $kendaraan
+     * @return RedirectResponse
+     */
+    public function destroy(DeleteKendaraanRequest $request, Kendaraan $kendaraan): RedirectResponse
+    {
+        $request->destroy();
+
+        return to_route('dashboard.kendaraan')->with('alert', [
+            'variant' => 'success',
+            'message' => 'Kendaraan berhasil dihapus.',
+        ]);
+    }
+
+    /**
      * Menampilkan halaman tambah unit kendaraan
      *
      * @param Kendaraan $kendaraan
@@ -86,6 +134,25 @@ class KendaraanController extends Controller
             ->with('alert', [
                 'variant' => 'success',
                 'message' => 'Unit kendaraan berhasil ditambahkan.'
+            ]);
+    }
+
+    /**
+     * Hapus unit kendaraan dari database.
+     *
+     * @param DeleteUnitKendaraanRequest $request
+     * @param Kendaraan $kendaraan
+     * @param UnitKendaraan $unit
+     * @return RedirectResponse
+     */
+    public function destroyUnit(DeleteUnitKendaraanRequest $request, Kendaraan $kendaraan, UnitKendaraan $unit): RedirectResponse
+    {
+        $request->destroy();
+
+        return to_route('dashboard.kendaraan.unit', ['kendaraan' => $kendaraan->id])
+            ->with('alert', [
+                'variant' => 'success',
+                'message' => 'Unit kendaraan berhasil dihapus.'
             ]);
     }
 }

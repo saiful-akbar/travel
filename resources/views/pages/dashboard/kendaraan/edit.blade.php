@@ -1,4 +1,4 @@
-<x-layouts.dashboard title="Tambah Kendaraan">
+<x-layouts.dashboard title="Edit Kendaraan">
     <x-slot:header-action>
         <x-button
             type="link"
@@ -10,8 +10,13 @@
         </x-button>
     </x-slot:header-action>
 
-    <form id="formCreateKendaraan" action="{{ route('dashboard.kendaraan.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
+    <form
+        id="formEditKendaraan"
+        action="{{ route('dashboard.kendaraan.update', ['kendaraan' => $kendaraan->id]) }}"
+        method="post"
+        enctype="multipart/form-data"
+    >
+        @csrf @method('patch')
 
         <div class="row justify-content-center">
             <div class="col-lg-10">
@@ -32,7 +37,7 @@
                                     type="text"
                                     name="merek"
                                     id="merek"
-                                    value="{{ old('merek') }}"
+                                    value="{{ old('merek', $kendaraan->merek) }}"
                                     placeholder="Masukan merek kendaraan..."
                                     @class([
                                         'form-control',
@@ -60,7 +65,7 @@
                                     type="text"
                                     name="tipe"
                                     id="tipe"
-                                    value="{{ old('tipe') }}"
+                                    value="{{ old('tipe', $kendaraan->tipe) }}"
                                     placeholder="Masukan tipe kendaraan..."
                                     @class([
                                         'form-control',
@@ -89,7 +94,7 @@
                                     min="1"
                                     name="kapasitas"
                                     id="kapasitas"
-                                    value="{{ old('kapasitas') }}"
+                                    value="{{ old('kapasitas', $kendaraan->kapasitas) }}"
                                     placeholder="Masukan kapasitas kendaraan..."
                                     @class([
                                         'form-control',
@@ -118,7 +123,7 @@
                                     placeholder="Masukan deskripsi..."
                                     rows="5"
                                     @class([ 'form-control', 'form-control-light', 'is-invalid' => $errors->has('deskripsi')])
-                                >{{ old('deskripsi') }}</textarea>
+                                >{{ old('deskripsi', $kendaraan->deskripsi) }}</textarea>
 
                                 @error('deskripsi')
                                     <div class="invalid-feedback">
@@ -151,13 +156,22 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-
-                                <img
-                                    src="{{ asset('assets/dashboard/images/image_empty.jpg') }}"
-                                    alt="Kendaraan"
-                                    id="imagePreview"
-                                    class="img-fluid rounded-2 border border-5 mt-4"
-                                >
+                                
+                                @isset($kendaraan->gambar)
+                                    <img
+                                        src="{{ storage($kendaraan->gambar) }}"
+                                        alt="Kendaraan"
+                                        id="imagePreview"
+                                        class="img-fluid rounded-2 border border-5 mt-4"
+                                    >
+                                @else
+                                    <img
+                                        src="{{ asset('assets/dashboard/images/image_empty.jpg') }}"
+                                        alt="Kendaraan"
+                                        id="imagePreview"
+                                        class="img-fluid rounded-2 border border-5 mt-4"
+                                    >
+                                @endisset
                             </div>
                         </div>
                     </div>

@@ -14,16 +14,21 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="kendaraanTable" class="table table-hover table-thead-bordered table-align-middle w-100"></table>
+                    <table id="kendaraanTable" class="table table-hover table-thead-bordered table-align-middle table-nowrap w-100"></table>
                 </div>
             </div>
         </div>
     </div>
 
-    <x-slot:script>
-        <script>
+    {{-- Form delete --}}
+    <form id="formDeleteKendaraan" method="post">
+        @csrf @method('delete')
+    </form>
 
-            // Data table
+    <x-slot:script>
+
+        {{-- Data table --}}
+        <script>
             $('#kendaraanTable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -50,6 +55,23 @@
                         title: 'Tipe'
                     },
                     {
+                        data: 'gambar',
+                        name: 'gambar',
+                        title: 'Gambar',
+                        render: (data, type, row) => {
+                            return `
+                                <img
+                                    src="${App.url(`/storage/${data}`)}"
+                                    alt="Gambar"
+                                    width="100"
+                                    height="80"
+                                    class="rounded-2 border border-2"
+                                    style="object-fit: contain; object-position: center;"
+                                />
+                            `;
+                        }
+                    },
+                    {
                         data: 'kapasitas',
                         name: 'kapasitas',
                         title: 'Kapasitas',
@@ -60,6 +82,16 @@
                         title: 'Jumlah Unit',
                     },
                     {
+                        data: 'created_at',
+                        name: 'created_at',
+                        title: 'Dibuat',
+                    },
+                    {
+                        data: 'updated_at',
+                        name: 'updated_at',
+                        title: 'Diubah',
+                    },
+                    {
                         data: 'action',
                         name: 'action',
                         title: 'Aksi',
@@ -68,7 +100,19 @@
                     }
                 ],
             })
-
         </script>
+
+        {{-- Handle hapus --}}
+        <script>
+            function handleDelete(id) {
+                App.destroy('Yakin ingin menghapus kendaraan ini?', (result) => {
+                    if (result) {
+                        $('#formDeleteKendaraan').attr('action', App.dashboardUrl(`/kendaraan/${id}`))
+                        $('#formDeleteKendaraan').submit();
+                    }
+                })
+            }
+        </script>
+
     </x-slot:script>
 </x-layouts.dashboard>

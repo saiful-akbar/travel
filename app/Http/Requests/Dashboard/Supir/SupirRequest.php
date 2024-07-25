@@ -23,23 +23,25 @@ class SupirRequest extends FormRequest implements DataTableRequest
         return DataTables::of(Supir::query())
             ->addColumn('action', function (Supir $supir) {
                 return '
-                    <a
-                        href="' . route('dashboard.supir.edit', ['supir' => $supir->id]) . '"
-                        class="btn btn-icon btn-warning btn-sm me-1"
-                        role="button"
-                        title="Edit"
-                    >
-                        <i class="bi-pencil"></i>
-                    </a>
+                    <div class="btn-group">
+                        <a
+                            href="' . route('dashboard.supir.edit', ['supir' => $supir->id]) . '"
+                            class="btn btn-icon btn-white btn-sm"
+                            role="button"
+                            title="Edit"
+                        >
+                            <i class="bi-pencil"></i>
+                        </a>
 
-                    <button
-                        type="button"
-                        class="btn btn-icon btn-sm btn-danger"
-                        onclick="handleDelete(`' . $supir->id . '`)"
-                        title="Hapus"
-                    >
-                        <i class="bi-trash"></i>
-                    </button>
+                        <button
+                            type="button"
+                            class="btn btn-icon btn-white btn-sm"
+                            onclick="handleDelete(`' . $supir->id . '`)"
+                            title="Hapus"
+                        >
+                            <i class="bi-trash"></i>
+                        </button>
+                    </div>
                 ';
             })->toJson();
     }

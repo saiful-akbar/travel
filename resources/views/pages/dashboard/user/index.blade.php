@@ -44,24 +44,23 @@
                 },
                 columns: [
                     {
+                        data: 'nama_lengkap',
+                        name: 'nama_lengkap',
+                        title: 'Nama',
+                    },
+                    {
                         data: 'foto',
                         name: 'foto',
                         title: 'Foto',
                         render: (data) => {
-                            const baseUrl = $('meta[name=base-url]').attr('content');
                             const url = data === null ? "{{ avatar() }}" : App.storageUrl(data);
 
                             return `
-                                <span class="avatar avatar-circle avatar-sm">
+                                <span class="avatar avatar-circle">
                                     <img class="avatar-img" src="${url}" alt="Foto">
                                 </span>
                           `;
                         }
-                    },
-                    {
-                        data: 'nama_lengkap',
-                        name: 'nama_lengkap',
-                        title: 'Nama',
                     },
                     {
                         data: 'email',

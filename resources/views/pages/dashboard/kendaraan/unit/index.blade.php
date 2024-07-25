@@ -123,7 +123,7 @@
                                         <button
                                             class="btn btn-icon btn-sm btn-danger"
                                             title="Hapus"
-                                            onclick="handleDelete('{{ $unit->id }}')"
+                                            onclick="handleDelete('{{ $kendaraan->id }}', '{{ $unit->id }}')"
                                         >
                                             <i class="bi-trash"></i>
                                         </button>
@@ -143,9 +143,9 @@
     </form>
 
     <x-slot:script>
-        <script>
 
-            // Datatable
+        {{-- datatable --}}
+        <script>
             $('#unitTable').DataTable({
                 responsive: true,
                 language: {
@@ -154,15 +154,17 @@
                     lengthMenu: "_MENU_"
                 },
             });
+        </script>
 
-            // Handle hapus
-            function handleDelete(id) {
+        {{-- handle delete --}}
+        <script>
+            function handleDelete(kendaraanId, unitId) {
                 App.destroy('Yakin ingin menghpau unit ini?', function(result) {
-                    $('#formDeleteUnit').attr('action', App.dashboardUrl(`/kendaraan/{{ $kendaraan->id }}/unit/${id}`));
+                    $('#formDeleteUnit').attr('action', App.dashboardUrl(`/kendaraan/${kendaraanId}/unit/${unitId}`));
                     $('#formDeleteUnit').submit();
                 });
             }
-
         </script>
+        
     </x-slot:script>
 </x-layouts.dashboard>
