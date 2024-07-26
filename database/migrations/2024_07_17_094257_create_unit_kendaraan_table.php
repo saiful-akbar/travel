@@ -21,6 +21,7 @@ return new class extends Migration
 
             $table->year('tahun');
             $table->string('nomor', 20)->unique();
+            $table->enum('status', ['tersedia', 'tidak_tersedia', 'dalam_perbaikan'])->default('tersedia');
             $table->timestamps();
         });
     }

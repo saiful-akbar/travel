@@ -21,7 +21,8 @@ class UnitKendaraan extends Model
     protected $fillable = [
         'kendaraan_id',
         'tahun',
-        'nomor'
+        'nomor',
+        'status',
     ];
 
     /**

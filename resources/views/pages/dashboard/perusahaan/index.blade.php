@@ -5,27 +5,15 @@
                 @csrf
 
                 <div class="card">
-                    @isset($perusahaan?->logo)
-                        <img
-                            src="{{ storage($perusahaan?->logo) }}"
-                            alt="Logo"
-                            class="card-img-top"
-                            id="logoPreview"
-                            loading="lazy"
-                            height="250"
-                            style="object-fit: contain; object-position: center;"
-                        >
-                    @else
-                        <img
-                            src="{{ dashboard_asset('images/image_empty.jpg') }}"
-                            alt="Logo"
-                            class="card-img-top"
-                            id="logoPreview"
-                            loading="lazy"
-                            height="250"
-                            style="object-fit: cover; object-position: center;"
-                        >
-                    @endisset
+                    <img
+                        src="{{ image($perusahaan?->logo) }}"
+                        alt="Logo"
+                        class="card-img-top"
+                        id="logoPreview"
+                        loading="lazy"
+                        height="250"
+                        style="object-fit: cover; object-position: center;"
+                    >
     
                     <div class="card-body">
                         <div class="row mb-4">
@@ -189,9 +177,8 @@
     <x-slot:script>
         <script>
             $('#logo').change(function (e) { 
-                if (e.target.files.length > 0) {
-                    $('#logoPreview').attr('src', URL.createObjectURL(e.target.files[0]));
-                    $('#logoPreview').attr('style', 'object-fit: contain; object-position: center;');
+                if (this.files[0]) {
+                    App.imagePreview('#logoPreview', this.files[0]);
                 }
             });
         </script>

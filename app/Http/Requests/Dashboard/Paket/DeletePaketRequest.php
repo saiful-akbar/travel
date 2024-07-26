@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Supir;
+namespace App\Http\Requests\Dashboard\Paket;
 
 use App\Models\Pesanan;
 use App\Http\Requests\DeleteRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteSupirRequest extends FormRequest implements DeleteRequest
+class DeletePaketRequest extends FormRequest implements DeleteRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,19 +18,19 @@ class DeleteSupirRequest extends FormRequest implements DeleteRequest
     }
 
     /**
-     * Hapus data supir
+     * Hapus paket dari database.
      *
      * @return integer
      */
     public function destroy(): int
     {
         /**
-         * Hitung jumlah pesanan aktif yang
-         * dimiliki supir yang ingin dihapus.
+         * Hitung jumlah pesanan yang dimiliki
+         * paket yang ingin dihapus.
          */
         $jumlahPesanan = Pesanan::select('pesanan.id')
-            ->leftJoin('supir', 'pesanan.supir_id', '=', 'supir.id')
-            ->where('supir.id', $this->supir->id)
+            ->leftJoin('destinasi', 'pesanan.destinasi_id', '=', 'destinasi.id')
+            ->where('destinasi.paket_id', $this->paket->id)
             ->where(function (Builder $query): void {
                 $query->where('pesanan.status', 'dipesan')
                     ->orWhere('pesanan.status', 'dikonfirmasi')
@@ -39,16 +39,23 @@ class DeleteSupirRequest extends FormRequest implements DeleteRequest
             })->count();
 
         /**
-         * Jika supir memiliki pesanan batalkan penghapusan.
+         * Batalkan penghapusan jika kendaraan memiliki pesanan.
          */
         if ($jumlahPesanan > 0) {
-            throw new \Exception("Penghapusan gagal. Supir ini masih memiliki pesanan yang aktif.", 1);
+            throw new \Exception("Penghapusan gagal. Paket ini memiliki pesanan yang aktif", 1);
         }
 
         /**
-         * Jika supir tidak memiliki pesanan
-         * lanjutkan proses penghapusan.
+         * Jika jumlah pesanan lebih dari 0
+         * batalkan penghapusan.
          */
-        return $this->supir->delete();
+        if ($jumlahPesanan > 0) {
+            throw new \Exception("Gagal menghapus paket. Paket ini masih memiliki pesanan yang aktif.", 1);
+        }
+
+        /**
+         * Lanjutkan penghapusan jika paket tidak memiliki pesanan.
+         */
+        return $this->paket->delete();
     }
 }

@@ -13,27 +13,12 @@ class KendaraanSeeder extends Seeder
         return [
             [
                 'merek' => 'Honda',
-                'tipe' => 'HRV',
-                'kapasitas' => 5,
+                'tipe' => 'CRV',
+                'kapasitas' => 8,
                 'unit' => [
                     [
                         'tahun' => 2020,
                         'nomor' => 'B 123 ABC',
-                    ],
-                    [
-                        'tahun' => 2020,
-                        'nomor' => 'B 456 DEF',
-                    ],
-                ]
-            ],
-            [
-                'merek' => 'Honda',
-                'tipe' => 'CRV',
-                'kapasitas' => 7,
-                'unit' => [
-                    [
-                        'tahun' => 2022,
-                        'nomor' => 'B 123 DEF',
                     ],
                 ]
             ],

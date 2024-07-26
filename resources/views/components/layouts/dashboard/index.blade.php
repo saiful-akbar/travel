@@ -43,6 +43,19 @@
             html[data-color-scheme="default"] {
                 color-scheme: light;
             }
+
+            #preloader {
+                z-index: 9999;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100dvh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0.75;
+            }
         </style>
 
         <script src="{{ dashboard_asset('js/head.js') }}"></script>
@@ -57,6 +70,13 @@
 
     <body id="dashboard" class="has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-closed-mode splitted-content">
         <script src="{{ dashboard_asset('js/theme-appearance.js') }}"></script>
+
+        {{-- Preloader --}}
+        <div id="preloader" class="bg-light">
+            <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
 
         {{-- Sidebar --}}
         <x-layouts.dashboard-sidebar></x-layouts.dashboard-sidebar>
@@ -126,10 +146,10 @@
         {{-- JS Plugins --}}
         <script src="{{ dashboard_asset('js/vendor.min.js') }}"></script>
         <script src="{{ dashboard_asset('js/theme.min.js') }}"></script>
-        <script src="{{ dashboard_asset('js/app.js') }}"></script>
         <script src="{{ dashboard_asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ dashboard_asset('vendor/bootbox/bootbox.all.min.js') }}"></script>
         <script src="{{ dashboard_asset('vendor/datatables/datatables.min.js') }}"></script>
+        <script src="{{ dashboard_asset('js/app.js') }}"></script>
 
         {{-- Logout --}}
         <script>

@@ -95,16 +95,22 @@ class SupirController extends Controller
      */
     public function destroy(DeleteSupirRequest $request, Supir $supir): RedirectResponse
     {
-        if ($request->destroy() > 0) {
-            return to_route('dashboard.supir')->with('alert', [
-                'variant' => 'success',
-                'message' => '1 Data supir berhasil dihapus.'
+        try {
+            $request->destroy();
+        } catch (\Throwable $e) {
+
+            /**
+             * Kirimkan pesan bahwa supir ini masih memiliki pesanan.
+             */
+            return back()->with('alert', [
+                'variant' => 'warning',
+                'message' => $e->getMessage(),
             ]);
         }
 
         return to_route('dashboard.supir')->with('alert', [
-            'variant' => 'danger',
-            'message' => 'Terjadi kesalahan, gagal menghapus data supir.'
+            'variant' => 'success',
+            'message' => 'Supir berhasil dihapus.'
         ]);
     }
 }

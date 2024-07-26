@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Dadshboard\Kendaraan;
+namespace App\Http\Requests\Dashboard\Paket;
 
 use App\Http\Requests\StoreRequest;
+use App\Models\Paket;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUnitKendaraanRequest extends FormRequest implements StoreRequest
+class StorePaketRequest extends FormRequest implements StoreRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +25,26 @@ class StoreUnitKendaraanRequest extends FormRequest implements StoreRequest
     public function rules(): array
     {
         return [
-            'nomor' => 'required|string|max:20|unique:unit_kendaraan,nomor',
-            'tahun' => 'required|numeric|date_format:Y|max:' . date('Y') . '|min:' . date('Y') - 20,
-            'status' => 'required|in:tersedia,tidak_tersedia,dalam_perbaikan',
+            'nama' => 'required|string|max:100|unique:paket,nama',
+            'deskripsi' => 'nullable|string|max:300',
         ];
     }
 
     /**
-     * Tambahkan data unit kendaraan ke database.
+     * Tambah data paket baru ke database.
      *
      * @return Model|null
      */
     public function insert(): ?Model
     {
-        return $this->kendaraan
-            ->unitKendaraan()
-            ->create($this->only('nomor', 'tahun', 'status'));
+        /**
+         * Tampung data form
+         */
+        $data = $this->only('nama', 'deskripsi');
+
+        /**
+         * Tambahkan dan simpan ke database.
+         */
+        return Paket::create($data);
     }
 }

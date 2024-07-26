@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Dashboard\Kendaraan\KendaraanRequest;
 use App\Http\Requests\Dashboard\Kendaraan\StoreKendaraanRequest;
 use App\Http\Requests\Dashboard\Kendaraan\UpdateKendaraanRequest;
+use App\Http\Requests\Dashboard\Kendaraan\UpdateUnitKendaraanRequest;
 use App\Models\UnitKendaraan;
 
 class KendaraanController extends Controller
@@ -98,7 +99,18 @@ class KendaraanController extends Controller
      */
     public function destroy(DeleteKendaraanRequest $request, Kendaraan $kendaraan): RedirectResponse
     {
-        $request->destroy();
+        try {
+            $request->destroy();
+        } catch (\Throwable $e) {
+
+            /**
+             * Kirimkan pesan notifikasi untuk pembatalan penghapusan.
+             */
+            return back()->with('alert', [
+                'variant' => 'warning',
+                'message' => $e->getMessage(),
+            ]);
+        }
 
         return to_route('dashboard.kendaraan')->with('alert', [
             'variant' => 'success',
@@ -112,7 +124,7 @@ class KendaraanController extends Controller
      * @param Kendaraan $kendaraan
      * @return View
      */
-    public function unit(Kendaraan $kendaraan): View
+    public function unit(Kendaraan $kendaraan)
     {
         return view('pages.dashboard.kendaraan.unit.index', [
             'kendaraan' => $kendaraan->load('unitKendaraan')
@@ -147,12 +159,45 @@ class KendaraanController extends Controller
      */
     public function destroyUnit(DeleteUnitKendaraanRequest $request, Kendaraan $kendaraan, UnitKendaraan $unit): RedirectResponse
     {
-        $request->destroy();
+        try {
+            $request->destroy();
+        } catch (\Throwable $e) {
 
+            /**
+             * Kirimkan pesan notifikasi untuk pembatalan penghapusan.
+             */
+            return back()->with('alert', [
+                'variant' => 'warning',
+                'message' => $e->getMessage(),
+            ]);
+        }
+
+        /**
+         * Kirimkan pesan notifikasi jika penghapusan berhasil.
+         */
         return to_route('dashboard.kendaraan.unit', ['kendaraan' => $kendaraan->id])
             ->with('alert', [
                 'variant' => 'success',
                 'message' => 'Unit kendaraan berhasil dihapus.'
+            ]);
+    }
+
+    /**
+     * Perbarui data unit kendaraan
+     *
+     * @param UpdateUnitKendaraanRequest $request
+     * @param Kendaraan $kendaraan
+     * @param UnitKendaraan $unit
+     * @return RedirectResponse
+     */
+    public function updateUnit(UpdateUnitKendaraanRequest $request, Kendaraan $kendaraan, UnitKendaraan $unit): RedirectResponse
+    {
+        $request->update();
+
+        return to_route('dashboard.kendaraan.unit', ['kendaraan' => $kendaraan->id])
+            ->with('alert', [
+                'variant' => 'success',
+                'message' => 'Unit kendaraan berhasil diperbarui.'
             ]);
     }
 }

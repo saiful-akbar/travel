@@ -76,3 +76,21 @@ if (!function_exists('avatar')) {
         return dashboard_asset('images/photo_empty.jpg');
     }
 }
+
+if (!function_exists('image')) {
+
+    /**
+     * Helper untukk pratinjau gambar.
+     *
+     * @param string|null $path
+     * @return string
+     */
+    function image(string $path = null): string
+    {
+        if (is_null($path)) {
+            return asset('assets/dashboard/images/image_empty.jpg');
+        }
+
+        return storage($path);
+    }
+}

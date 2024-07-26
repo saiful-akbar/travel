@@ -31,20 +31,8 @@
 
         {{-- Datatable --}}
         <script>
-            $("#userTable").DataTable({
-                processing: true,
-                serverSide: true,
-                responsive: true,
+            App.dataTable('#userTable', {
                 ajax: "{{ route('dashboard.user') }}",
-                language: {
-                    search: "",
-                    searchPlaceholder: 'Search...',
-                    lengthMenu: "_MENU_"
-                },
-                order: {
-                    name: 'nama_lengkap',
-                    dir: 'asc'
-                },
                 columns: [
                     {
                         data: 'nama_lengkap',
@@ -130,7 +118,7 @@
                         orderable: false,
                     },
                 ]
-            });
+            })
         </script>
 
         {{-- Handle delete --}}

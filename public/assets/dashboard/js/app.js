@@ -54,6 +54,14 @@ class App {
 
     // INITIALIZATION OF BOOTSTRAP DROPDOWN
     HSBsDropdown.init();
+
+    // INITIALIZATION OF SELECT
+    HSCore.components.HSTomSelect.init(".js-select");
+
+    // hide preloader
+    $(document).ready(function () {
+      $("#preloader").fadeOut();
+    });
   }
 
   /**
@@ -106,10 +114,9 @@ class App {
    */
   static destroy(title, callback) {
     bootbox.confirm({
-      size: "small",
       title: `Hapus ${title}`,
       message: `
-        <div>Yakin ingin menghapus ${title.toLowerCase()} ini ?</div>
+        <div>Yakin ingin menghapus ${title.toLowerCase()} ini?</div>
         <div>${title} yang dihapus tidak dapat dipulihkan kembali.</div>
       `,
       buttons: {
@@ -132,6 +139,43 @@ class App {
         callback(result);
       },
     });
+  }
+
+  /**
+   * DataTable setup
+   *
+   * @param {string} element
+   * @param {object} options
+   */
+  static dataTable(element, options) {
+    $(element).DataTable({
+      processing: true,
+      serverSide: true,
+      responsive: true,
+      language: {
+        search: "",
+        searchPlaceholder: "Search...",
+        lengthMenu: "_MENU_",
+      },
+      ...options,
+    });
+  }
+
+  /**
+   * Pratinjau gambar.
+   *
+   * @param {string} element
+   * @param {FileBinary} file
+   */
+  static imagePreview(element, file) {
+    if (typeof file === "object") {
+      const url = URL.createObjectURL(file);
+
+      $(element).attr("src", url);
+      $(element).on("load", () => URL.revokeObjectURL(url));
+    } else {
+      $(element).attr("src", file);
+    }
   }
 }
 

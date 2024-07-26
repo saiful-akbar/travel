@@ -207,25 +207,17 @@
         <script>
             $('#gambar').change(function (e) { 
                 if(this.files.length > 0) {
-                    $('#imagePreview').attr('src', URL.createObjectURL(this.files[0]));
+                    App.imagePreview('#imagePreview', this.files[0]);
                 }
             });
         </script>
 
         {{-- Reset image --}}
-        @isset($kendaraan->gambar)
-            <script>
-                $('#formEditKendaraan button[type=reset]').click(function(e) {
-                    $('#imagePreview').attr('src', '{{ storage($kendaraan->gambar) }}');
-                });
-            </script>
-        @else
-            <script>
-                $('#formEditKendaraan button[type=reset]').click(function(e) {
-                    $('#imagePreview').attr('src', '{{ asset("assets/dashboard/images/image_empty.jpg") }}');
-                });
-            </script>
-        @endisset
+        <script>
+            $('#formEditKendaraan button[type=reset]').click(function(e) {
+                App.imagePreview('#imagePreview', '{{ image($kendaraan->gambar) }}')
+            });
+        </script>
 
     </x-slot:script>
 </x-layouts.dashboard>

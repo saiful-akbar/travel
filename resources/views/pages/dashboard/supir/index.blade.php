@@ -29,20 +29,8 @@
         
         {{-- data table --}}
         <script>
-            $('#supirTable').DataTable({
-                processing: true,
-                serverSide: true,
-                responsive: true,
+            App.dataTable('#supirTable', {
                 ajax: "{{ route('dashboard.supir') }}",
-                language: {
-                    search: "",
-                    searchPlaceholder: 'Search...',
-                    lengthMenu: "_MENU_"
-                },
-                order: {
-                    name: 'nama_lengkap',
-                    dir: 'asc'
-                },
                 columns: [
                     {
                         data: 'nama_lengkap',
@@ -55,7 +43,6 @@
                         title: 'Foto',
                         render: (data) => {
                             const url = data === null ? '{{ avatar() }}' : App.storageUrl(data);
-
                             return `
                                 <span class="avatar avatar-circle">
                                     <img class="avatar-img" src="${url}" alt="Foto">

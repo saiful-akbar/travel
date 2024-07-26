@@ -41,7 +41,17 @@ return new class extends Migration
             $table->string('latitude_penjemputan', 20)->nullable();
             $table->string('longitude_penjemputan', 20)->nullable();
             $table->decimal('total_tagihan', 15, 2)->default(0)->unsigned();
-            $table->enum('status_pembayaran', ['Belum Bayar', 'Lunas'])->default('Belum Bayar');
+            $table->enum('status_pembayaran', ['pending', 'lunas', 'gagal'])->default('pending');
+
+            $table->enum('status', [
+                'dipesan',
+                'dikonfirmasi',
+                'dijemput',
+                'dalam_perjalanan',
+                'selesai',
+                'dibatalkan',
+            ])->default('dipesan');
+
             $table->timestamps();
         });
     }

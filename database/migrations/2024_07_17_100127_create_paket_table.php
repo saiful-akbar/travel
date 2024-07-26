@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('paket', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('deskripsi');
+            $table->string('nama', 100)->unique();
+            $table->text('deskripsi')->nullable();
+            $table->boolean('aktif')->default(true);
             $table->timestamps();
         });
     }

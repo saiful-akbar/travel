@@ -192,16 +192,17 @@
         {{-- Image preview --}}
         <script>
             $('#gambar').change(function (e) { 
-                if(e.target.files.length > 0) {
-                    $('#imagePreview').attr('src', URL.createObjectURL(e.target.files[0]));
+                if(this.files[0]) {
+                    App.imagePreview('#imagePreview', this.files[0]);
                 }
             });
+
         </script>
 
         {{-- Reset image --}}
         <script>
             $('#formCreateKendaraan button[type=reset]').click(function(e) {
-                $('#imagePreview').attr('src', "{{ asset('assets/dashboard/images/image_empty.jpg') }}");
+                App.imagePreview('#imagePreview', '{{ image() }}');
             });
         </script>
 

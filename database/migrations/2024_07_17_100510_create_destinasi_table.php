@@ -21,6 +21,7 @@ return new class extends Migration
 
             $table->string('wilayah');
             $table->smallInteger('jumlah_hari');
+            $table->boolean('aktif')->default(true);
             $table->timestamps();
         });
     }

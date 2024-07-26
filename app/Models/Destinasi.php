@@ -21,8 +21,21 @@ class Destinasi extends Model
     protected $fillable = [
         'paket_id',
         'wilayah',
-        'jumlah_hari'
+        'jumlah_hari',
+        'aktif',
     ];
+
+    /**
+     * casts.
+     *
+     * @return array
+     */
+    protected function casts(): array
+    {
+        return [
+            'aktif' => 'boolean'
+        ];
+    }
 
     /**
      * Get the paket that owns the Destinasi

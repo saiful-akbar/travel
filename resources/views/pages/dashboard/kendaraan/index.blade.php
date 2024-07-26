@@ -29,20 +29,8 @@
 
         {{-- Data table --}}
         <script>
-            $('#kendaraanTable').DataTable({
-                processing: true,
-                serverSide: true,
-                responsive: true,
+            App.dataTable('#kendaraanTable', {
                 ajax: "{{ route('dashboard.kendaraan') }}",
-                language: {
-                    search: "",
-                    searchPlaceholder: 'Search...',
-                    lengthMenu: "_MENU_"
-                },
-                order: {
-                    name: 'merek',
-                    dir: 'asc'
-                },
                 columns: [
                     {
                         data: 'merek',
@@ -62,7 +50,7 @@
                             if (data === null) {
                                 return `
                                     <img
-                                        src="{{ dashboard_asset('images/image_empty.jpg') }}"
+                                        src="{{ image() }}"
                                         alt="Gambar"
                                         width="100"
                                         height="70"

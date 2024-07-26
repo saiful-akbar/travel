@@ -50,3 +50,11 @@
   1. Tipe hiace commuter
   2. Tipe hiace premio
 
+# 2. Rule
+
+- Pesanan
+  - Customer harus memilih terlebih dahulu paket destinasi dan waktu peminjaman untuk menentukan ketersediaan mobil.
+- Pembatalan pesanan
+  - Pembatalan pesanan hanya bisa dilakukan oleh customer dalam waktu 1x24 jam setelah pemesanan.
+- Delete data
+  - Untuk penghapusan supir, kendaraan, unit kendaraan, paket dan destinasi hanya bisa jika tidak memiliki pesanan atau jika status pesanan `selesai` atau `dibatalkan`.

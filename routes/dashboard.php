@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\KendaraanController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
 use App\Http\Controllers\Dashboard\SupirController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\PaketController;
 
 /**
  * Home
@@ -26,7 +27,7 @@ Route::controller(UserController::class)
         Route::get('/', 'index');
         Route::get('/create', 'create')->name('.create');
         Route::post('/', 'store')->name('.store');
-        Route::get('/{user}/edit', 'edit')->name('.edit');
+        Route::get('/{user}', 'edit')->name('.edit');
         Route::patch('/{user}', 'update')->name('.update');
         Route::delete('/{user}', 'destroy')->name('.destroy');
     });
@@ -41,7 +42,7 @@ Route::controller(SupirController::class)
         Route::get('/', 'index');
         Route::get('/create', 'create')->name('.create');
         Route::post('/', 'store')->name('.store');
-        Route::get('/{supir}/edit', 'edit')->name('.edit');
+        Route::get('/{supir}', 'edit')->name('.edit');
         Route::patch('/{supir}', 'update')->name('.update');
         Route::delete('/{supir}', 'destroy')->name('.destroy');
     });
@@ -56,7 +57,7 @@ Route::controller(KendaraanController::class)
         Route::get('/', 'index');
         Route::get('/create', 'create')->name('.create');
         Route::post('/', 'store')->name('.store');
-        Route::get('/{kendaraan}/edit', 'edit')->name('.edit');
+        Route::get('/{kendaraan}', 'edit')->name('.edit');
         Route::patch('/{kendaraan}', 'update')->name('.update');
         Route::delete('/{kendaraan}', 'destroy')->name('.destroy');
 
@@ -65,6 +66,7 @@ Route::controller(KendaraanController::class)
             ->group(function (): void {
                 Route::get('/', 'unit');
                 Route::post('/', 'storeUnit')->name('.store');
+                Route::patch('/{unit}', 'updateUnit')->name('.update');
                 Route::delete('/{unit}', 'destroyUnit')->name('.destroy');
             });
     });
@@ -78,4 +80,19 @@ Route::controller(PerusahaanController::class)
     ->group(function (): void {
         Route::get('/', 'index');
         Route::post('/', 'store')->name('.store');
+    });
+
+/**
+ * Paket
+ */
+Route::controller(PaketController::class)
+    ->name('.paket')
+    ->prefix('/paket')
+    ->group(function (): void {
+        Route::get('/', 'index');
+        Route::get('/crete', 'create')->name('.create');
+        Route::post('/', 'store')->name('.store');
+        Route::get('/{paket}', 'edit')->name('.edit');
+        Route::patch('/{paket}', 'update')->name('.update');
+        Route::delete('/{paket}', 'destroy')->name('.destroy');
     });

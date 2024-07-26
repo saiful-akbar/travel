@@ -17,8 +17,22 @@ class Paket extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'deskripsi'
+        'nama',
+        'deskripsi',
+        'aktif',
     ];
+
+    /**
+     * casts
+     *
+     * @return array
+     */
+    protected function casts(): array
+    {
+        return [
+            'aktif' => 'boolean',
+        ];
+    }
 
     /**
      * Get all of the destinasi for the Paket

@@ -29,6 +29,7 @@ class Pesanan extends Model
         'longitude_penjemputan',
         'total_tagihan',
         'status_pembayaran',
+        'status',
     ];
 
     /**

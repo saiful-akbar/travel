@@ -64,10 +64,10 @@ class DashboardSidebar extends Component
             ],
         ],
         [
-            'name' => 'Paket Destinasi',
+            'name' => 'Perjalanan',
             'sub_menu' => [
                 [
-                    'name' => 'Paket',
+                    'name' => 'Paket Perjalanan',
                     'path' => 'dashboard/paket',
                     'route' => 'dashboard.paket',
                     'icon' => 'bi-box2',
