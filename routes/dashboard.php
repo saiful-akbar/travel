@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\DestinasiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\KendaraanController;
@@ -83,7 +84,7 @@ Route::controller(PerusahaanController::class)
     });
 
 /**
- * Paket
+ * Paket perjalanan
  */
 Route::controller(PaketController::class)
     ->name('.paket')
@@ -95,4 +96,19 @@ Route::controller(PaketController::class)
         Route::get('/{paket}', 'edit')->name('.edit');
         Route::patch('/{paket}', 'update')->name('.update');
         Route::delete('/{paket}', 'destroy')->name('.destroy');
+    });
+
+/**
+ * Destinasi
+ */
+Route::controller(DestinasiController::class)
+    ->name('.destinasi')
+    ->prefix('/destinasi')
+    ->group(function (): void {
+        Route::get('/', 'index');
+        Route::get('/create', 'create')->name('.create');
+        Route::post('/', 'store')->name('.store');
+        Route::get('/{destinasi}', 'edit')->name('.edit');
+        Route::patch('/{destinasi}', 'update')->name('.update');
+        Route::delete('/{destinasi}', 'destroy')->name('.destroy');
     });
