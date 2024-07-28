@@ -1,0 +1,22 @@
+#dashboard {
+  html[data-color-scheme="dark"] {
+    color-scheme: dark;
+  }
+
+  html[data-color-scheme="default"] {
+    color-scheme: light;
+  }
+
+  #preloader {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.75;
+  }
+}

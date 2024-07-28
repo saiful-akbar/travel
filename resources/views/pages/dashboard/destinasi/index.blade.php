@@ -36,17 +36,17 @@
                 columns: [
                     {
                         data: 'wilayah',
-                        name: 'wilayah',
+                        name: 'destinasi.wilayah',
                         title: 'Wilayah',
                     },
                     {
                         data: 'jumlah_hari',
-                        name: 'jumlah_hari',
+                        name: 'destinasi.jumlah_hari',
                         title: 'Jumlah Hari',
                     },
                     {
                         data: 'aktif',
-                        name: 'aktif',
+                        name: 'destinasi.aktif',
                         title: 'Status',
                         render: (data) => {
                             const color = data ? 'success' : 'danger'
@@ -59,17 +59,17 @@
                     },
                     {
                         data: 'paket_nama',
-                        name: 'paket_nama',
+                        name: 'paket.nama',
                         title: 'Paket',
                     },
                     {
                         data: 'created_at',
-                        name: 'created_at',
+                        name: 'destinasi.created_at',
                         title: 'Dibuat',
                     },
                     {
                         data: 'updated_at',
-                        name: 'updated_at',
+                        name: 'destinasi.updated_at',
                         title: 'Diubah',
                     },
                     {
