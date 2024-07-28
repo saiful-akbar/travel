@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
+<html id="main" lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="Travel online">
+    <meta name="description" content="Sistem pemesanan mobil travel online.">
     <meta name="author" content="saifulakbar.dev@gmail.com">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="base-url" content="{{ url('/') }}">
@@ -26,7 +26,7 @@
     {{-- Customizer generated styles --}}
     <style id="customizer-styles"></style>
 
-    {{-- Page loading styles --}}
+    {{-- style preloader --}}
     <style>
         .page-loading {
             position: fixed;
@@ -36,8 +36,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            -webkit-transition: all .4s .2s ease-in-out;
-            transition: all .4s .2s ease-in-out;
+            -webkit-transition: all 0.4s 0.2s ease-in-out;
+            transition: all 0.4s 0.2s ease-in-out;
             background-color: #fff;
             opacity: 0;
             visibility: hidden;
@@ -61,16 +61,16 @@
             text-align: center;
             -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
-            -webkit-transition: opacity .2s ease-in-out;
-            transition: opacity .2s ease-in-out;
+            -webkit-transition: opacity 0.2s ease-in-out;
+            transition: opacity 0.2s ease-in-out;
             opacity: 0;
         }
 
-        .page-loading.active>.page-loading-inner {
+        .page-loading.active > .page-loading-inner {
             opacity: 1;
         }
 
-        .page-loading-inner>span {
+        .page-loading-inner > span {
             display: block;
             font-family: "Inter", sans-serif;
             font-size: 1rem;
@@ -78,51 +78,51 @@
             color: #6f788b;
         }
 
-        [data-bs-theme="dark"] .page-loading-inner>span {
+        [data-bs-theme="dark"] .page-loading-inner > span {
             color: #fff;
-            opacity: .6;
+            opacity: 0.6;
         }
 
         .page-spinner {
             display: inline-block;
             width: 2.75rem;
             height: 2.75rem;
-            margin-bottom: .75rem;
+            margin-bottom: 0.75rem;
             vertical-align: text-bottom;
             background-color: #d7dde2;
             border-radius: 50%;
             opacity: 0;
-            -webkit-animation: spinner .75s linear infinite;
-            animation: spinner .75s linear infinite;
+            -webkit-animation: spinner 0.75s linear infinite;
+            animation: spinner 0.75s linear infinite;
         }
 
         [data-bs-theme="dark"] .page-spinner {
-            background-color: rgba(255, 255, 255, .25);
+            background-color: rgba(255, 255, 255, 0.25);
         }
 
         @-webkit-keyframes spinner {
             0% {
-                -webkit-transform: scale(0);
-                transform: scale(0);
+            -webkit-transform: scale(0);
+            transform: scale(0);
             }
 
             50% {
-                opacity: 1;
-                -webkit-transform: none;
-                transform: none;
+            opacity: 1;
+            -webkit-transform: none;
+            transform: none;
             }
         }
 
         @keyframes spinner {
             0% {
-                -webkit-transform: scale(0);
-                transform: scale(0);
+            -webkit-transform: scale(0);
+            transform: scale(0);
             }
 
             50% {
-                opacity: 1;
-                -webkit-transform: none;
-                transform: none;
+            opacity: 1;
+            -webkit-transform: none;
+            transform: none;
             }
         }
     </style>
@@ -133,15 +133,13 @@
             window.onload = function() {
                 const preloader = document.querySelector('.page-loading')
                 preloader.classList.remove('active')
-                setTimeout(function() {
-                    preloader.remove()
-                }, 1500)
+                setTimeout(() => preloader.remove(), 1500)
             }
         })()
     </script>
 
+    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     @isset($style) {{ $style }} @endisset
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -160,9 +158,22 @@
     {{-- Back to top button --}}
     @auth
         <a class="btn-scroll-top" href="#top" data-scroll aria-label="Scroll back to top">
-            <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+            <svg
+                viewBox="0 0 40 40"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <circle
+                    cx="20"
+                    cy="20"
+                    r="19"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-miterlimit="10"
+                ></circle>
             </svg>
+            
             <i class="ai-arrow-up"></i>
         </a>
     @endauth
