@@ -22,6 +22,11 @@
         </div>
     </div>
 
+    {{-- Form delete --}}
+    <form id="formDeleteDestinasi" method="post" class="d-none">
+        @csrf @method('delete')
+    </form>
+
     <x-slot:script>
 
         {{-- Datatable --}}
@@ -55,7 +60,7 @@
                     {
                         data: 'paket_nama',
                         name: 'paket_nama',
-                        title: 'Paket Perjalanan',
+                        title: 'Paket',
                     },
                     {
                         data: 'created_at',
@@ -76,6 +81,20 @@
                     },
                 ],
             })
+        </script>
+
+        {{-- handle delete --}}
+        <script>
+            function handleDelete(id) {
+                App.destroy('Destinasi', function(deleted) {
+                    if (deleted) {
+                        const form = $('#formDeleteDestinasi');
+
+                        form.attr('action', App.dashboardUrl(`/destinasi/${id}`));
+                        form.submit();
+                    }
+                })
+            }
         </script>
 
     </x-slot:script>

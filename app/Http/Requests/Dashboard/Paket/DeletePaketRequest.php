@@ -46,14 +46,6 @@ class DeletePaketRequest extends FormRequest implements DeleteRequest
         }
 
         /**
-         * Jika jumlah pesanan lebih dari 0
-         * batalkan penghapusan.
-         */
-        if ($jumlahPesanan > 0) {
-            throw new \Exception("Gagal menghapus paket. Paket ini masih memiliki pesanan yang aktif.", 1);
-        }
-
-        /**
          * Lanjutkan penghapusan jika paket tidak memiliki pesanan.
          */
         return $this->paket->delete();

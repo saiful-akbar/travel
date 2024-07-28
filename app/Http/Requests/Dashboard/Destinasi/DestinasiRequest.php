@@ -42,8 +42,7 @@ class DestinasiRequest extends FormRequest implements DataTableRequest
         /**
          * Buat query select destinasi dan join dengan tabel paket.
          */
-        $query = Destinasi::select($columns)
-            ->leftJoin('paket', 'destinasi.paket_id', '=', 'paket.id');
+        $query = Destinasi::select($columns)->leftJoin('paket', 'destinasi.paket_id', '=', 'paket.id');
 
         /**
          * Buat datatable dari hasil query.
