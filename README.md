@@ -39,7 +39,33 @@
 - Mengelola Data Content
 - Logout Admin
 
-# 3. Catatan
+# 3 Instalasi
+
+## Instalasi Pengembangan
+
+```bash
+git clone https://github.com/saiful-akbar/travel.git && cd travel
+
+```
+
+```bash
+sh app-dev.sh
+
+```
+
+```bash
+php artisan migrate:fresh --seed && npm run dev
+
+```
+
+## Instalasi Produksi
+
+```bash
+sh app-build.sh
+
+```
+
+# 4. Catatan
 
 - Penyewaan mobil hanya tersedia dalam 2 macam:
 
@@ -50,7 +76,7 @@
   1. Tipe hiace commuter
   2. Tipe hiace premio
 
-# 2. Rule
+# 5. Rule
 
 - Pesanan
   - Customer harus memilih terlebih dahulu paket destinasi dan waktu peminjaman untuk menentukan ketersediaan mobil.

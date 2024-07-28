@@ -48,16 +48,13 @@ class Destinasi extends Model
     }
 
     /**
-     * The kendaraan that belong to the Destinasi
+     * Get all of the harga for the Destinasi
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function kendaraan(): BelongsToMany
+    public function harga(): HasMany
     {
-        return $this->belongsToMany(Kendaraan::class, 'kendaraan_destinasi', 'destinasi_id', 'kendaraan_id')
-            ->using(KendaraanDestinasi::class)
-            ->withPivot('harga')
-            ->withTimestamps();
+        return $this->hasMany(Harga::class, 'destinasi_id', 'id');
     }
 
     /**

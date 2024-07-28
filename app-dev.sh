@@ -3,7 +3,7 @@ composer install
 cp .env.example .env
 
 php artisan key:generate
-php artisan storage:link
 php artisan optimize:clear
+php artisan storage:link
 
 npm ci

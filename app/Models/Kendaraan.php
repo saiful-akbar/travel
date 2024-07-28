@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Kendaraan extends Model
 {
@@ -36,15 +35,12 @@ class Kendaraan extends Model
     }
 
     /**
-     * The destinasi that belong to the Kendaraan
+     * Get all of the harga for the Kendaraan
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function destinasi(): BelongsToMany
+    public function harga(): HasMany
     {
-        return $this->belongsToMany(Destinasi::class, 'kendaraan_destinasi', 'kendaraan_id', 'destinasi_id')
-            ->using(KendaraanDestinasi::class)
-            ->withPivot('harga')
-            ->withTimestamps();
+        return $this->hasMany(Harga::class, 'kendaraan_id', 'id');
     }
 }
