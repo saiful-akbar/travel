@@ -17,10 +17,6 @@
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-header-title">Form Edit Paket</h4>
-                    </div>
-
                     <div class="card-body">
                         <div class="row mb-4">
                             <label for="nama" class="col-sm-3 col-form-label form-label">

@@ -177,6 +177,18 @@ class App {
       $(element).attr("src", file);
     }
   }
+
+  /**
+   * Number format
+   *
+   * @param {Int} number
+   * @param {Int} digits
+   */
+  static numberFormat(number, digits = 0) {
+    return number.toLocaleString("id-ID", {
+      minimumFractionDigits: digits,
+    });
+  }
 }
 
 App.init();

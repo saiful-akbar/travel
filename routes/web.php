@@ -1,14 +1,16 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DestinasiController;
+use App\Http\Controllers\Dashboard\HargaController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\KendaraanController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
 use App\Http\Controllers\Dashboard\SupirController;
 use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\PaketController;
+use App\Http\Controllers\Dashboard\PaketController;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Route;
 
 /**
  * Auth
@@ -23,7 +25,16 @@ Route::controller(AuthController::class)->group(function (): void {
  * main
  */
 Route::name('main')->group(function (): void {
-    // Masukan route main disini...
+    Route::get('/', function (): RedirectResponse {
+        return redirect()->route('login');
+    });
+});
+
+/**
+ * Auth member
+ */
+Route::middleware(['auth', 'role:member'])->name('name')->group(function (): void {
+    // route auth main... 
 });
 
 /**
@@ -34,18 +45,12 @@ Route::middleware(['auth', 'role:admin'])
     ->prefix('/dashboard')
     ->group(function (): void {
 
-        /**
-         * Home
-         */
         Route::controller(HomeController::class)
             ->name('.home')
             ->group(function (): void {
                 Route::get('/', 'index');
             });
 
-        /**
-         * Master User
-         */
         Route::controller(UserController::class)
             ->name('.user')
             ->prefix('/user')
@@ -58,9 +63,6 @@ Route::middleware(['auth', 'role:admin'])
                 Route::delete('/{user}', 'destroy')->name('.destroy');
             });
 
-        /**
-         * Master Supir
-         */
         Route::controller(SupirController::class)
             ->name('.supir')
             ->prefix('/supir')
@@ -73,9 +75,6 @@ Route::middleware(['auth', 'role:admin'])
                 Route::delete('/{supir}', 'destroy')->name('.destroy');
             });
 
-        /**
-         * Master Kendaraan
-         */
         Route::controller(KendaraanController::class)
             ->name('.kendaraan')
             ->prefix('/kendaraan')
@@ -87,19 +86,14 @@ Route::middleware(['auth', 'role:admin'])
                 Route::patch('/{kendaraan}', 'update')->name('.update');
                 Route::delete('/{kendaraan}', 'destroy')->name('.destroy');
 
-                Route::name('.unit')
-                    ->prefix('/{kendaraan}/unit')
-                    ->group(function (): void {
-                        Route::get('/', 'unit');
-                        Route::post('/', 'storeUnit')->name('.store');
-                        Route::patch('/{unit}', 'updateUnit')->name('.update');
-                        Route::delete('/{unit}', 'destroyUnit')->name('.destroy');
-                    });
+                Route::name('.unit')->prefix('/{kendaraan}/unit')->group(function (): void {
+                    Route::get('/', 'unit');
+                    Route::post('/', 'storeUnit')->name('.store');
+                    Route::patch('/{unit}', 'updateUnit')->name('.update');
+                    Route::delete('/{unit}', 'destroyUnit')->name('.destroy');
+                });
             });
 
-        /**
-         * Master Perusahaan
-         */
         Route::controller(PerusahaanController::class)
             ->name('.perusahaan')
             ->prefix('/perusahaan')
@@ -108,9 +102,6 @@ Route::middleware(['auth', 'role:admin'])
                 Route::post('/', 'store')->name('.store');
             });
 
-        /**
-         * Paket perjalanan
-         */
         Route::controller(PaketController::class)
             ->name('.paket')
             ->prefix('/paket')
@@ -123,9 +114,6 @@ Route::middleware(['auth', 'role:admin'])
                 Route::delete('/{paket}', 'destroy')->name('.destroy');
             });
 
-        /**
-         * Destinasi
-         */
         Route::controller(DestinasiController::class)
             ->name('.destinasi')
             ->prefix('/destinasi')
@@ -136,5 +124,17 @@ Route::middleware(['auth', 'role:admin'])
                 Route::get('/{destinasi}', 'edit')->name('.edit');
                 Route::patch('/{destinasi}', 'update')->name('.update');
                 Route::delete('/{destinasi}', 'destroy')->name('.destroy');
+            });
+
+        Route::controller(HargaController::class)
+            ->name('.harga')
+            ->prefix('/harga')
+            ->group(function (): void {
+                Route::get('/', 'index');
+                Route::get('/create', 'create')->name('.create');
+                Route::post('/', 'store')->name('.store');
+                Route::get('/{harga}', 'edit')->name('.edit');
+                Route::patch('/{harga}', 'update')->name('.update');
+                Route::delete('/{harga}', 'destroy')->name('.destroy');
             });
     });

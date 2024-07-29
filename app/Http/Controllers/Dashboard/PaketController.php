@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Requests\Dashboard\Paket\DeletePaketRequest;
 use App\Models\Paket;
 use Illuminate\View\View;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Dashboard\Paket\PaketRequest;
 use App\Http\Requests\Dashboard\Paket\StorePaketRequest;
+use App\Http\Requests\Dashboard\Paket\DeletePaketRequest;
 use App\Http\Requests\Dashboard\Paket\UpdatePaketRequest;
 
 class PaketController extends Controller

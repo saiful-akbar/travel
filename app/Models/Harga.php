@@ -18,10 +18,22 @@ class Harga extends Model
     protected $fillable = [
         'kendaraan_id',
         'destinasi_id',
-        'harga',
+        'nominal',
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * Casts
+     *
+     * @return array
+     */
+    protected function casts(): array
+    {
+        return [
+            'nominal' => 'decimal:2'
+        ];
+    }
 
     /**
      * Get the kendaraan that owns the Harga

@@ -5,6 +5,7 @@
 - Laragon untuk web server.
 - PHP v8.2 atau yang lebih terbaru.
 - Composer.
+- Node JS & NPM
 - Database MySQL.
 
 # 2. Fitur-Fitur Aplikasi

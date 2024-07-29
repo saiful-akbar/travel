@@ -78,6 +78,12 @@ class DashboardSidebar extends Component
                     'route' => 'dashboard.destinasi',
                     'icon' => 'bi-map',
                 ],
+                [
+                    'name' => 'Harga',
+                    'path' => 'dashboard/harga',
+                    'route' => 'dashboard.harga',
+                    'icon' => 'bi-cash',
+                ],
             ],
         ],
         [

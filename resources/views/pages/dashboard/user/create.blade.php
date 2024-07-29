@@ -11,10 +11,6 @@
         <div class="row justify-content-lg-center">
             <div class="col-lg-10">
                 <div class="card card-lg">
-                    <div class="card-header">
-                        <h4 class="card-header-title">Form tambah user</h4>
-                    </div>
-
                     <div class="card-body">
                         <div class="row mb-4">
                             <label class="col-sm-3 col-form-label form-label">Foto</label>

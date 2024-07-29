@@ -33,10 +33,6 @@
                 @csrf
                 
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-header-title">Form Unit Kendaraan</h4>
-                    </div>
-
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4 col-12 mb-md-0 mb-4">
@@ -141,7 +137,7 @@
 
                     <div class="card-footer d-flex justify-content-end">
                         <x-button type="submit" color="primary" start-icon="bi-plus-lg">
-                            Tambahkan
+                            Tambah Unit
                         </x-button>
                     </div>
                 </div>
