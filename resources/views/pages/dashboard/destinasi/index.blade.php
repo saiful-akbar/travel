@@ -1,4 +1,4 @@
-<x-layouts.dashboard title="Destinasi">
+<x-layout.dashboard title="Destinasi">
     <x-slot:header-action>
         <x-button
             type="link"
@@ -98,4 +98,4 @@
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

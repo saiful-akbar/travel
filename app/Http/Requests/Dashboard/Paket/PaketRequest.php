@@ -31,14 +31,14 @@ class PaketRequest extends FormRequest implements DataTableRequest
                     <a
                         href='" . route('dashboard.paket.edit', ['paket' => $model->id]) . "'
                         role='button'
-                        class='btn btn-icon btn-sm btn-warning rounded-pill'
+                        class='btn btn-icon btn-sm btn-light rounded-pill'
                     >
                         <i class='bi-pencil'></i>
                     </a>
 
                     <button
                         type='button'
-                        class='btn btn-icon btn-sm btn-danger rounded-pill'
+                        class='btn btn-icon btn-sm btn-light rounded-pill'
                         onclick='handleDelete(`$model->id`)'
                     >
                         <i class='bi-trash'></i>

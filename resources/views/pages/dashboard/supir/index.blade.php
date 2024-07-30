@@ -1,9 +1,8 @@
-<x-layouts.dashboard title="Supir">
+<x-layout.dashboard title="Supir">
     <x-slot:header-action>
         <x-button
             type="link"
             href="{{ route('dashboard.supir.create') }}"
-            color="primary"
             start-icon="bi-plus-lg"
         >
             Tambah Supir
@@ -96,4 +95,4 @@
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

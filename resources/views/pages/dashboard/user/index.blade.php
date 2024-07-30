@@ -1,10 +1,10 @@
-<x-layouts.dashboard title="User">
+<x-layout.dashboard title="User">
     <x-slot:header-action>
         <x-button
             type="link"
             href="{{ route('dashboard.user.create') }}"
-            color="primary"
             start-icon="bi-person-plus-fill"
+            gradient
         >
             Tambah User
         </x-button>
@@ -14,9 +14,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="userTable"
-                        class="table table-hover table-thead-bordered table-nowrap table-align-middle w-100">
-                    </table>
+                    <table id="userTable" class="table table-hover table-thead-bordered table-nowrap table-align-middle"></table>
                 </div>
             </div>
         </div>
@@ -45,7 +43,6 @@
                         title: 'Foto',
                         render: (data) => {
                             const url = data === null ? "{{ avatar() }}" : App.storageUrl(data);
-
                             return `
                                 <span class="avatar avatar-circle">
                                     <img class="avatar-img" src="${url}" alt="Foto">
@@ -65,7 +62,6 @@
                         render: (data) => {
                             const color = data === 'admin' ? 'danger' : 'primary';
                             const content = data === 'admin' ? 'Administrator' : 'Member';
-
                             return `
                                 <span class="badge bg-soft-${color} text-${color}">
                                     ${content}
@@ -80,7 +76,6 @@
                         render: (data) => {
                             const color = data ? 'success' : 'danger';
                             const content = data ? 'Aktif' : 'Tidak Aktif';
-
                             return `
                                 <span class="badge bg-soft-${color} text-${color}">
                                     ${content}
@@ -134,4 +129,4 @@
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

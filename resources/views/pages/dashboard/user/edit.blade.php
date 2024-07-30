@@ -1,6 +1,12 @@
-<x-layouts.dashboard title="Edit User">
+<x-layout.dashboard title="Edit User">
     <x-slot:header-action>
-        <x-button type="link" href="{{ route('dashboard.user') }}" color="dark" start-icon="bi-chevron-left">
+        <x-button
+            type="link"
+            href="{{ route('dashboard.user') }}"
+            color="dark"
+            start-icon="bi-chevron-left"
+            gradient
+        >
             Kembali
         </x-button>
     </x-slot:header-action>
@@ -240,12 +246,8 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button type="submit" color="success" start-icon="bi-save">
+                        <x-button type="submit" start-icon="bi-save" gradient>
                             Simpan
-                        </x-button>
-
-                        <x-button type="reset" color="secondary" start-icon="bi-x-lg" class="ms-2">
-                            Reset
                         </x-button>
                     </div>
                 </div>
@@ -289,4 +291,4 @@
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

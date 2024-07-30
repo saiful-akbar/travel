@@ -1,9 +1,9 @@
-<x-layouts.dashboard title="Tambah Unit Kendaraan">
+<x-layout.dashboard title="Tambah Unit Kendaraan">
     <x-slot:header-action>
         <x-button
             type="link"
             href="{{ route('dashboard.kendaraan') }}"
-            color="dark"
+            color="white"
             start-icon="bi-chevron-left"
         >
             Kembali
@@ -13,8 +13,8 @@
     <x-slot:header-content>
         <x-button
             type="link"
-            href="{{ route('dashboard.kendaraan') }}"
-            color="white"
+            href="{{ route('dashboard.kendaraan.create') }}"
+            color="primary"
             start-icon="bi-plus-lg"
             class="me-2"
         >
@@ -136,7 +136,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button type="submit" color="primary" start-icon="bi-plus-lg">
+                        <x-button type="submit" start-icon="bi-plus-lg">
                             Tambah Unit
                         </x-button>
                     </div>
@@ -187,7 +187,7 @@
                                     <td>
                                         <button
                                             type="button"
-                                            class="btn btn-icon btn-sm btn-warning rounded-pill"
+                                            class="btn btn-icon btn-sm btn-light rounded-pill"
                                             title="Edit"
                                             onclick="handleEdit({{ $unit }})"
                                         >
@@ -196,7 +196,7 @@
 
                                         <button
                                             type="button"
-                                            class="btn btn-icon btn-sm btn-danger rounded-pill"
+                                            class="btn btn-icon btn-sm btn-light rounded-pill"
                                             title="Hapus"
                                             onclick="handleDelete('{{ $kendaraan->id }}', '{{ $unit->id }}')"
                                         >
@@ -225,7 +225,7 @@
             aria-labelledby="modalEditLable"
             aria-hidden="true"
         >
-            <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header py-4 border-bottom">
                         <h4 class="modal-title" id="modalEditLable">Edit Unit</h4>
@@ -286,7 +286,7 @@
                                 <label for="status" class="form-label">
                                     Status <span class="text-danger">*</span>
                                 </label>
-
+                                
                                 <select
                                     required
                                     name="status_edit"
@@ -309,23 +309,11 @@
                     </div>
     
                     <div class="modal-footer">
-                        <x-button
-                            type="button"
-                            color="secondary"
-                            size="sm"
-                            start-icon="bi-x-lg"
-                            data-bs-dismiss="modal"
-                        >
+                        <x-button type="button" color="white" start-icon="bi-x-lg" data-bs-dismiss="modal">
                             Batal
                         </x-button>
     
-                        <x-button
-                            type="submit"
-                            color="info"
-                            size="sm"
-                            start-icon="bi-save"
-                            autofocus
-                        >
+                        <x-button type="submit" color="primary" start-icon="bi-save" autofocus>
                             Simpan
                         </x-button>
                     </div>
@@ -384,4 +372,4 @@
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

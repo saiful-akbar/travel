@@ -1,6 +1,6 @@
-<x-layouts.dashboard title="Perusahaan">
+<x-layout.dashboard title="Perusahaan">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <form action="{{ route('dashboard.perusahaan.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
@@ -17,11 +17,11 @@
     
                     <div class="card-body">
                         <div class="row mb-4">
-                            <label for="logo" class="col-sm-4 col-form-label form-label">
+                            <label for="logo" class="col-sm-3 col-form-label form-label">
                                 Logo
                             </label>
     
-                            <div class="col-sm-8">
+                            <div class="col-sm-9">
                                 <input
                                     type="file"
                                     accept=".png,.jpg,.jpeg,.webp"
@@ -45,11 +45,11 @@
 
                         {{-- Nama --}}
                         <div class="row mb-4">
-                            <label for="nama" class="col-sm-4 col-form-label form-label">
+                            <label for="nama" class="col-sm-3 col-form-label form-label">
                                 Nama Perusahaan <span class="text-danger">*</span>
                             </label>
     
-                            <div class="col-sm-8">
+                            <div class="col-sm-9">
                                 <input
                                     required
                                     type="text"
@@ -74,11 +74,11 @@
 
                         {{-- Email --}}
                         <div class="row mb-4">
-                            <label for="email" class="col-sm-4 col-form-label form-label">
+                            <label for="email" class="col-sm-3 col-form-label form-label">
                                 Email <span class="text-danger">*</span>
                             </label>
     
-                            <div class="col-sm-8">
+                            <div class="col-sm-9">
                                 <input
                                     required
                                     type="email"
@@ -103,11 +103,11 @@
 
                         {{-- Telepon --}}
                         <div class="row mb-4">
-                            <label for="telepon" class="col-sm-4 col-form-label form-label">
+                            <label for="telepon" class="col-sm-3 col-form-label form-label">
                                 No. Telp <span class="text-danger">*</span>
                             </label>
     
-                            <div class="col-sm-8">
+                            <div class="col-sm-9">
                                 <input
                                     required
                                     type="number"
@@ -133,11 +133,11 @@
 
                         {{-- Alamat --}}
                         <div class="row">
-                            <label for="alamat" class="col-sm-4 col-form-label form-label">
+                            <label for="alamat" class="col-sm-3 col-form-label form-label">
                                 Alamat <span class="text-danger">*</span>
                             </label>
     
-                            <div class="col-sm-8">
+                            <div class="col-sm-9">
                                 <textarea
                                     required
                                     rows="5"
@@ -161,11 +161,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button
-                            type="submit"
-                            color="success"
-                            start-icon="bi-save"
-                        >
+                        <x-button type="submit" start-icon="bi-save">
                             Simpan
                         </x-button>
                     </div>
@@ -183,4 +179,4 @@
             });
         </script>
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

@@ -1,4 +1,4 @@
-<x-layouts.dashboard title="Harga">
+<x-layout.dashboard title="Harga">
     <x-slot:header-action>
         <x-button
             type="link"
@@ -78,13 +78,15 @@
         <script>
             function handleDelete(id) {
                 App.destroy('Harga', function(deleted) {
-                    const form = $('#formDeleteHarga');
-
-                    form.attr('action', App.dashboardUrl(`/harga/${id}`));
-                    form.submit();
+                    if (deleted) {
+                        const form = $('#formDeleteHarga');
+                        
+                        form.attr('action', App.dashboardUrl(`/harga/${id}`));
+                        form.submit();
+                    }
                 })
             }
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

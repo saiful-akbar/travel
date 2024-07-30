@@ -1,9 +1,9 @@
-<x-layouts.dashboard title="Edit Supir">
+<x-layout.dashboard title="Edit Supir">
     <x-slot:header-action>
         <x-button
             type="link"
             href="{{ route('dashboard.supir') }}"
-            color="dark"
+            color="white"
             start-icon="bi-chevron-left"
         >
             Kembali
@@ -174,21 +174,8 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button
-                            type="submit"
-                            color="success"
-                            start-icon="bi-save"
-                            class="me-2"
-                        >
+                        <x-button type="submit" start-icon="bi-save">
                             Simpan
-                        </x-button>
-
-                        <x-button
-                            type="reset"
-                            color="secondary"
-                            start-icon="bi-x-lg"
-                        >
-                            Reset
                         </x-button>
                     </div>
                 </div>                
@@ -213,4 +200,4 @@
             
         </script>
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

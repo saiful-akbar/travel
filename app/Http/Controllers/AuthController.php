@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class AuthController extends Controller
      */
     public function login(): View
     {
-        return view('pages.main.auth.login');
+        return view('pages.auth.login');
     }
 
     /**
@@ -25,26 +26,16 @@ class AuthController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(LoginRequest $request): RedirectResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $request->authenticate();
+        $request->session()->regenerate();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            if (Auth::user()->role == 'member') {
-                return redirect($request->redirect);
-            }
-
-            return to_route('dashboard.home');
+        if (Auth::user()->role == 'member') {
+            return redirect($request->query('redirect'));
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password anda salah.',
-        ])->onlyInput('email');
+        return to_route('dashboard.home');
     }
 
     /**

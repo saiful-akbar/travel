@@ -54,7 +54,7 @@ class HargaRequest extends FormRequest implements DataTableRequest
                 <a
                     href='" . route('dashboard.harga.update', ['harga' => $model->id]) . "'
                     role='button'
-                    class='btn btn-icon btn-sm btn-warning rounded-pill'
+                    class='btn btn-icon btn-sm btn-light rounded-pill'
                     title='Edit'
                 >
                     <i class='bi-pencil'></i>
@@ -62,7 +62,7 @@ class HargaRequest extends FormRequest implements DataTableRequest
 
                 <button
                     type='button'
-                    class='btn btn-icon btn-sm btn-danger rounded-pill'
+                    class='btn btn-icon btn-sm btn-light rounded-pill'
                     title='Hapus'
                     onclick='handleDelete(`{$model->id}`)'
                 >

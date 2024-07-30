@@ -1,9 +1,9 @@
-<x-layouts.dashboard title="Edit Paket">
+<x-layout.dashboard title="Edit Paket">
     <x-slot:header-action>
         <x-button
             type="link"
             href="{{ route('dashboard.paket') }}"
-            color="dark"
+            color="white"
             start-icon="bi-chevron-left"
             role="botton"
         >
@@ -74,16 +74,12 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button type="submit" color="success" start-icon="bi-save">
+                        <x-button type="submit" start-icon="bi-save">
                             Simpan
-                        </x-button>
-                        
-                        <x-button type="Reset" color="secondary" start-icon="bi-x-lg" class="ms-2">
-                            Reset
                         </x-button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-</x-layouts.dashboard>
+</x-layout.dashboard>

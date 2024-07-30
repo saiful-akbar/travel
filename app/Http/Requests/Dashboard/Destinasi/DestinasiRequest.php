@@ -54,7 +54,7 @@ class DestinasiRequest extends FormRequest implements DataTableRequest
                     <a
                         role='button'
                         href='" . route('dashboard.destinasi.edit', ['destinasi' => $model->id]) . "'
-                        class='btn btn-icon btn-sm btn-warning rounded-pill'
+                        class='btn btn-icon btn-sm btn-light rounded-pill'
                         title='Edit'
                     >
                         <i class='bi-pencil'></i>
@@ -62,7 +62,7 @@ class DestinasiRequest extends FormRequest implements DataTableRequest
 
                     <button
                         type='button'
-                        class='btn btn-icon btn-sm btn-danger rounded-pill'
+                        class='btn btn-icon btn-sm btn-light rounded-pill'
                         onclick='handleDelete(`{$model->id}`)'
                         title='Hapus'
                     >

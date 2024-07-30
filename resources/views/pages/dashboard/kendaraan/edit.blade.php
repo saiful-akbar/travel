@@ -1,9 +1,9 @@
-<x-layouts.dashboard title="Edit Kendaraan">
+<x-layout.dashboard title="Edit Kendaraan">
     <x-slot:header-action>
         <x-button
             type="link"
             href="{{ route('dashboard.kendaraan') }}"
-            color="dark"
+            color="white"
             start-icon="bi-chevron-left"
         >
             Kembali
@@ -162,7 +162,7 @@
                                     >
                                 @else
                                     <img
-                                        src="{{ asset('assets/dashboard/images/image_empty.jpg') }}"
+                                        src="{{ asset('assets/images/image_empty.jpg') }}"
                                         alt="Kendaraan"
                                         id="imagePreview"
                                         class="img-fluid rounded-2 border border-5 mt-4"
@@ -173,12 +173,8 @@
                     </div>
     
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button type="submit" color="success" start-icon="bi-save">
+                        <x-button type="submit" start-icon="bi-save">
                             Simpan
-                        </x-button>
-    
-                        <x-button type="reset" color="secondary" start-icon="bi-x-lg" class="ms-2">
-                            Reset
                         </x-button>
                     </div>
                 </div>
@@ -216,4 +212,4 @@
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

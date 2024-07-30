@@ -25,9 +25,9 @@ Route::controller(AuthController::class)->group(function (): void {
  * main
  */
 Route::name('main')->group(function (): void {
-    Route::get('/', function (): RedirectResponse {
-        return redirect()->route('login');
-    });
+    Route::get('/', function () {
+        return view('pages.main.home.index');
+    })->name('.home');
 });
 
 /**

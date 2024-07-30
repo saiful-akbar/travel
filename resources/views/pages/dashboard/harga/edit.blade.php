@@ -1,9 +1,9 @@
-<x-layouts.dashboard title="Tambah Harga">
+<x-layout.dashboard title="Tambah Harga">
     <x-slot:header-action>
         <x-button
             type="link"
             href="{{ route('dashboard.harga') }}"
-            color="dark"
+            color="white"
             start-icon="bi-chevron-left"
         >
             Kembali
@@ -29,10 +29,12 @@
                                         name="kendaraan"
                                         id="kendaraan"
                                         autocomplete="off"
-                                        data-hs-tom-select-options='{"placeholder": "Pilih Kendaraan..."}'
+                                        data-hs-tom-select-options='{
+                                            "placeholder": "Pilih Kendaraan..."
+                                        }'
                                         @class([
                                             'js-select',
-                                            'form-control',
+                                            'form-select',
                                             'form-control-light',
                                             'is-invalid' => $errors->has('kendaraan'),
                                         ])
@@ -67,10 +69,12 @@
                                         name="destinasi"
                                         id="destinasi"
                                         autocomplete="off"
-                                        data-hs-tom-select-options='{"placeholder": "Pilih destinasi..."}'
+                                        data-hs-tom-select-options='{
+                                            "placeholder": "Pilih destinasi..."
+                                        }'
                                         @class([
                                             'js-select',
-                                            'form-control',
+                                            'form-select',
                                             'form-control-light',
                                             'is-invalid' => $errors->has('destinasi'),
                                         ])
@@ -78,13 +82,11 @@
                                         <option value="">Pilih destinasi</option>
 
                                         @foreach ($paket as $paketItem)
-                                            <optgroup label="{{ $paketItem->nama }}">
-                                                @foreach ($paketItem->destinasi as $destinasi)
-                                                    <option value="{{ $destinasi->id }}" @selected(old('destinasi', $harga->destinasi_id) == $destinasi->id)>
-                                                        {{ $destinasi->wilayah }} - {{ $destinasi->jumlah_hari }} Hari
-                                                    </option>
-                                                @endforeach
-                                            </optgroup>
+                                            @foreach ($paketItem->destinasi as $destinasi)
+                                                <option value="{{ $destinasi->id }}" @selected(old('destinasi', $harga->destinasi_id) == $destinasi->id)>
+                                                    {{ $paketItem->nama }} - {{ $destinasi->wilayah }}
+                                                </option>
+                                            @endforeach
                                         @endforeach
                                     </select>
                                 </div>
@@ -127,16 +129,12 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button type="submit" color="success" start-icon="bi-save">
+                        <x-button type="submit" start-icon="bi-save">
                             Simpan
-                        </x-button>
-
-                        <x-button type="reset" color="secondary" start-icon="bi-x-lg" class="ms-2">
-                            Reset
                         </x-button>
                     </div>
                 </div>    
             </div>
         </div>
     </form>
-</x-layouts.dashboard>
+</x-layout.dashboard>

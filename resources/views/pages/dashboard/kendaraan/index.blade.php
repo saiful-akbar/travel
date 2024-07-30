@@ -1,4 +1,4 @@
-<x-layouts.dashboard title="Kendaraan">
+<x-layout.dashboard title="Kendaraan">
     <x-slot:header-action>
         <x-button
             type="link"
@@ -6,7 +6,7 @@
             color="primary"
             start-icon="bi-plus-lg"
         >
-            Tambah Baru
+            Tambah Kendaraan
         </x-button>
     </x-slot:header-action>
 
@@ -116,4 +116,4 @@
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

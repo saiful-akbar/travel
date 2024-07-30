@@ -1,4 +1,4 @@
-<x-layouts.dashboard title="Paket Perjalanan">
+<x-layout.dashboard title="Paket Perjalanan">
     <x-slot:header-action>
         <x-button
             type="link"
@@ -81,4 +81,4 @@
         </script>
 
     </x-slot:script>
-</x-layouts.dashboard>
+</x-layout.dashboard>

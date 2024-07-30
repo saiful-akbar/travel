@@ -19,18 +19,6 @@ class UserRequest extends FormRequest implements DataTableRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    /**
      * Datatable
      *
      * @return JsonResponse
@@ -41,7 +29,7 @@ class UserRequest extends FormRequest implements DataTableRequest
             ->addColumn('action', function (User $model) {
                 return "
                     <a
-                        class='btn btn-warning btn-icon btn-sm rounded-pill'
+                        class='btn btn-light btn-icon btn-sm rounded-pill'
                         href='" . route('dashboard.user.edit', ['user' => $model->id]) . "'
                         title='Edit'
                     >
@@ -49,7 +37,7 @@ class UserRequest extends FormRequest implements DataTableRequest
                     </a>
 
                     <button
-                        class='btn btn-danger btn-icon btn-sm rounded-pill'
+                        class='btn btn-light btn-icon btn-sm rounded-pill'
                         title='Hapus'
                         onclick='handleDelete(`{$model->id}`)'
                     >
