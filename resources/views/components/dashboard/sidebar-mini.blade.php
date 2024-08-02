@@ -1,5 +1,5 @@
 <div class="splitted-content-mini navbar-dark bg-dark h-100 py-3">
-    <a class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard.home') }}">
+    <a class="navbar-brand d-flex justify-content-center" href="{{ route('main.home') }}">
         <img class="navbar-brand-logo-short" src="{{ image(perusahaan()?->logo) }}" alt="{{ perusahaan()?->nama }}" style="object-fit: contain; object-position: center;">
     </a>
 
@@ -46,7 +46,7 @@
                     data-bs-dropdown-animation
                 >
                     <div class="avatar avatar-sm avatar-circle">
-                        <img class="avatar-img" src="{{ avatar(user()->foto) }}" alt="Image Description">
+                        <img class="avatar-img" src="{{ photo(user()->foto) }}" alt="Image Description">
                         <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                     </div>
                 </a>
@@ -55,7 +55,7 @@
                     <div class="dropdown-item-text">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-sm avatar-circle">
-                                <img class="avatar-img" src="{{ avatar(user()->foto) }}" alt="Foto">
+                                <img class="avatar-img" src="{{ photo(user()->foto) }}" alt="Foto">
                             </div>
 
                             <div class="flex-grow-1 ms-3">

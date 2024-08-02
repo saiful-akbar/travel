@@ -58,6 +58,9 @@ class App {
     // INITIALIZATION OF SELECT
     HSCore.components.HSTomSelect.init(".js-select");
 
+    // INITIALIZATION OF QUILLJS EDITOR
+    HSCore.components.HSQuill.init(".js-quill");
+
     // hide preloader
     $(document).ready(function () {
       $("#preloader").fadeOut();

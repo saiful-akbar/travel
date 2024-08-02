@@ -12,7 +12,9 @@
         <title>{{ $title }} - {{ config('app.name') }} Dashboard</title>
 
         {{-- Icon --}}
-        <link rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}">
+        @isset(perusahaan()->logo)
+            <link rel="shortcut icon" href="{{ image(perusahaan()->logo) }}">
+        @endisset
 
         {{-- Google font --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,11 +22,11 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
 
         {{-- CSS --}}
-        <link rel="stylesheet" href="{{ asset('assets/css/vendor.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/theme.minc619.css?v=1.0') }}">
-        <link rel="preload" href="{{ asset('assets/css/theme.min.css') }}" data-hs-appearance="default" as="style">
-        <link rel="preload" href="{{ asset('assets/css/theme-dark.min.css') }}" data-hs-appearance="dark" as="style">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/datatables/datatables.min.css') }}">
+        <link rel="stylesheet" href="{{ dashboard_asset('css/vendor.min.css') }}">
+        <link rel="stylesheet" href="{{ dashboard_asset('css/theme.minc619.css?v=1.0') }}">
+        <link rel="preload" href="{{ dashboard_asset('css/theme.min.css') }}" data-hs-appearance="default" as="style">
+        <link rel="preload" href="{{ dashboard_asset('css/theme-dark.min.css') }}" data-hs-appearance="dark" as="style">
+        <link rel="stylesheet" href="{{ dashboard_asset('vendor/datatables/datatables.min.css') }}">
 
         {{-- Theme style --}}
         <style data-hs-appearance-onload-styles>
@@ -38,7 +40,7 @@
         </style>
 
         {{-- Head script --}}
-        <script src="{{ asset('assets/js/head.js') }}"></script>
+        <script src="{{ dashboard_asset('js/head.js') }}"></script>
 
         {{-- Vite --}}
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
@@ -49,7 +51,7 @@
 
 
     <body id="dashboardLayout" class="has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-closed-mode splitted-content">
-        <script src="{{ asset('assets/js/theme-appearance.js') }}"></script>
+        <script src="{{ dashboard_asset('js/theme-appearance.js') }}"></script>
 
         {{-- Preloader --}}
         <x-preloader></x-preloader>
@@ -119,12 +121,12 @@
         </form>
 
         {{-- JS Plugins --}}
-        <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-        <script src="{{ asset('assets/js/theme.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootbox/bootbox.all.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/datatables/datatables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="{{ dashboard_asset('js/vendor.min.js') }}"></script>
+        <script src="{{ dashboard_asset('js/theme.min.js') }}"></script>
+        <script src="{{ dashboard_asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ dashboard_asset('vendor/bootbox/bootbox.all.min.js') }}"></script>
+        <script src="{{ dashboard_asset('vendor/datatables/datatables.min.js') }}"></script>
+        <script src="{{ dashboard_asset('js/app.js') }}"></script>
 
         {{-- Logout --}}
         <script>

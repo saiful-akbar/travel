@@ -1,11 +1,6 @@
 <x-layout.dashboard title="User">
     <x-slot:header-action>
-        <x-button
-            type="link"
-            href="{{ route('dashboard.user.create') }}"
-            start-icon="bi-person-plus-fill"
-            gradient
-        >
+        <x-button type="link" href="{{ route('dashboard.user.create') }}" start-icon="bi-person-plus-fill">
             Tambah User
         </x-button>
     </x-slot:header-action>
@@ -42,7 +37,7 @@
                         name: 'foto',
                         title: 'Foto',
                         render: (data) => {
-                            const url = data === null ? "{{ avatar() }}" : App.storageUrl(data);
+                            const url = data === null ? "{{ photo() }}" : App.storageUrl(data);
                             return `
                                 <span class="avatar avatar-circle">
                                     <img class="avatar-img" src="${url}" alt="Foto">

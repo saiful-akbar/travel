@@ -66,7 +66,7 @@
                                     alt="Gambar"
                                     width="100"
                                     height="70"
-                                    class="rounded-2 border border-2"
+                                    class="rounded-2 border border-3"
                                     style="object-fit: contain; object-position: center;"
                                 />
                             `;

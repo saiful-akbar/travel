@@ -3,28 +3,21 @@
 namespace App\Models;
 
 use App\Traits\HasTimestamp;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Perusahaan extends Model
+class MediaSosial extends Model
 {
     use HasFactory, HasUlids, HasTimestamp;
 
-    protected $table = 'perusahaan';
+    protected $table = 'media_sosial';
     protected $keyType = 'string';
     public $incrementing = false;
 
     protected $fillable = [
         'nama',
-        'pt',
-        'logo',
-        'telepon',
-        'email',
-        'alamat',
-        'visi',
-        'misi',
-        'profil',
+        'url',
+        'icon',
     ];
 }

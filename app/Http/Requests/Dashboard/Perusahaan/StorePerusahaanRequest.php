@@ -27,11 +27,14 @@ class StorePerusahaanRequest extends FormRequest implements StoreRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required|string|max:100',
-            'logo' => 'required|mimes:jpg,jpeg,png,webp|max:1024',
-            'email' => 'required|email:filter|max:100',
-            'telepon' => 'required|regex:/^[0-9]{10,13}+$/',
-            'alamat' => 'required|string|max:300',
+            'nama' => 'nullable|string|max:100',
+            'logo' => 'nullable|mimes:jpg,jpeg,png,webp|max:1024',
+            'email' => 'nullable|email:filter|max:100',
+            'telepon' => 'nullable|regex:/^[0-9]{10,13}+$/',
+            'alamat' => 'nullable|string|max:300',
+            'visi' => 'nullable|string|max:500',
+            'misi' => 'nullable|string|max:500',
+            'profil' => 'nullable|string|max:500',
         ];
     }
 
@@ -48,46 +51,49 @@ class StorePerusahaanRequest extends FormRequest implements StoreRequest
         $perusahaan = Perusahaan::first();
 
         /**
-         * Periksa apakah data perrusahaan ada atau tidak.
-         * Jika ada, hapus datanya dari database
-         * dan logo-nya dari storage.
-         */
-        if (!is_null($perusahaan)) {
-
-            /**
-             * Periksa apakah ada logo pada perusahaan saat ini.
-             * Jika ada, hapus logo dari storage.
-             */
-            if (!is_null($perusahaan->logo)) {
-                Storage::disk('public')->delete($perusahaan->logo);
-            }
-
-            /**
-             * Hapus data perusahaan saat ini dari database.
-             */
-            $perusahaan->delete();
-        }
-
-        /**
          * Tampung data request form
          */
-        $data = $this->only('nama', 'email', 'telepon', 'alamat');
+        $data = $this->only([
+            'nama',
+            'email',
+            'telepon',
+            'alamat',
+            'visi',
+            'misi',
+            'profil',
+        ]);
 
         /**
-         * Periksa apakah ada logo yang di-upload pada data
-         * perusahaan baru.
+         * Jika logo diupload ulang atau diganti, Hapus logo lama.
          */
         if ($this->hasFile('logo')) {
 
             /**
-             * Jika ada logo yang di-upload
-             * simpan pada storage.
+             * Hapus logo lama
+             */
+            Storage::disk('public')->delete($perusahaan->logo);
+
+            /**
+             * Simpan logo baru
              */
             $data['logo'] = $this->file('logo')->store('logo-perusahaan', 'public');
+        } else {
+
+            /**
+             * Pertahankan logo lama.
+             */
+            $data['logo'] = $perusahaan->logo;
         }
 
         /**
-         * Simpan data perusahaan baru ke database.
+         * Hapus semua data perusahaan lama.
+         */
+        if (!is_null($perusahaan)) {
+            $perusahaan->delete();
+        }
+
+        /**
+         * Simpan data perusahaan baru.
          */
         return Perusahaan::create($data);
     }

@@ -3,9 +3,8 @@
         <x-button
             type="link"
             href="{{ route('dashboard.user') }}"
-            color="dark"
+            color="white"
             start-icon="bi-chevron-left"
-            gradient
         >
             Kembali
         </x-button>
@@ -29,10 +28,8 @@
                             <label class="col-sm-3 col-form-label form-label">Foto</label>
 
                             <div class="col-sm-9">
-                                <label for="foto"
-                                    class="avatar avatar-xl avatar-circle avatar-uploader me-5 border-lg">
-                                    <img src="{{ avatar($user->foto) }}" alt="foto" class="avatar-img"
-                                        id="photoPreview">
+                                <label for="foto" class="avatar avatar-xxl avatar-circle avatar-uploader me-5 border-lg">
+                                    <img src="{{ photo($user->foto) }}" alt="foto" class="avatar-img" id="photoPreview">
                                     <input type="file" id="foto" name="foto" class="d-none">
                                 </label>
 
@@ -49,10 +46,14 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <input required type="text" name="nama_lengkap" id="nama_lengkap"
+                                <input
+                                    required type="text"
+                                    name="nama_lengkap"
+                                    id="nama_lengkap"
                                     placeholder="Masukan nama lengkap..."
                                     value="{{ old('nama_lengkap', $user->nama_lengkap) }}"
-                                    class="form-control form-control-light @error('nama_lengkap') is-invalid @enderror">
+                                    class="form-control form-control-light @error('nama_lengkap') is-invalid @enderror"
+                                >
 
                                 @error('nama_lengkap')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -67,9 +68,15 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <input required type="email" name="email" id="email"
-                                    placeholder="Masukan nama lengkap..." value="{{ old('email', $user->email) }}"
-                                    class="form-control form-control-light @error('email') is-invalid @enderror">
+                                <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Masukan nama lengkap..."
+                                    value="{{ old('email', $user->email) }}"
+                                    class="form-control form-control-light @error('email') is-invalid @enderror"
+                                >
 
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -85,9 +92,14 @@
 
                             <div class="col-sm-9">
                                 <div class="input-group @error('password') is-invalid @enderror">
-                                    <input type="password" name="password" id="password"
-                                        placeholder="Masukan password..." value="{{ old('password') }}"
-                                        class="form-control form-control-light @error('password') is-invalid @enderror">
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        placeholder="Masukan password..."
+                                        value="{{ old('password') }}"
+                                        class="form-control form-control-light @error('password') is-invalid @enderror"
+                                    >
 
                                     <button id="togglePassword" type="button" class="input-group-text">
                                         <i id="togglePasswordIcon" class="bi-eye-slash"></i>
@@ -112,11 +124,17 @@
 
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical  @error('role') is-invalid @enderror">
-                                    <label class="form-control form-control-light @error('role') is-invalid @enderror"
-                                        for="admin">
+                                    <label for="admin" class="form-control form-control-light @error('role') is-invalid @enderror">
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="role" value="admin"
-                                                id="admin" @checked(old('role', $user->role) === 'admin') required>
+                                            <input
+                                                type="radio"
+                                                class="form-check-input"
+                                                name="role"
+                                                value="admin"
+                                                id="admin"
+                                                @checked(old('role', $user->role) === 'admin')
+                                                required
+                                            >
 
                                             <span class="form-check-label">
                                                 Admin
@@ -124,11 +142,17 @@
                                         </span>
                                     </label>
 
-                                    <label class="form-control form-control-light @error('role') is-invalid @enderror"
-                                        for="member">
+                                    <label for="member" class="form-control form-control-light @error('role') is-invalid @enderror">
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="role" value="member"
-                                                id="member" @checked(old('role', $user->role) === 'member') required>
+                                            <input
+                                                type="radio"
+                                                class="form-check-input"
+                                                name="role"
+                                                value="member"
+                                                id="member"
+                                                @checked(old('role', $user->role) === 'member')
+                                                required
+                                            >
 
                                             <span class="form-check-label">
                                                 Member
@@ -150,14 +174,18 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <div
-                                    class="input-group input-group-sm-vertical  @error('status') is-invalid @enderror">
-                                    <label
-                                        class="form-control form-control-light @error('status') is-invalid @enderror"
-                                        for="aktif">
+                                <div class="input-group input-group-sm-vertical  @error('status') is-invalid @enderror">
+                                    <label for="aktif" class="form-control form-control-light @error('status') is-invalid @enderror">
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="status"
-                                                id="aktif" value="1" @checked(old('status', $user->aktif) == '1') required>
+                                            <input
+                                                type="radio"
+                                                class="form-check-input"
+                                                name="status"
+                                                id="aktif"
+                                                value="1"
+                                                @checked(old('status', $user->aktif) == '1')
+                                                required
+                                            >
 
                                             <span class="form-check-label">
                                                 Aktif
@@ -165,12 +193,17 @@
                                         </span>
                                     </label>
 
-                                    <label
-                                        class="form-control form-control-light @error('status') is-invalid @enderror"
-                                        for="inactive">
+                                    <label for="inactive" class="form-control form-control-light @error('status') is-invalid @enderror">
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="status"
-                                                id="inactive" value="0" @checked(old('status', $user->aktif) == '0') required>
+                                            <input
+                                                type="radio"
+                                                class="form-check-input"
+                                                name="status"
+                                                id="inactive"
+                                                value="0"
+                                                @checked(old('status', $user->aktif) == '0')
+                                                required
+                                            >
 
                                             <span class="form-check-label">
                                                 Tidak Aktif
@@ -192,14 +225,18 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <div
-                                    class="input-group input-group-sm-vertical  @error('jenis_kelamin') is-invalid @enderror">
-                                    <label
-                                        class="form-control form-control-light @error('jenis_kelamin') is-invalid @enderror"
-                                        for="L">
+                                <div class="input-group input-group-sm-vertical  @error('jenis_kelamin') is-invalid @enderror">
+                                    <label for="L" class="form-control form-control-light @error('jenis_kelamin') is-invalid @enderror">
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="jenis_kelamin"
-                                                id="L" value="L" @checked(old('jenis_kelamin', $user->jenis_kelamin) === 'L') required>
+                                            <input
+                                                type="radio"
+                                                class="form-check-input"
+                                                name="jenis_kelamin"
+                                                id="L"
+                                                value="L"
+                                                @checked(old('jenis_kelamin', $user->jenis_kelamin) === 'L')
+                                                required
+                                            >
 
                                             <span class="form-check-label">
                                                 Laki - Laki
@@ -207,12 +244,17 @@
                                         </span>
                                     </label>
 
-                                    <label
-                                        class="form-control form-control-light @error('jenis_kelamin') is-invalid @enderror"
-                                        for="P">
+                                    <label for="P" class="form-control form-control-light @error('jenis_kelamin') is-invalid @enderror">
                                         <span class="form-check">
-                                            <input type="radio" class="form-check-input" name="jenis_kelamin"
-                                                id="P" value="P" @checked(old('jenis_kelamin', $user->jenis_kelamin) === 'P') required>
+                                            <input
+                                                required
+                                                type="radio"
+                                                class="form-check-input"
+                                                name="jenis_kelamin"
+                                                id="P"
+                                                value="P"
+                                                @checked(old('jenis_kelamin', $user->jenis_kelamin) === 'P')
+                                            >
 
                                             <span class="form-check-label">
                                                 Perempuan
@@ -234,9 +276,14 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <input type="number" name="telepon" id="telepon" placeholder="Masukan no telp..."
+                                <input
+                                    type="number"
+                                    name="telepon"
+                                    id="telepon"
+                                    placeholder="Masukan no telp..."
                                     value="{{ old('telepon', $user->telepon) }}"
-                                    class="form-control form-control-light @error('telepon') is-invalid @enderror">
+                                    class="form-control form-control-light @error('telepon') is-invalid @enderror"
+                                >
 
                                 @error('telepon')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -246,7 +293,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button type="submit" start-icon="bi-save" gradient>
+                        <x-button type="submit" start-icon="bi-save">
                             Simpan
                         </x-button>
                     </div>
@@ -269,7 +316,7 @@
         {{-- reset foto --}}
         <script>
             $('#formEditUser button[type=reset]').click(function (e) {
-                $('#photoPreview').attr('src', '{{ avatar($user->foto) }}');
+                $('#photoPreview').attr('src', '{{ photo($user->foto) }}');
             });
         </script>
 

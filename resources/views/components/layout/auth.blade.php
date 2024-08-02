@@ -12,7 +12,7 @@
         <title>{{ $title }} - {{ config('app.name') }} Dashboard</title>
 
         {{-- Icon --}}
-        <link rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
         {{-- Google font --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,10 +20,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
 
         {{-- CSS --}}
-        <link rel="stylesheet" href="{{ asset('assets/css/vendor.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/theme.minc619.css?v=1.0') }}">
-        <link rel="preload" href="{{ asset('assets/css/theme.min.css') }}" data-hs-appearance="default" as="style">
-        <link rel="preload" href="{{ asset('assets/css/theme-dark.min.css') }}" data-hs-appearance="dark" as="style">
+        <link rel="stylesheet" href="{{ dashboard_asset('css/vendor.min.css') }}">
+        <link rel="stylesheet" href="{{ dashboard_asset('css/theme.minc619.css?v=1.0') }}">
+        <link rel="preload" href="{{ dashboard_asset('css/theme.min.css') }}" data-hs-appearance="default" as="style">
+        <link rel="preload" href="{{ dashboard_asset('css/theme-dark.min.css') }}" data-hs-appearance="dark" as="style">
 
         {{-- Tema style --}}
         <style data-hs-appearance-onload-styles>
@@ -37,7 +37,7 @@
         </style>
 
         {{-- Head script --}}
-        <script src="{{ asset('assets/js/head.js') }}"></script>
+        <script src="{{ dashboard_asset('js/head.js') }}"></script>
 
         {{-- Vite --}}
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
@@ -47,13 +47,13 @@
     </head>
 
     <body id="authLayout">
-        <script src="{{ asset('assets/js/theme-appearance.js') }}"></script>
+        <script src="{{ dashboard_asset('js/theme-appearance.js') }}"></script>
 
         <x-preloader></x-preloader>
 
         {{-- Main content --}}
         <main id="content" role="main" class="main">
-            <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ asset('assets/images/bg-login.svg') }});">
+            <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ dashboard_asset('images/bg-login.svg') }});">
                 <div class="shape shape-bottom zi-1">
                     <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
                         <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
@@ -73,11 +73,11 @@
         </main>
 
         {{-- Javascript --}}
-        <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-        <script src="{{ asset('assets/js/theme.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootbox/bootbox.all.min.js') }}"></script>
-        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="{{ dashboard_asset('js/vendor.min.js') }}"></script>
+        <script src="{{ dashboard_asset('js/theme.min.js') }}"></script>
+        <script src="{{ dashboard_asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ dashboard_asset('vendor/bootbox/bootbox.all.min.js') }}"></script>
+        <script src="{{ dashboard_asset('js/app.js') }}"></script>
 
         {{-- Page script --}}
         @isset($script) {{ $script }} @endisset

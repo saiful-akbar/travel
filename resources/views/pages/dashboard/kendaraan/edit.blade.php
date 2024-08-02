@@ -153,21 +153,12 @@
                                     </div>
                                 @enderror
                                 
-                                @isset($kendaraan->gambar)
-                                    <img
-                                        src="{{ storage($kendaraan->gambar) }}"
-                                        alt="Kendaraan"
-                                        id="imagePreview"
-                                        class="img-fluid rounded-2 border border-5 mt-4"
-                                    >
-                                @else
-                                    <img
-                                        src="{{ asset('assets/images/image_empty.jpg') }}"
-                                        alt="Kendaraan"
-                                        id="imagePreview"
-                                        class="img-fluid rounded-2 border border-5 mt-4"
-                                    >
-                                @endisset
+                                <img
+                                    src="{{ image($kendaraan->gambar) }}"
+                                    alt="Kendaraan"
+                                    id="imagePreview"
+                                    class="img-fluid rounded-2 border border-5 mt-4"
+                                >
                             </div>
                         </div>
                     </div>

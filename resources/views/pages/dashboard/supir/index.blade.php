@@ -41,7 +41,7 @@
                         name: 'foto',
                         title: 'Foto',
                         render: (data) => {
-                            const url = data === null ? '{{ avatar() }}' : App.storageUrl(data);
+                            const url = data === null ? '{{ photo() }}' : App.storageUrl(data);
                             return `
                                 <span class="avatar avatar-circle">
                                     <img class="avatar-img" src="${url}" alt="Foto">

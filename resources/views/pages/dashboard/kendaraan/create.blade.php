@@ -149,7 +149,7 @@
                                 @enderror
 
                                 <img
-                                    src="{{ asset('assets/images/image_empty.jpg') }}"
+                                    src="{{ image() }}"
                                     alt="Kendaraan"
                                     id="imagePreview"
                                     class="img-fluid rounded-2 border border-5 mt-4"

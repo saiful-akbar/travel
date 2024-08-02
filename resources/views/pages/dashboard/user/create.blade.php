@@ -16,8 +16,8 @@
                             <label class="col-sm-3 col-form-label form-label">Foto</label>
 
                             <div class="col-sm-9">
-                                <label for="foto" class="avatar avatar-xl avatar-circle avatar-uploader me-5 border-lg">
-                                    <img src="{{ avatar() }}" alt="foto" class="avatar-img" id="photoPreview">
+                                <label for="foto" class="avatar avatar-xxl avatar-circle avatar-uploader me-5 border-lg">
+                                    <img src="{{ photo() }}" alt="foto" class="avatar-img" id="photoPreview">
                                     <input type="file" id="foto" name="foto" class="d-none">
                                 </label>
 
@@ -351,7 +351,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
-                        <x-button type="submit" gradient start-icon="bi-save">
+                        <x-button type="submit" start-icon="bi-save">
                             Simpan
                         </x-button>
                     </div>
@@ -374,7 +374,7 @@
         {{-- reset foto --}}
         <script>
             $('#formCreateUser button[type=reset]').click(function (e) {
-                $('#photoPreview').attr('src', '{{ avatar() }}');
+                $('#photoPreview').attr('src', '{{ photo() }}');
             });
         </script>
 

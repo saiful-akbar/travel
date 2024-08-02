@@ -25,7 +25,7 @@
 
                             <div class="col-sm-9">
                                 <label for="foto" class="avatar avatar-xl avatar-circle avatar-uploader me-3 border-lg">
-                                    <img src="{{ avatar() }}" alt="foto" class="avatar-img" id="photoPreview">
+                                    <img src="{{ photo() }}" alt="foto" class="avatar-img" id="photoPreview">
                                     <input type="file" id="foto" name="foto" class="d-none">
                                 </label>
 

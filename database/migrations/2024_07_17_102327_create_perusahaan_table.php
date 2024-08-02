@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('perusahaan', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('nama', 100);
+            $table->string('nama', 100)->nullable();
+            $table->string('pt', 100)->nullable();
             $table->string('logo', 100)->nullable();
             $table->string('telepon', 20)->unique()->nullable();
             $table->string('email', 100)->unique()->nullable();
             $table->text('alamat')->nullable();
+            $table->text('visi')->nullable();
+            $table->text('misi')->nullable();
+            $table->text('profil')->nullable();
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             KendaraanSeeder::class,
             PaketSeeder::class,
             PesananSeeder::class,
+            MediaSosialSeeder::class,
         ]);
     }
 }

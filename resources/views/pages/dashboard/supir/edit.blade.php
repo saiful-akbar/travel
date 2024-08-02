@@ -31,15 +31,13 @@
 
                             <div class="col-sm-9">
                                 <label for="foto" class="avatar avatar-xl avatar-circle avatar-uploader me-3 border-lg">
-                                    <img src="{{ avatar($supir->foto) }}" alt="foto" class="avatar-img" id="photoPreview">
+                                    <img src="{{ photo($supir->foto) }}" alt="foto" class="avatar-img" id="photoPreview">
                                     <input type="file" id="foto" name="foto" class="d-none">
                                 </label>
 
                                 @error('foto')
-                                    <small class="text-danger">
-                                        {{ $message }}
-                                    </small>
-                                    @enderror
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
 
@@ -195,7 +193,7 @@
 
             // handle reset button
             $('#formEditSupir button[type=reset]').click(function (e) {
-                $('#photoPreview').attr('src', '{{ avatar($supir->foto) }}');
+                $('#photoPreview').attr('src', '{{ photo($supir->foto) }}');
             });
             
         </script>

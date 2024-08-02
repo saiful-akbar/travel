@@ -1,6 +1,6 @@
 # Sistem Pemesanan Mobile Travel Online
 
-# 1. Persyaratan
+# Persyaratan
 
 - Laragon untuk web server.
 - PHP v8.2 atau yang lebih terbaru.
@@ -8,9 +8,9 @@
 - Node JS & NPM
 - Database MySQL.
 
-# 2. Fitur-Fitur Aplikasi
+# Fitur-Fitur Aplikasi
 
-## 2.1 Fitur Member
+## Fitur Member
 
 - Melihat Profil Perusahaan
 - Melihat Layanan yang Diberikan Perusahaan
@@ -26,7 +26,7 @@
 - Melihat Daftar Paket
 - Logout Member
 
-## 2.2 Fitur Admin
+## Fitur Admin
 
 - Login Dashboard
 - Mengelola Data User
@@ -40,7 +40,102 @@
 - Mengelola Data Content
 - Logout Admin
 
-# 3 Instalasi
+## Daftar Menu / Halaman Aplikasi
+
+### Halaman Umum (Akses oleh Semua Pengguna)
+
+1. Beranda
+
+- Deskripsi layanan
+- Informasi perusahaan
+- Testimoni pelanggan
+
+2. Tentang Kami
+
+- Profil perusahaan
+- Visi dan misi
+- Tim manajemen
+
+3. Kontak
+
+- Formulir kontak
+- Alamat perusahaan
+- Nomor telepon dan email
+
+4. Layanan Kami
+
+- Deskripsi layanan yang ditawarkan
+- Paket destinasi yang tersedia
+- Galeri foto kendaraan dan destinasi
+
+5. Blog/Artikel
+
+- Artikel terkait travel
+- Tips dan panduan perjalanan
+
+### Halaman Member (Akses setelah Login)
+
+1. Dashboard Member
+
+- Ringkasan aktivitas terbaru
+- Informasi akun
+
+2. Profil Saya
+
+- Edit profil
+- Ubah kata sandi
+
+3. Pemesanan Kendaraan
+
+- Formulir pemesanan
+- Pilih mobil dan tanggal perjalanan
+- Konfirmasi dan pembayaran
+
+4. Paket Destinasi
+
+- Lihat daftar paket destinasi
+- Detail setiap paket
+- Pemesanan paket
+
+5. Riwayat Pemesanan
+
+- Lihat riwayat pemesanan
+- Status pemesanan
+
+### Halaman Admin (Akses setelah Login)
+
+1. Dashboard Admin
+
+- Statistik pemesanan
+- Ringkasan laporan
+
+2. Manajemen Pengguna
+
+- Tambah, edit, dan hapus member
+- Lihat daftar pengguna
+
+3. Manajemen Kendaraan
+
+- Tambah, edit, dan hapus kendaraan
+- Lihat daftar kendaraan
+
+4. Manajemen Paket Destinasi
+
+- Tambah, edit, dan hapus paket destinasi
+- Lihat daftar paket
+
+5. Manajemen Pemesanan
+
+- Lihat dan kelola semua pemesanan
+- Status dan laporan pemesanan
+
+### Halaman Autentikasi
+
+1. Login
+2. Registrasi
+3. Lupa Kata Sandi
+
+# Instalasi
 
 ## Instalasi Pengembangan
 
@@ -66,22 +161,17 @@ sh app-build.sh
 
 ```
 
-# 4. Catatan
+# Catatan
 
 - Penyewaan mobil hanya tersedia dalam 2 macam:
-
-  1. Antar jemput
-  2. Paket travel
-
+  - Antar jemput
+  - Paket travel
 - Tipe mobil hanya ada 2:
-  1. Tipe hiace commuter
-  2. Tipe hiace premio
-
-# 5. Rule
-
+  - Tipe hiace commuter
+  - Tipe hiace premio
 - Pesanan
   - Customer harus memilih terlebih dahulu paket destinasi dan waktu peminjaman untuk menentukan ketersediaan mobil.
 - Pembatalan pesanan
   - Pembatalan pesanan hanya bisa dilakukan oleh customer dalam waktu 1x24 jam setelah pemesanan.
-- Delete data
-  - Untuk penghapusan supir, kendaraan, unit kendaraan, paket dan destinasi hanya bisa jika tidak memiliki pesanan atau jika status pesanan `selesai` atau `dibatalkan`.
+- Buat crud untuk data media sosial.
+- Buat tabel database untuk testimoni
