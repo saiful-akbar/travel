@@ -124,13 +124,13 @@
                                             Dalam Perbaikan
                                         </option>
                                     </select>
-                                  </div>
+                                </div>
 
-                                  @error('status')
+                                @error('status')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                  @enderror
+                                @enderror
                             </div>
                         </div>
                     </div>

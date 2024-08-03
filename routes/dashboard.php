@@ -8,14 +8,21 @@ use App\Http\Controllers\Dashboard\PaketController;
 use App\Http\Controllers\Dashboard\SupirController;
 use App\Http\Controllers\Dashboard\DestinasiController;
 use App\Http\Controllers\Dashboard\KendaraanController;
+use App\Http\Controllers\Dashboard\MediaSosialController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
 
+/**
+ * Home
+ */
 Route::controller(HomeController::class)
     ->name('.home')
     ->group(function (): void {
         Route::get('/', 'index');
     });
 
+/**
+ * User
+ */
 Route::controller(UserController::class)
     ->name('.user')
     ->prefix('/user')
@@ -28,6 +35,9 @@ Route::controller(UserController::class)
         Route::delete('/{user}', 'destroy')->name('.destroy');
     });
 
+/**
+ * Supir
+ */
 Route::controller(SupirController::class)
     ->name('.supir')
     ->prefix('/supir')
@@ -40,6 +50,9 @@ Route::controller(SupirController::class)
         Route::delete('/{supir}', 'destroy')->name('.destroy');
     });
 
+/**
+ * Kendaraan
+ */
 Route::controller(KendaraanController::class)
     ->name('.kendaraan')
     ->prefix('/kendaraan')
@@ -59,6 +72,9 @@ Route::controller(KendaraanController::class)
         });
     });
 
+/**
+ * Perusahaan
+ */
 Route::controller(PerusahaanController::class)
     ->name('.perusahaan')
     ->prefix('/perusahaan')
@@ -67,6 +83,9 @@ Route::controller(PerusahaanController::class)
         Route::post('/', 'store')->name('.store');
     });
 
+/**
+ * Paket
+ */
 Route::controller(PaketController::class)
     ->name('.paket')
     ->prefix('/paket')
@@ -79,6 +98,9 @@ Route::controller(PaketController::class)
         Route::delete('/{paket}', 'destroy')->name('.destroy');
     });
 
+/**
+ * Destinasi
+ */
 Route::controller(DestinasiController::class)
     ->name('.destinasi')
     ->prefix('/destinasi')
@@ -91,6 +113,9 @@ Route::controller(DestinasiController::class)
         Route::delete('/{destinasi}', 'destroy')->name('.destroy');
     });
 
+/**
+ * Harga
+ */
 Route::controller(HargaController::class)
     ->name('.harga')
     ->prefix('/harga')
@@ -101,4 +126,19 @@ Route::controller(HargaController::class)
         Route::get('/{harga}', 'edit')->name('.edit');
         Route::patch('/{harga}', 'update')->name('.update');
         Route::delete('/{harga}', 'destroy')->name('.destroy');
+    });
+
+/**
+ * Media Sosial
+ */
+Route::controller(MediaSosialController::class)
+    ->name('.mediaSosial')
+    ->prefix('/media-sosial')
+    ->group(function (): void {
+        Route::get('/', 'index');
+        Route::get('/create', 'create')->name('.create');
+        Route::post('/', 'store')->name('.store');
+        Route::get('/{mediaSosial}', 'edit')->name('.edit');
+        Route::patch('/{mediaSosial}', 'update')->name('.update');
+        Route::delete('/{mediaSosial}', 'destroy')->name('.destroy');
     });

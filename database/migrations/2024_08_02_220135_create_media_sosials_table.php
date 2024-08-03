@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('media_sosial', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('nama', 100);
+            $table->string('nama', 100)->unique();
             $table->string('url');
-            $table->string('icon', 20)->nullable();
+            $table->string('icon', 30)->nullable();
             $table->timestamps();
         });
     }

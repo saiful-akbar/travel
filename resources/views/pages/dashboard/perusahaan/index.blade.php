@@ -111,7 +111,7 @@
                             <label for="visi" class="col-sm-3 col-form-label form-label">Visi</label>
 
                             <div class="col-sm-9">
-                                <textarea name="visi" id="visi" rows="5" placeholder="Masukan visi perusahaan..."
+                                <textarea name="visi" id="visi" rows="10" placeholder="Masukan visi perusahaan..."
                                     class="form-control form-control-light @error('visi') is-invalid @enderror">{{ old('visi', $perusahaan?->visi) }}</textarea>
 
                                 @error('visi')
@@ -124,7 +124,7 @@
                             <label for="misi" class="col-sm-3 col-form-label form-label">Misi</label>
 
                             <div class="col-sm-9">
-                                <textarea name="misi" id="misi" rows="5" placeholder="Masukan misi perusahaan..."
+                                <textarea name="misi" id="misi" rows="10" placeholder="Masukan misi perusahaan..."
                                     class="form-control form-control-light @error('misi') is-invalid @enderror">{{ old('misi', $perusahaan?->misi) }}</textarea>
 
                                 @error('misi')
@@ -146,7 +146,7 @@
                     </div>
 
                     <div class="card-body">
-                        <textarea name="profil" id="profil" rows="8" placeholder="Masukan profil perusahaan..."
+                        <textarea name="profil" id="profil" rows="10" placeholder="Masukan profil perusahaan..."
                             class="form-control form-control-light @error('profil') is-invalid @enderror">{{ old('profil', $perusahaan?->profil) }}</textarea>
 
                         @error('profil')
@@ -162,12 +162,12 @@
             <div class="card card-sm bg-dark border-dark mx-2">
                 <div class="card-body">
                     <div class="d-flex justify-content-center justify-content-center">
-                        <button type="reset" class="btn btn-ghost-light me-2">
+                        <button type="reset" class="btn btn-ghost-light btn-sm me-2">
                             <i class="bi-x-lg me-1"></i>
                             <span>Reset</span>
                         </button>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary btn-sm">
                             <i class="bi-save me-1"></i>
                             <span>Simpan</span>
                         </button>

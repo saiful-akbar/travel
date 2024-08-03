@@ -58,6 +58,12 @@ class Sidebar extends Component
                     'route' => 'dashboard.perusahaan',
                     'icon' => 'bi-building',
                 ],
+                [
+                    'name' => 'Media Sosial',
+                    'path' => 'dashboard/media-sosial',
+                    'route' => 'dashboard.mediaSosial',
+                    'icon' => 'bi-facebook',
+                ],
             ],
         ],
         [
