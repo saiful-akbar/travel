@@ -15,6 +15,44 @@ use Illuminate\View\View;
 
 class MediaSosialController extends Controller
 {
+    private array $icons = [
+        "bi-alexa",
+        "bi-behance",
+        "bi-discord",
+        "bi-dribbble",
+        "bi-facebook",
+        "bi-github",
+        "bi-google",
+        "bi-instagram",
+        "bi-line",
+        "bi-linkedin",
+        "bi-mastodon",
+        "bi-medium",
+        "bi-messenger",
+        "bi-microsoft-teams",
+        "bi-paypal",
+        "bi-pinterest",
+        "bi-quora",
+        "bi-reddit",
+        "bi-signal",
+        "bi-skype",
+        "bi-slack",
+        "bi-snapchat",
+        "bi-spotify",
+        "bi-stack-overflow",
+        "bi-strava",
+        "bi-telegram",
+        "bi-tiktok",
+        "bi-twitch",
+        "bi-twitter",
+        "bi-vimeo",
+        "bi-wechat",
+        "bi-whatsapp",
+        "bi-wordpress",
+        "bi-yelp",
+        "bi-youtube",
+    ];
+
     /**
      * Menampilkan halaman utama media sosial
      *
@@ -37,54 +75,9 @@ class MediaSosialController extends Controller
      */
     public function create(): View
     {
-        $icons = [
-            "bi-alexa",
-            "bi-behance",
-            "bi-discord",
-            "bi-dribbble",
-            "bi-facebook",
-            "bi-github",
-            "bi-gitlab",
-            "bi-google",
-            "bi-instagram",
-            "bi-line",
-            "bi-linkedin",
-            "bi-mastodon",
-            "bi-medium",
-            "bi-messenger",
-            "bi-microsoft-teams",
-            "bi-opencollective",
-            "bi-paypal",
-            "bi-pinterest",
-            "bi-quora",
-            "bi-reddit",
-            "bi-signal",
-            "bi-sina-weibo",
-            "bi-skype",
-            "bi-slack",
-            "bi-snapchat",
-            "bi-sourceforge",
-            "bi-spotify",
-            "bi-stack-overflow",
-            "bi-strava",
-            "bi-substack",
-            "bi-telegram",
-            "bi-tencent-qq",
-            "bi-threads",
-            "bi-threads-fill",
-            "bi-tiktok",
-            "bi-twitch",
-            "bi-twitter",
-            "bi-twitter-x",
-            "bi-vimeo",
-            "bi-wechat",
-            "bi-whatsapp",
-            "bi-wordpress",
-            "bi-yelp",
-            "bi-youtube",
-        ];
-
-        return view('pages.dashboard.media-sosial.create', compact('icons'));
+        return view('pages.dashboard.media-sosial.create', [
+            'icons' => $this->icons,
+        ]);
     }
 
     /**
@@ -110,54 +103,10 @@ class MediaSosialController extends Controller
      */
     public function edit(MediaSosial $mediaSosial): View
     {
-        $icons = [
-            "bi-alexa",
-            "bi-behance",
-            "bi-discord",
-            "bi-dribbble",
-            "bi-facebook",
-            "bi-github",
-            "bi-gitlab",
-            "bi-google",
-            "bi-instagram",
-            "bi-line",
-            "bi-linkedin",
-            "bi-mastodon",
-            "bi-medium",
-            "bi-messenger",
-            "bi-microsoft-teams",
-            "bi-opencollective",
-            "bi-paypal",
-            "bi-pinterest",
-            "bi-quora",
-            "bi-reddit",
-            "bi-signal",
-            "bi-sina-weibo",
-            "bi-skype",
-            "bi-slack",
-            "bi-snapchat",
-            "bi-sourceforge",
-            "bi-spotify",
-            "bi-stack-overflow",
-            "bi-strava",
-            "bi-substack",
-            "bi-telegram",
-            "bi-tencent-qq",
-            "bi-threads",
-            "bi-threads-fill",
-            "bi-tiktok",
-            "bi-twitch",
-            "bi-twitter",
-            "bi-twitter-x",
-            "bi-vimeo",
-            "bi-wechat",
-            "bi-whatsapp",
-            "bi-wordpress",
-            "bi-yelp",
-            "bi-youtube",
-        ];
-
-        return view('pages.dashboard.media-sosial.edit', compact('icons', 'mediaSosial'));
+        return view('pages.dashboard.media-sosial.edit', [
+            'mediaSosial' => $mediaSosial,
+            'icons' => $this->icons
+        ]);
     }
 
     /**
