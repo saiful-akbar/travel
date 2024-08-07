@@ -68,6 +68,15 @@ class App {
   }
 
   /**
+   * Leaflet
+   *
+   * @returns {object}
+   */
+  static leaflet() {
+    return HSCore.components.HSLeaflet.init(document.getElementById("map"));
+  }
+
+  /**
    * style switcher
    */
   static styleSwitcher() {

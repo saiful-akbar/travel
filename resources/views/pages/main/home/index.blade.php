@@ -17,34 +17,34 @@
             </div>
 
             <figure class="background background-gradient-vertical" data-aos="zoom-out" data-aos-delay="400">
-                <img class="w-40 shadow position-absolute top-10 end-70" src="{{ main_asset('images/home-1.jpg') }}"
+                <img class="w-40 shadow position-absolute top-10 end-70" src="{{ main_asset('images/bg-1.jpg') }}"
                     alt="" data-center-top="transform: translateY(0%);"
                     data-top-bottom="transform: translateY(-80%);">
 
-                <img class="w-40 shadow position-absolute top-80 start-20" src="{{ main_asset('images/home-2.jpg') }}"
+                <img class="w-40 shadow position-absolute top-80 start-20" src="{{ main_asset('images/bg-2.jpg') }}"
                     alt="" data-bottom-top="transform: translateY(0%);"
                     data-top-bottom="transform: translateY(-50%);">
 
-                <img class="w-40 shadow position-absolute top-0 start-60" src="{{ main_asset('images/home-3.jpg') }}"
+                <img class="w-40 shadow position-absolute top-0 start-60" src="{{ main_asset('images/bg-3.jpg') }}"
                     alt="" data-bottom-top="transform: translateY(0%);"
                     data-top-bottom="transform: translateY(-50%);">
 
-                <img class="w-40 shadow position-absolute top-60 start-80" src="{{ main_asset('images/home-4.jpg') }}"
+                <img class="w-40 shadow position-absolute top-60 start-80" src="{{ main_asset('images/bg-4.jpg') }}"
                     alt="" data-bottom-top="transform: translateY(0%);"
                     data-top-bottom="transform: translateY(-120%);">
 
-                <img class="w-40 shadow position-absolute top-100 start-50" src="{{ main_asset('images/home-5.jpg') }}"
+                <img class="w-40 shadow position-absolute top-100 start-50" src="{{ main_asset('images/bg-5.jpg') }}"
                     alt="" data-bottom-top="transform: translateY(0%);"
                     data-top-bottom="transform: translateY(-60%);">
 
-                <img class="w-40 shadow position-absolute top-60 end-90" src="{{ main_asset('images/home-6.jpg') }}"
+                <img class="w-40 shadow position-absolute top-60 end-90" src="{{ main_asset('images/bg-6.jpg') }}"
                     alt="" data-bottom-top="transform: translateY(0%);"
                     data-top-bottom="transform: translateY(-80%);">
             </figure>
             <span class="scroll-down"></span>
         </section>
 
-        {{-- Step Acordion --}}
+        {{-- Daftar paket --}}
         <section class="py-15 py-xl-20 overflow-hidden">
             <div class="container">
                 <div class="row justify-content-between">
@@ -54,87 +54,34 @@
 
                     <div class="col-lg-6">
                         <div class="accordion accordion-steps" id="accordion-steps" style="--bs-primary: #1d4b40;">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading-steps-1">
-                                    <button class="accordion-button fs-5 collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapse-steps-1"
-                                        aria-expanded="false" aria-controls="collapse-steps-1">
-                                        Penyewaan Mobil Harian
-                                    </button>
-                                </h2>
-                                <div id="collapse-steps-1" class="accordion-collapse collapse"
-                                    aria-labelledby="heading-steps-1" data-bs-parent="#accordion-steps">
-                                    <div class="accordion-body">
-                                        <p class="text-secondary">
-                                            Pilih dari berbagai jenis mobil sesuai kebutuhan Anda. Layanan penyewaan
-                                            mobil harian dengan harga terjangkau.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            @foreach ($paket as $paketItem)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading__{{ $paketItem->id }}">
+                                        <button class="accordion-button fs-5 collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse__{{ $paketItem->id }}"
+                                            aria-expanded="false" aria-controls="collapse__{{ $paketItem->id }}">
+                                            {{ $paketItem->nama }}
+                                        </button>
+                                    </h2>
 
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading-steps-2">
-                                    <button class="accordion-button fs-5 collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapse-steps-2"
-                                        aria-expanded="false" aria-controls="collapse-steps-2">
-                                        Paket Wisata
-                                    </button>
-                                </h2>
-                                <div id="collapse-steps-2" class="accordion-collapse collapse"
-                                    aria-labelledby="heading-steps-2" data-bs-parent="#accordion-steps">
-                                    <div class="accordion-body">
-                                        <p class="text-secondary">
-                                            Paket wisata ke berbagai destinasi populer. Termasuk transportasi,
-                                            akomodasi, dan pemandu wisata.
-                                        </p>
+                                    <div id="collapse__{{ $paketItem->id }}" class="accordion-collapse collapse"
+                                        aria-labelledby="heading__{{ $paketItem->id }}"
+                                        data-bs-parent="#accordion-steps">
+                                        <div class="accordion-body">
+                                            <p class="text-secondary">
+                                                {{ $paketItem->deskripsi }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading-steps-3">
-                                    <button class="accordion-button fs-5 collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapse-steps-3"
-                                        aria-expanded="false" aria-controls="collapse-steps-3">
-                                        Transportasi Bandara
-                                    </button>
-                                </h2>
-                                <div id="collapse-steps-3" class="accordion-collapse collapse"
-                                    aria-labelledby="heading-steps-3" data-bs-parent="#accordion-steps">
-                                    <div class="accordion-body">
-                                        <p class="text-secondary">
-                                            Layanan antar jemput dari dan ke bandara. Jadwal yang fleksibel dan tepat
-                                            waktu.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading-steps-4">
-                                    <button class="accordion-button fs-5 collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapse-steps-4"
-                                        aria-expanded="false" aria-controls="collapse-steps-4">
-                                        Sewa Mobil dengan Sopir
-                                    </button>
-                                </h2>
-                                <div id="collapse-steps-4" class="accordion-collapse collapse"
-                                    aria-labelledby="heading-steps-4" data-bs-parent="#accordion-steps">
-                                    <div class="accordion-body">
-                                        <p class="text-secondary">
-                                            Layanan sewa mobil lengkap dengan sopir berpengalaman. Nikmati perjalanan
-                                            tanpa perlu khawatir tentang rute.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        {{-- Kenapa memilih kami --}}
         <section class="py-15 py-xl-20 bg-light">
             <div class="container">
                 <div class="row align-items-center justify-content-center justify-content-lg-between">
@@ -180,7 +127,7 @@
                     <div class="col-md-10 col-lg-5 position-relative" data-aos='fade-up'>
                         <div class="equal-1-1 rounded-circle">
                             <figure class="background"
-                                style="background-image: url('{{ main_asset('images/home-6.jpg') }}')">
+                                style="background-image: url('{{ main_asset('images/bg-6.jpg') }}')">
                             </figure>
                         </div>
                     </div>

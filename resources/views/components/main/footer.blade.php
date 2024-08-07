@@ -1,4 +1,4 @@
-<footer class="py-15 py-xl-20 border-top {{ $bgColor }}">
+<footer class="py-15 py-xl-20 {{ $bgColor }}">
     <div class="container">
         <div class="row justify-content-between g-5 mb-5 mb-lg-10">
             <div class="col-lg-4">
@@ -15,7 +15,7 @@
                             @foreach (main_menu() as $menu)
                                 <li class="{{ $loop->iteration < $loop->count ? 'mb-1' : '' }}">
                                     <a href="{{ url($menu['path']) }}" class="text-reset text-primary-hover">
-                                        {{ strtolower($menu['name']) }}
+                                        {{ $menu['name'] }}
                                     </a>
                                 </li>
                             @endforeach
@@ -24,12 +24,14 @@
 
                     <div class="col-6">
                         <span class="eyebrow text-muted mb-1 d-flex">Ikuti Kami</span>
+
                         <ul class="list-unstyled">
                             @foreach (media_sosial() as $mediaSosial)
                                 <li class="{{ $loop->iteration < $loop->count ? 'mb-1' : '' }}">
                                     <a href="{{ $mediaSosial?->url }}" target="_blank" rel="noreferrer"
                                         class="text-reset text-primary-hover">
-                                        {{ strtolower($mediaSosial?->nama) }}
+                                        <i class="{{ $mediaSosial->icon }} me-1"></i>
+                                        <span>{{ $mediaSosial?->nama }}</span>
                                     </a>
                                 </li>
                             @endforeach

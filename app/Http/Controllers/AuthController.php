@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\Auth\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -32,7 +33,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user()->role == 'member') {
-            return redirect($request->query('redirect'));
+            return redirect()->away($request->query('redirect'));
         }
 
         return to_route('dashboard.home');
@@ -51,6 +52,40 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return to_route('login');
+        return to_route('main.home');
+    }
+
+    /**
+     * Menampilkan halaman register member
+     *
+     * @return View
+     */
+    public function register(): View
+    {
+        return view('pages.auth.register');
+    }
+
+    /**
+     * Insert data member baru.
+     *
+     * @param RegisterRequest $request
+     * @return Returntype
+     */
+    public function storeMember(RegisterRequest $request): RedirectResponse
+    {
+        /**
+         * Ambil data member baru
+         */
+        $newMember = $request->insert();
+
+        /**
+         * Buat session login
+         */
+        Auth::login($newMember, true);
+
+        /**
+         * Redirect
+         */
+        return redirect()->away($request->query('redirect'));
     }
 }

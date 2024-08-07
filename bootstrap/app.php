@@ -23,7 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return route('dashboard.home');
             }
 
-            return route('dashboard.home');
+            return route('main.home');
         });
 
         /**

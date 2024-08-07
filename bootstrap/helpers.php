@@ -157,9 +157,9 @@ if (!function_exists('main_menu')) {
                 'route' => 'main.tentangKami',
             ],
             [
-                'name' => 'Kontak',
-                'path' => '/kontak',
-                'route' => 'main.kontak',
+                'name' => 'Layanan',
+                'path' => '/layanan',
+                'route' => 'main.layanan',
             ],
             [
                 'name' => 'Pemesanan',

@@ -1,92 +1,76 @@
-<x-layout.auth title="Login">
-    <div class="card card-lg shadow">
-        <div class="card-body">
-            <form id="formLogin" method="post"
-                action="{{ route('login.store', ['redirect' => request('redirect', '/')]) }}">
-                @csrf
+<x-layout.main title="Login" header-bg-color="dark" footer-bg-color="dark">
+    <section class="bg-black overflow-hidden">
+        <div class="py-15 py-xl-20 d-flex flex-column container level-3 min-vh-100">
+            <div class="row align-items-center justify-content-center my-auto">
+                <div class="col-md-10 col-lg-8 col-xl-5">
+                    <div class="card">
+                        <div class="card-header bg-white text-center pb-0">
+                            <h5 class="fs-4 mb-1">Masuk</h5>
+                        </div>
 
-                <div class="text-center">
-                    <div class="mb-5">
-                        <h1 class="display-5">Log In</h1>
+                        <div class="card-body bg-white">
+                            <form action="{{ route('login.store') }}" method="post">
+                                @csrf
 
-                        <p>Belum punya akun? <a class="link" href="{{ url('/registrasi') }}">registrasi disini</a></p>
+                                <div class="mb-3">
+                                    <div class="form-floating @error('email') is-invalid @enderror">
+                                        <input required type="email" name="email" id="email"
+                                            placeholder="Alamat Email"
+                                            class="form-control @error('email') is-invalid @enderror">
+
+                                        <label for="email">Email</label>
+                                    </div>
+
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-floating @error('password') is-invalid @enderror">
+                                        <input type="password" name="password" id="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            placeholder="Password">
+
+                                        <label for="password">Password</label>
+                                    </div>
+
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" name="remember"
+                                            id="remember">
+
+                                        <label class="form-check-label small text-secondary" for="remember">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid mb-2">
+                                    <button type="submit" class="btn btn-block btn-primary">
+                                        Masuk
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card-footer bg-opaque-black inverted text-center">
+                            <p class="text-secondary">
+                                Belum punya akun? <a
+                                    href="{{ route('register', ['redirect' => request('redirect', route('main.home'))]) }}"
+                                    class="underline">Daftar disini</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="mb-4">
-                    <label class="form-label" for="email">Email</label>
-
-                    <input required type="email" name="email" id="email" placeholder="Masukan email..."
-                        value="{{ old('email') }}" @class([
-                            'form-control',
-                            'form-control-lg',
-                            'form-control-light',
-                            'is-invalid' => $errors->has('email'),
-                        ])>
-
-                    @error('email')
-                        <span class="invalid-feedback">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label" for="password">Password</label>
-
-                    <div class="input-group input-group-merge @error('password') is-invalid @enderror">
-                        <input required type="password" name="password" id="password" placeholder="Masukan password..."
-                            @class([
-                                'form-control',
-                                'form-control-lg',
-                                'form-control-light',
-                                'is-invalid' => $errors->has('password'),
-                            ])>
-
-                        <a id="togglePassword" class="input-group-append input-group-text" href="javascript:;">
-                            <i id="togglePasswordIcon" class="bi-eye-slash"></i>
-                        </a>
-                    </div>
-
-                    @error('password')
-                        <span class="invalid-feedback">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="form-check mb-4">
-                    <input type="checkbox" value="1" id="remember" name="remember"
-                        class="form-check-input form-check-light">
-                    <label class="form-check-label" for="remember">Remeber me</label>
-                </div>
-
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">Log In</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
 
-    <x-slot:script>
-        <script>
-            $('#togglePassword').click(function(e) {
-                e.preventDefault();
-
-                const icon = $('#togglePasswordIcon');
-                const password = $('#password')
-                const currentType = password.attr('type');
-
-                if (currentType === 'password') {
-                    password.attr('type', 'text');
-                    icon.removeClass('bi-eye-slash');
-                    icon.addClass('bi-eye');
-                } else {
-                    password.attr('type', 'password');
-                    icon.removeClass('bi-eye');
-                    icon.addClass('bi-eye-slash');
-                }
-            });
-        </script>
-    </x-slot:script>
-</x-layout.auth>
+        <figure class="bg-overlay" style="background-image: url('{{ main_asset('images/bg-4.jpg') }}')"></figure>
+    </section>
+</x-layout.main>

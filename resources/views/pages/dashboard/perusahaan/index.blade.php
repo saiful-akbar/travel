@@ -3,7 +3,7 @@
         enctype="multipart/form-data">
         @csrf
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
             <div class="col-lg-10">
                 <div class="card">
                     <img src="{{ image($perusahaan?->logo) }}" alt="Logo" class="card-img-top p-3" id="logoPreview"
@@ -98,8 +98,8 @@
             </div>
         </div>
 
-        {{-- Visi --}}
-        <div class="row justify-content-center mt-5">
+        {{-- Visi & misi --}}
+        <div class="row justify-content-center mb-5">
             <div class="col-lg-10">
                 <div class="card">
                     <div class="card-header">
@@ -108,7 +108,9 @@
 
                     <div class="card-body">
                         <div class="row mb-4">
-                            <label for="visi" class="col-sm-3 col-form-label form-label">Visi</label>
+                            <label for="visi" class="col-sm-3 col-form-label form-label">
+                                Visi
+                            </label>
 
                             <div class="col-sm-9">
                                 <textarea name="visi" id="visi" rows="10" placeholder="Masukan visi perusahaan..."
@@ -138,7 +140,7 @@
         </div>
 
         {{-- Profil --}}
-        <div class="row justify-content-center mt-5 mb-10">
+        <div class="row justify-content-center mb-10">
             <div class="col-lg-10">
                 <div class="card">
                     <div class="card-header">
@@ -157,6 +159,7 @@
             </div>
         </div>
 
+        {{-- Button submit dan reset --}}
         <div class="position-fixed start-50 bottom-0 translate-middle-x w-100 zi-99 mb-3 zi-999"
             style="max-width: 40rem;">
             <div class="card card-sm bg-dark border-dark mx-2">

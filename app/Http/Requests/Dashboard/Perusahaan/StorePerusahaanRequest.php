@@ -64,31 +64,36 @@ class StorePerusahaanRequest extends FormRequest implements StoreRequest
         ]);
 
         /**
-         * Jika logo diupload ulang atau diganti, Hapus logo lama.
+         * Simpan logo pada storage jika di-upload.
          */
         if ($this->hasFile('logo')) {
 
             /**
-             * Hapus logo lama
+             * Jika sebelumnya perusahaan sudah memiliki logo,
+             * hapus logo lama dari storage.
              */
-            Storage::disk('public')->delete($perusahaan->logo);
+            if (!empty($perusahaan->logo)) {
+                Storage::disk('public')->delete($perusahaan->logo);
+            }
 
             /**
-             * Simpan logo baru
+             * Upload dan simpan logo baru.
              */
             $data['logo'] = $this->file('logo')->store('logo-perusahaan', 'public');
         } else {
 
             /**
-             * Pertahankan logo lama.
+             * Pertahankan logo lama jika ada.
              */
-            $data['logo'] = $perusahaan->logo;
+            if (!empty($perusahaan->logo)) {
+                $data['logo'] = $perusahaan->logo;
+            }
         }
 
         /**
          * Hapus semua data perusahaan lama.
          */
-        if (!is_null($perusahaan)) {
+        if (!empty($perusahaan)) {
             $perusahaan->delete();
         }
 

@@ -29,7 +29,7 @@
         @endisset
     </head>
 
-    <body class="{{ $bgColor }}">
+    <body id="mainLayout" class="{{ $bgColor }}">
         <x-main.navbar bg-color="{{ $headerBgColor }}"></x-main.navbar>
         <x-main.sidebar></x-main.sidebar>
 
@@ -51,8 +51,8 @@
 
         {{-- Logout --}}
         <script>
-            function handleLogout(event) {
-                event.preventDefault();
+            function handleLogout(e) {
+                e.preventDefault();
                 document.querySelector('#formLogout').submit();
             }
         </script>
