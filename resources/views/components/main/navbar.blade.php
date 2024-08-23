@@ -1,16 +1,19 @@
-@props(['bgColor' => 'dark', 'menu'])
+@props(['bgColor' => 'dark'])
 
 <nav id="mainNav" @class([
     'navbar',
     'navbar-expand-lg',
     'navbar-sticky',
     'navbar-dark' => $bgColor === 'dark',
-    'navbar-light' => $bgColor === 'light',
-    'border-bottom' => $bgColor === 'light',
+    'navbar-light' => $bgColor === 'light' || $bgColor === 'white',
+    'border-bottom' => $bgColor === 'light' || $bgColor === 'white',
+    'bg-light' => $bgColor === 'light',
 ])>
     <div class="container">
         <a href="{{ route('main.home') }}" class="navbar-brand">
-            <h1 class="fs-5 font-monospace">{{ perusahaan()?->nama }}</h1>
+            <h1 class="fs-5 font-monospace" style="font-weight: 900">
+                {{ perusahaan()?->nama }}
+            </h1>
         </a>
 
         {{-- secondary menu --}}
@@ -31,7 +34,9 @@
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li>
-                            <a class="dropdown-item " href="{{ route('dashboard.home') }}">Dashboard</a>
+                            <a class="dropdown-item" href="#">
+                                Profil
+                            </a>
                         </li>
 
                         <li>
@@ -49,6 +54,7 @@
                         'btn-sm',
                         'btn-outline-white' => $bgColor === 'dark',
                         'btn-outline-dark' => $bgColor === 'light',
+                        'btn-outline-dark' => $bgColor === 'white',
                     ])>
                         Log In
                     </a>

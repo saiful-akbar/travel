@@ -53,7 +53,7 @@
         <script>
             function handleLogout(e) {
                 e.preventDefault();
-                document.querySelector('#formLogout').submit();
+                $('#formLogout').submit()
             }
         </script>
 

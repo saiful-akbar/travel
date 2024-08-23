@@ -19,8 +19,21 @@ class Footer extends Component
     public function __construct(string $bgColor = 'white')
     {
         if ($bgColor == 'dark') {
-            $this->bgColor = 'bg-black inverted';
-            $this->textColor = 'text-white';
+        }
+
+        switch ($bgColor) {
+            case 'dark':
+                $this->bgColor = 'bg-black inverted';
+                $this->textColor = 'text-white';
+                break;
+
+            case 'light':
+                $this->bgColor = 'bg-light';
+                break;
+
+            default:
+                $this->bgColor = 'bg-white';
+                break;
         }
     }
 

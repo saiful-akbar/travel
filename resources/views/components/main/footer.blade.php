@@ -1,9 +1,11 @@
-<footer class="py-15 py-xl-20 {{ $bgColor }}">
+<footer class="py-15 py-xl-20 border-top {{ $bgColor }}">
     <div class="container">
         <div class="row justify-content-between g-5 mb-5 mb-lg-10">
             <div class="col-lg-4">
                 <a href="{{ route('main.home') }}" class="navbar-brand text-reset">
-                    <h1 class="fs-4 fw-bold font-monospace">{{ perusahaan()?->nama }}</h1>
+                    <h1 class="fs-4 fw-bold font-monospace" style="font-weight: 900">
+                        {{ perusahaan()?->nama }}
+                    </h1>
                 </a>
             </div>
 

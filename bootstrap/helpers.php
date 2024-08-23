@@ -1,8 +1,9 @@
 <?php
 
-use App\Models\MediaSosial;
-use App\Models\Perusahaan;
 use App\Models\User;
+use App\Models\Perusahaan;
+use App\Models\MediaSosial;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 
 if (!function_exists('storage')) {
@@ -29,7 +30,7 @@ if (!function_exists('user')) {
      */
     function user(): ?User
     {
-        return auth()->user();
+        return Auth::user();
     }
 }
 
@@ -165,6 +166,38 @@ if (!function_exists('main_menu')) {
                 'name' => 'Pemesanan',
                 'path' => '/pemesanan',
                 'route' => 'main.pemesanan',
+            ],
+        ];
+    }
+}
+
+if (!function_exists('sub_menu')) {
+    function sub_menu(): array
+    {
+        return [
+            [
+                'name' => 'Profil',
+                'url' => 'profil',
+            ],
+            [
+                'name' => 'Pemesanan',
+                'url' => 'pemesanan',
+            ],
+            [
+                'name' => 'Pembayaran',
+                'url' => 'pembayaran',
+            ],
+            [
+                'name' => 'Riwayat Pemesanan',
+                'url' => '#',
+            ],
+            [
+                'name' => 'Riwayat Transaksi',
+                'url' => '#',
+            ],
+            [
+                'name' => 'Riwayat Pemesanan',
+                'url' => 'riwayat-pemesanan',
             ],
         ];
     }

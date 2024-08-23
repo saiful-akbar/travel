@@ -9,7 +9,11 @@
                         </div>
 
                         <div class="card-body bg-white">
-                            <form action="{{ route('login.store') }}" method="post">
+                            <form
+                                action="{{ route('login.store', ['redirect' => request('redirect', route('main.home'))]) }}"
+                                method="post"
+                                id="formLogin"
+                            >
                                 @csrf
 
                                 <div class="mb-3">

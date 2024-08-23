@@ -11,16 +11,16 @@ use Illuminate\View\Component;
 class Main extends Component
 {
     public string $title;
-    public string $headerBgColor = 'light';
-    public string $footerBgColor = 'light';
-    public string $bgColor = 'bg-white';
+    public string $headerBgColor;
+    public string $footerBgColor;
+    public string $bgColor;
 
     /**
      * Create a new component instance.
      */
     public function __construct(
         string $title,
-        string $headerBgColor = 'light',
+        string $headerBgColor = 'white',
         string $footerBgColor = 'white',
         string $bgColor = 'white',
     ) {
@@ -29,8 +29,18 @@ class Main extends Component
         /**
          * Header color
          */
-        if ($headerBgColor == 'dark') {
-            $this->headerBgColor = 'dark';
+        switch ($headerBgColor) {
+            case 'dark':
+                $this->headerBgColor = 'dark';
+                break;
+
+            case 'light':
+                $this->headerBgColor = 'light';
+                break;
+
+            default:
+                $this->headerBgColor = 'white';
+                break;
         }
 
         /**

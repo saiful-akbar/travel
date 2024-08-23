@@ -36,12 +36,12 @@ class DestinasiController extends Controller
      *
      * @return View
      */
-    public function create(): View
+    public function create()
     {
         /**
          * select data id dan nama paket
          */
-        $paket = Paket::select('id', 'nama')
+        $paket = Paket::select('id', 'nama', 'deskripsi')
             ->orderBy('nama', 'asc')
             ->get();
 
@@ -72,7 +72,7 @@ class DestinasiController extends Controller
      */
     public function edit(Destinasi $destinasi): View
     {
-        $paket = Paket::select('id', 'nama')
+        $paket = Paket::select('id', 'nama', 'deskripsi')
             ->orderBy('nama', 'asc')
             ->get();
 

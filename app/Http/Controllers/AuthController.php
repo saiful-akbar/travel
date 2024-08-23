@@ -33,7 +33,9 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user()->role == 'member') {
-            return redirect()->away($request->query('redirect'));
+            $redirect = $request->query('redirect') ?? route('main.home');
+
+            return redirect()->away($redirect);
         }
 
         return to_route('dashboard.home');

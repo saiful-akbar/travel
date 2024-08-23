@@ -1,15 +1,9 @@
-<x-layout.main title="Tentang Kami" footer-bg-color="dark">
+<x-layout.main title="Tentang Kami" footer-bg-color="dark" header-bg-color="white">
     <section class="overflow-hidden py-15 py-xl-20">
         <div class="container">
             <div class="row align-items-end mt-5">
-                <div class="col-lg-8 mb-1 mb-md-0">
+                <div class="col-12 mb-1 mb-md-0">
                     <h1>Tentang {{ perusahaan()?->nama }}</h1>
-                </div>
-
-                <div class="col-lg-4 text-lg-end">
-                    <p class="fs-lg text-muted">
-                        Nikmati Setiap Perjalanan <span class="d-block">Bersama Kami</span>
-                    </p>
                 </div>
             </div>
         </div>

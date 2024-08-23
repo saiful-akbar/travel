@@ -35,6 +35,11 @@
                 ajax: "{{ route('dashboard.destinasi') }}",
                 columns: [
                     {
+                        data: 'paket_nama',
+                        name: 'paket.nama',
+                        title: 'Paket',
+                    },
+                    {
                         data: 'wilayah',
                         name: 'destinasi.wilayah',
                         title: 'Wilayah',
@@ -56,11 +61,6 @@
                                 </span>
                             `;
                         }
-                    },
-                    {
-                        data: 'paket_nama',
-                        name: 'paket.nama',
-                        title: 'Paket',
                     },
                     {
                         data: 'created_at',

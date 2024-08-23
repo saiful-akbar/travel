@@ -43,7 +43,7 @@
 
                                         @foreach ($paket as $data)
                                             <option value="{{ $data->id }}" @selected(old('paket_id') == $data->id)>
-                                                {{ $data->nama }}
+                                                {{ $data->nama }} - {{ $data->deskripsi }}
                                             </option>
                                         @endforeach
                                     </select>
