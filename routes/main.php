@@ -23,5 +23,15 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
         ->prefix('/pemesanan')
         ->group(function (): void {
             Route::get('/', 'index');
+
+            /**
+             * Json response.
+             */
+            Route::name('.json')
+                ->prefix('/json')
+                ->group(function (): void {
+                    Route::get('/destinasi/{paket}', 'getDestinasiJson')->name('.destinasi');
+                    Route::get('/ketersediaan', 'cekKetersediaanKendaraan')->name('.ketersediaan');
+                });
         });
 });

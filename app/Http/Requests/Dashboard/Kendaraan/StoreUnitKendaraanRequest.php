@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Dadshboard\Kendaraan;
+namespace App\Http\Requests\Dashboard\Kendaraan;
 
 use App\Http\Requests\StoreRequest;
 use Illuminate\Database\Eloquent\Model;

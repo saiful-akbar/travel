@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Kendaraan;
 use Illuminate\View\View;
+use App\Models\UnitKendaraan;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dadshboard\Kendaraan\StoreUnitKendaraanRequest;
-use App\Http\Requests\Dashboard\Kendaraan\DeleteKendaraanRequest;
-use App\Http\Requests\Dashboard\Kendaraan\DeleteUnitKendaraanRequest;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Dashboard\Kendaraan\KendaraanRequest;
 use App\Http\Requests\Dashboard\Kendaraan\StoreKendaraanRequest;
+use App\Http\Requests\Dashboard\Kendaraan\DeleteKendaraanRequest;
 use App\Http\Requests\Dashboard\Kendaraan\UpdateKendaraanRequest;
+use App\Http\Requests\Dashboard\Kendaraan\StoreUnitKendaraanRequest;
+use App\Http\Requests\Dashboard\Kendaraan\DeleteUnitKendaraanRequest;
 use App\Http\Requests\Dashboard\Kendaraan\UpdateUnitKendaraanRequest;
-use App\Models\UnitKendaraan;
 
 class KendaraanController extends Controller
 {

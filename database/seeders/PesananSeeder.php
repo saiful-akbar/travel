@@ -27,8 +27,19 @@ class PesananSeeder extends Seeder
             'supir_id' => $supir->id,
             'unit_kendaraan_id' => $unit_kendaraan->id,
             'destinasi_id' => $destinasi->id,
-            'tanggal_keberangkatan' => date('Y-m-d'),
-            'tanggal_kepulangan' => date('Y-m-d'),
+            'tanggal_keberangkatan' => date('Y-m-01'),
+            'tanggal_kepulangan' => date('Y-m-05'),
+            'waktu_penjemputan' => date('H:i:s'),
+            'lokasi_penjemputan' => 'Jl. Dewi Sartika, Ciputat',
+        ]);
+
+        Pesanan::create([
+            'user_id' => $user->id,
+            'supir_id' => $supir->id,
+            'unit_kendaraan_id' => $unit_kendaraan->id,
+            'destinasi_id' => $destinasi->id,
+            'tanggal_keberangkatan' => date('Y-m-10'),
+            'tanggal_kepulangan' => date('Y-m-15'),
             'waktu_penjemputan' => date('H:i:s'),
             'lokasi_penjemputan' => 'Jl. Dewi Sartika, Ciputat',
         ]);

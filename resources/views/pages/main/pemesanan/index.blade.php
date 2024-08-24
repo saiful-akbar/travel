@@ -1,234 +1,186 @@
-<x-layout.main title="Pemesanan" footer-bg-color="dark">
-    <form>
+<x-layout.main title="Pemesanan">
+    <form id="formPemesanan">
         <section class="py-15 py-xl-20">
             <div class="container mt-5">
                 <div class="row justify-content-between">
-                    
-                    {{-- Form --}}
                     <div class="col-xl-7 mb-5 mb-xl-0">
                         <section class="mt-4">
-                            <h2 class="fw-bold">Address</h2>
-                            
-                            <div class="row g-2">
+                            <h2 class="fw-bold">Pesan Kendaraan</h2>
+
+                            <div class="row g-3">
                                 <div class="col-12">
-                                    <label for="inputCountry" class="form-label">Country</label>
-                                    <input type="email" class="form-control" id="inputCountry" placeholder="Country"
-                                        value="Germany">
+                                    <label for="paket" class="form-label">
+                                        Paket <span class="text-danger">*</span>
+                                    </label>
+
+                                    <select name="paket" id="paket"
+                                        class="form-select @error('paket') is-invalid @enderror" required>
+                                        <option value="" disabled selected>Pilih Paket...</option>
+
+                                        @foreach ($paket as $paketItem)
+                                            <option value="{{ $paketItem->id }}" @selected(old('paket') == $paketItem->id)>
+                                                {{ $paketItem->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('paket')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
+
                                 <div class="col-12">
-                                    <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="password" class="form-control" id="inputAddress" placeholder="Address">
+                                    <label for="destinasi" class="form-label">
+                                        Destinasi <span class="text-danger">*</span>
+                                    </label>
+
+                                    <select name="destinasi" id="destinasi"
+                                        class="form-select @error('destinasi') is-invalid @enderror" disabled
+                                        required></select>
                                 </div>
-                                <div class="col-xl-8">
-                                    <label for="inputCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="inputCity" placeholder="City"
-                                        value="Munich">
-                                </div>
-                                <div class="col-xl-4">
-                                    <label for="inputZip" class="form-label">Zip Code</label>
-                                    <input type="text" class="form-control" id="inputZip" placeholder="Zip Code">
-                                </div>
+
                                 <div class="col-12">
-                                    <label for="inputStateProvince" class="form-label">State / Province</label>
-                                    <input type="text" class="form-control" id="inputStateProvince"
-                                        placeholder="State / Province">
+                                    <label for="kendaraan" class="form-label">
+                                        Kendaraan <span class="text-danger">*</span>
+                                    </label>
+
+                                    <select name="kendaraan" id="kendaraan"
+                                        class="form-select @error('kendaraan') is-invalid @enderror" required>
+                                        <option value="" disabled selected>Pilih Kendaraan...</option>
+
+                                        @foreach ($kendaraan as $kendaraanItem)
+                                            <option value="{{ $kendaraanItem->id }}" @selected(old('kendaraan') == $kendaraanItem->id)>
+                                                {{ $kendaraanItem->merek }} - {{ $kendaraanItem->tipe }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-xl-4">
-                                    <label for="inputCountryCode" class="form-label">Country Code</label>
-                                    <input type="text" class="form-control" id="inputCountryCode"
-                                        placeholder="Country Code">
+
+                                <div class="col-lg-6 col-12">
+                                    <label for="tanggalKeberangkatan" class="form-label">
+                                        Tanggal Keberangkatan <span class="text-danger">*</span>
+                                    </label>
+
+                                    <input type="date" name="tanggal_keberangkatan" id="tanggalKeberangkatan"
+                                        value="{{ old('tanggal_keberangkatan') }}"
+                                        class="form-control @error('tanggal_keberangkatan') is-invalid @enderror"
+                                        required>
                                 </div>
-                                <div class="col-xl-8">
-                                    <label for="inputPhoneNumber" class="form-label">Phone Number</label>
-                                    <input type="text" class="form-control" id="inputPhoneNumber"
-                                        placeholder="Phone Number">
+
+                                <div class="col-lg-6 col-12">
+                                    <label for="tanggalKepulangan" class="form-label">
+                                        Tanggal Kepulangan <span class="text-danger">*</span>
+                                    </label>
+
+                                    <input type="date" name="tanggal_kepulangan" id="tanggalKepulangan"
+                                        value="{{ old('tanggal_kepulangan') }}"
+                                        class="form-control @error('tanggal_kepulangan') is-invalid @enderror" required>
                                 </div>
-                                <div class="col-12">
-                                    <ul class="list-unstyled mt-2">
-                                        <li class="mb-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                <label class="form-check-label" for="gridCheck">
-                                                    My billing and delivery information are the same
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gridCheck2">
-                                                <label class="form-check-label" for="gridCheck2">
-                                                    Please send me emails with exclusive offers and updates
-                                                </label>
-                                            </div>
-                                        </li>
-                                    </ul>
+
+                                <div class="col-12 d-grid gap-2">
+                                    <button type="button" class="btn btn-dark btn-block" id="cekKetersediaan">
+                                        Cek Ketersedian
+                                    </button>
                                 </div>
-                            </div>
-                        </section>
-    
-                        <section class="mt-10">
-                            <h2 class="fw-bold">Billing</h2>
-                            <ul class="nav nav-pills" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                        aria-selected="true">Credit Card</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                        type="button" role="tab" aria-controls="profile"
-                                        aria-selected="false">Paypal</button>
-                                </li>
-                            </ul>
-                            
-                            <div class="tab-content mt-4" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                    aria-labelledby="home-tab">
-                                    <form class="row g-2">
-                                        <div class="col-12">
-                                            <label for="inputCardNumber" class="form-label">Card Number</label>
-                                            <input type="text" class="form-control" id="inputCardNumber"
-                                                placeholder="Card Number">
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <label for="inputCardName" class="form-label">Name on Card</label>
-                                            <input type="text" class="form-control" id="inputCardName"
-                                                placeholder="Name on card">
-                                        </div>
-                                        <div class="col-xl-3">
-                                            <label for="inputCardMonth" class="form-label">Month</label>
-                                            <input type="text" class="form-control" id="inputCardMonth"
-                                                placeholder="Month">
-                                        </div>
-                                        <div class="col-xl-3">
-                                            <label for="inputCardCVV" class="form-label">CVV</label>
-                                            <input type="text" class="form-control" id="inputCardCVV"
-                                                placeholder="CVV">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    ...</div>
                             </div>
                         </section>
                     </div>
-    
-                    {{-- Billing --}}
+
                     <div class="col-xl-5 ps-xl-10">
                         <div class="card bg-light sticky-top">
                             <div class="accordion accordion-classic" id="accordion-1">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading-1-1">
-                                        <button class="accordion-button collapsed fw-bold fs-2" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapse-1-1"
-                                            aria-expanded="false" aria-controls="collapse-1-1">
-                                            $249.99
-                                        </button>
-                                    </h2>
-                                    <div id="collapse-1-1" class="accordion-collapse collapse"
-                                        aria-labelledby="heading-1-1" data-bs-parent="#accordion-1">
-                                        <div class="accordion-body">
-                                            <ol class="list-group list-group-minimal">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start text-secondary">
-                                                    Subtotal
-                                                    <span class="text-black">$35.90</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start text-secondary">
-                                                    Delivery
-                                                    <span class="text-black">Free</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start text-secondary">
-                                                    Tax
-                                                    <span class="text-black">$10.00</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start text-secondary">
-                                                    Insurance
-                                                    <span class="text-black">$5.00</span>
-                                                </li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading-1-2">
-                                        <button class="accordion-button fs-lg collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapse-1-2"
-                                            aria-expanded="false" aria-controls="collapse-1-2">
-                                            Delivery
-                                        </button>
-                                    </h2>
-                                    <div id="collapse-1-2" class="accordion-collapse collapse"
-                                        aria-labelledby="heading-1-2" data-bs-parent="#accordion-1">
-                                        <div class="accordion-body">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault1" checked>
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Standard ( within 2 weeks )
-                                                </label>
-                                            </div>
-                                            <div class="form-check mt-1">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault2">
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    Express ( within 2 working days)
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading-1-3">
-                                        <button class="accordion-button fs-lg collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapse-1-3"
-                                            aria-expanded="false" aria-controls="collapse-1-3">
-                                            Cart
-                                        </button>
-                                    </h2>
-                                    <div id="collapse-1-3" class="accordion-collapse collapse"
-                                        aria-labelledby="heading-1-3" data-bs-parent="#accordion-1">
-                                        <div class="accordion-body">
-                                            <ol class="list-group list-group-minimal">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start text-black">
-                                                    <span>
-                                                        Analog Magazine Rack x2
-                                                        <span class="text-muted d-block">Blue</span>
-                                                    </span>
-                                                    $35.90
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start text-black">
-                                                    <span>
-                                                        Analog Magazine Rack x2
-                                                        <span class="text-muted d-block">Blue</span>
-                                                    </span>
-                                                    $35.90
-                                                </li>
-                                            </ol>
-                                            <a href="#" class="action underline mt-1">Edit Cart <i
-                                                    class="bi bi-arrow-right-short"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h2 class="accordion-header" id="heading-1-1">
+                                    <button class="accordion-button collapsed fw-bold fs-2" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse-1-1" aria-expanded="false"
+                                        aria-controls="collapse-1-1">
+                                        $249.99
+                                    </button>
+                                </h2>
                             </div>
                             <div class="card-footer">
                                 <div class="d-grid text-center">
-                                    <a href="#" class="btn btn-lg btn-primary rounded-pill">Proceed to Checkout</a>
-                                    <span class="d-flex justify-content-center align-items-center text-muted mt-2"><i
-                                            class="bi bi-shield-lock fs-6 me-1"></i>
-                                        Secure Transaction</span>
+                                    <a href="#" class="btn btn-lg btn-primary rounded-pill">Proceed to
+                                        Checkout</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-    
                 </div>
             </div>
         </section>
     </form>
+
+    <x-slot:script>
+
+        {{-- mengambil data destinasi dari paket yang dipilih --}}
+        <script>
+            $('#paket').change(function(e) {
+                e.preventDefault();
+
+                const paketId = $(this).val();
+                const baseUrl = $('meta[name=base-url]').attr('content');
+                const url = `${baseUrl}/pemesanan/json/destinasi/${paketId}`;
+
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "json",
+                    success: function(response) {
+                        const {
+                            data
+                        } = response;
+                        let options = `<option value="" selected disabled>Pilih Destinasi...</option>`
+
+                        options += data.map((destinasi) => {
+                            return `<option value="${destinasi.id}">${destinasi.wilayah}</option>`
+                        });
+
+                        $('#destinasi').removeAttr('disabled');
+                        $('#destinasi').html(options);
+                    },
+                    error: function(error) {
+                        alert(`${error.status} - ${error.statusText}`)
+                    }
+                });
+            });
+        </script>
+
+        {{-- Periksa ketersediaan kendaraan --}}
+        <script>
+            $('#cekKetersediaan').click(function(e) {
+                e.preventDefault();
+
+                const kendaraanId = $('#kendaraan').val();
+                const tanggalKeberangkatan = $('#tanggalKeberangkatan').val();
+                const tanggalKepulangan = $('#tanggalKepulangan').val();
+
+                if (kendaraanId === null || tanggalKeberangkatan === '' || tanggalKepulangan === '') {
+                    alert('Form kendaraan, Tanggal Keberangkatan dan Tanggal Kepulangan harus diisi.')
+                } else {
+                    const baseUrl = $('meta[name=base-url]').attr('content');
+
+                    const request = $.ajax({
+                        type: "get",
+                        url: `${baseUrl}/pemesanan/json/ketersediaan`,
+                        dataType: "json",
+                        data: {
+                            kendaraan_id: kendaraanId,
+                            tanggal_keberangkatan: tanggalKeberangkatan,
+                            tanggal_kepulangan: tanggalKepulangan,
+                        },
+                    });
+
+                    request.done(function(response) {
+                        console.log(response)
+                    });
+
+                    request.fail(function(error) {
+                        console.log(error);
+                        alert(`${error.status} - ${error.statusText}`);
+                    });
+                }
+            });
+        </script>
+
+    </x-slot:script>
 </x-layout.main>

@@ -11,15 +11,13 @@
                         <div class="card-body bg-white">
                             <form
                                 action="{{ route('login.store', ['redirect' => request('redirect', route('main.home'))]) }}"
-                                method="post"
-                                id="formLogin"
-                            >
+                                method="post" id="formLogin">
                                 @csrf
 
                                 <div class="mb-3">
                                     <div class="form-floating @error('email') is-invalid @enderror">
                                         <input required type="email" name="email" id="email"
-                                            placeholder="Alamat Email"
+                                            placeholder="Alamat Email" value="{{ old('email') }}"
                                             class="form-control @error('email') is-invalid @enderror">
 
                                         <label for="email">Email</label>
@@ -65,9 +63,9 @@
 
                         <div class="card-footer bg-opaque-black inverted text-center">
                             <p class="text-secondary">
-                                Belum punya akun? <a
-                                    href="{{ route('register', ['redirect' => request('redirect', route('main.home'))]) }}"
-                                    class="underline">Daftar disini</a>
+                                Belum punya akun? <a class="underline"
+                                    href="{{ route('register', ['redirect' => request('redirect', route('main.home'))]) }}">Daftar
+                                    disini</a>
                             </p>
                         </div>
                     </div>
@@ -77,4 +75,12 @@
 
         <figure class="bg-overlay" style="background-image: url('{{ main_asset('images/bg-4.jpg') }}')"></figure>
     </section>
+
+    <x-slot:script>
+        <script>
+            $('#formLogin').submit(function(e) {
+                $('#preloader').fadeIn();
+            });
+        </script>
+    </x-slot:script>
 </x-layout.main>

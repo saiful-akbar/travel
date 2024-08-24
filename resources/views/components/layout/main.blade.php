@@ -23,6 +23,22 @@
         {{-- Vite --}}
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 
+        {{-- preloader --}}
+        <style>
+            #preloader {
+                z-index: 9999;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100dvh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0.80;
+            }
+        </style>
+
         {{-- Page style --}}
         @isset($style)
             {{ $style }}
@@ -30,6 +46,7 @@
     </head>
 
     <body id="mainLayout" class="{{ $bgColor }}">
+        <x-preloader></x-preloader>
         <x-main.navbar bg-color="{{ $headerBgColor }}"></x-main.navbar>
         <x-main.sidebar></x-main.sidebar>
 
@@ -49,12 +66,18 @@
         <script src="{{ main_asset('js/index.bundle.js') }}"></script>
         <script src="{{ main_asset('vendor/jquery/jquery.min.js') }}"></script>
 
-        {{-- Logout --}}
+        {{-- global script --}}
         <script>
+            // Logout
             function handleLogout(e) {
                 e.preventDefault();
                 $('#formLogout').submit()
             }
+
+            // Hide preloader
+            $(document).ready(function() {
+                $('#preloader').fadeOut();
+            });
         </script>
 
         {{-- Page script --}}
