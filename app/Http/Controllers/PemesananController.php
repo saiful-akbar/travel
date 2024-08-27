@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kendaraan;
+use App\Models\Harga;
 use App\Models\Paket;
 use App\Models\Pesanan;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\JsonResponse;
+use App\Models\Destinasi;
+use App\Models\Kendaraan;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Builder;
 
 class PemesananController extends Controller
 {
@@ -82,10 +84,28 @@ class PemesananController extends Controller
                         $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $request->tanggal_kepulangan)
                             ->where('pesanan.tanggal_kepulangan', '>=', $request->tanggal_kepulangan);
                     });
-            })->get();
+            })->count();
 
         return response()->json([
             'data' => $count,
+        ], 200);
+    }
+
+    /**
+     * Periksa harga kendaraan.
+     *
+     * @param Destinasi $destinasi
+     * @param Kendaraan $kendaraan
+     * @return JsonResponse
+     */
+    public function cekHarga(Request $request): JsonResponse
+    {
+        $harga = Harga::where('destinasi_id', $request->query('destinasi'))
+            ->where('kendaraan_id', $request->query('kendaraan'))
+            ->first();
+
+        return response()->json([
+            'data' => (int) $harga?->nominal,
         ], 200);
     }
 }
