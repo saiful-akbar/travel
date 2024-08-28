@@ -51,18 +51,16 @@ class HargaRequest extends FormRequest implements DataTableRequest
          */
         return DataTables::of($query)->addColumn('action', function (Harga $model): string {
             return "
-                <a
-                    href='" . route('dashboard.harga.update', ['harga' => $model->id]) . "'
+                <a href='" . route('dashboard.harga.update', ['harga' => $model->id]) . "'
                     role='button'
-                    class='btn btn-icon btn-sm btn-light rounded-pill'
+                    class='btn btn-icon btn-sm btn-warning rounded-pill'
                     title='Edit'
                 >
                     <i class='bi-pencil'></i>
                 </a>
 
-                <button
-                    type='button'
-                    class='btn btn-icon btn-sm btn-light rounded-pill'
+                <button type='button'
+                    class='btn btn-icon btn-sm btn-danger rounded-pill'
                     title='Hapus'
                     onclick='handleDelete(`{$model->id}`)'
                 >

@@ -23,6 +23,7 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
         ->prefix('/pemesanan')
         ->group(function (): void {
             Route::get('/', 'index');
+            Route::post('/', 'store')->name('.store');
 
             /**
              * Json response.

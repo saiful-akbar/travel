@@ -30,7 +30,8 @@ class PesananSeeder extends Seeder
             'tanggal_keberangkatan' => date('Y-m-01'),
             'tanggal_kepulangan' => date('Y-m-05'),
             'waktu_penjemputan' => date('H:i:s'),
-            'lokasi_penjemputan' => 'Jl. Dewi Sartika, Ciputat',
+            'alamat_penjemputan' => 'Jl. Dewi Sartika, Ciputat',
+            'alamat_tujuan' => 'Yogya',
         ]);
 
         Pesanan::create([
@@ -41,7 +42,8 @@ class PesananSeeder extends Seeder
             'tanggal_keberangkatan' => date('Y-m-10'),
             'tanggal_kepulangan' => date('Y-m-15'),
             'waktu_penjemputan' => date('H:i:s'),
-            'lokasi_penjemputan' => 'Jl. Dewi Sartika, Ciputat',
+            'alamat_penjemputan' => 'Jl. Dewi Sartika, Ciputat',
+            'alamat_tujuan' => 'Yogya',
         ]);
     }
 }

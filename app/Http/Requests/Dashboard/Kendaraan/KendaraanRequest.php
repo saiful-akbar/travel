@@ -54,7 +54,7 @@ class KendaraanRequest extends FormRequest implements DataTableRequest
             return "
                 <a
                     href='" . route('dashboard.kendaraan.unit', ['kendaraan' => $model->id]) . "'
-                    class='btn btn-sm btn-icon btn-light rounded-pill'
+                    class='btn btn-sm btn-icon btn-info rounded-pill'
                     title='Unit Kendaraan'
                     role='button'
                 >
@@ -63,7 +63,7 @@ class KendaraanRequest extends FormRequest implements DataTableRequest
 
                 <a
                     href='" . route('dashboard.kendaraan.edit', ['kendaraan' => $model->id]) . "'
-                    class='btn btn-sm btn-icon btn-light rounded-pill'
+                    class='btn btn-sm btn-icon btn-warning rounded-pill'
                     title='Edit'
                     role='button'
                 >
@@ -72,7 +72,7 @@ class KendaraanRequest extends FormRequest implements DataTableRequest
 
                 <button
                     type='button'
-                    class='btn btn-sm btn-icon btn-light rounded-pill'
+                    class='btn btn-sm btn-icon btn-danger rounded-pill'
                     title='Hapus'
                     onclick='handleDelete(`{$model->id}`)'
                 >

@@ -7,6 +7,7 @@ use App\Models\Paket;
 use App\Models\Pesanan;
 use App\Models\Destinasi;
 use App\Models\Kendaraan;
+use App\Models\UnitKendaraan;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -21,13 +22,11 @@ class PemesananController extends Controller
      */
     public function index(): View
     {
-        $paket = Paket::select('id', 'nama', 'deskripsi')
-            ->where('aktif', true)
-            ->get();
-
-        $kendaraan = Kendaraan::whereRelation('unitKendaraan', 'status', '=', 'tersedia')
-            ->get();
-
+        /**
+         * Ambil data paket dan kendaraan
+         */
+        $paket = Paket::select('id', 'nama', 'deskripsi')->where('aktif', true)->get();
+        $kendaraan = Kendaraan::whereRelation('unitKendaraan', 'status', '=', 'tersedia')->get();
 
         return view('pages.main.pemesanan.index', compact('paket', 'kendaraan'));
     }
@@ -55,40 +54,35 @@ class PemesananController extends Controller
      */
     public function cekKetersediaanKendaraan(Request $request): JsonResponse
     {
-        /**
-         * SQL untuk memeriksa ketersediaan kendaraan
-         * yang dipesan berdasarkan tanggal keberangkatan,
-         * tanggal kepulangan dan kendaraan yang dipilih.
-         * 
-         * SQL:
-         * select `pesanan`.`id` from `pesanan`
-         * left join `unit_kendaraan` on `unit_kendaraan`.`id` = `pesanan`.`unit_kendaraan_id`
-         * where `unit_kendaraan`.`kendaraan_id` = '01j5zzhc6ftmmgfkm1n9tcz9s5' and (
-         *      `pesanan`.`tanggal_keberangkatan` between '2024-08-16' and '2024-08-16'
-         *      or `pesanan`.`tanggal_kepulangan` between '2024-08-16' and '2024-08-16'
-         *      or (`pesanan`.`tanggal_keberangkatan` <= '2024-08-16' and `pesanan`.`tanggal_kepulangan` >= '2024-08-16')
-         *      or (`pesanan`.`tanggal_keberangkatan` <= '2024-08-16' and `pesanan`.`tanggal_kepulangan` >= '2024-08-16')
-         * );
-         */
-        $count = Pesanan::select('pesanan.id')
-            ->leftJoin('unit_kendaraan', 'unit_kendaraan.id', '=', 'pesanan.unit_kendaraan_id')
+        $unitTidakMemilikiPesanan = UnitKendaraan::leftJoin('pesanan', 'pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id')
             ->where('unit_kendaraan.kendaraan_id', $request->query('kendaraan_id'))
-            ->where(function (Builder $query) use ($request): void {
-                $query->whereBetween('pesanan.tanggal_keberangkatan', [$request->tanggal_keberangkatan, $request->tanggal_keberangkatan])
-                    ->orWhereBetween('pesanan.tanggal_kepulangan', [$request->tanggal_keberangkatan, $request->tanggal_keberangkatan])
-                    ->orWhere(function (Builder $subQuery) use ($request): void {
-                        $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $request->tanggal_keberangkatan)
-                            ->where('pesanan.tanggal_kepulangan', '>=', $request->tanggal_keberangkatan);
-                    })
-                    ->orWhere(function (Builder $subQuery) use ($request): void {
-                        $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $request->tanggal_kepulangan)
-                            ->where('pesanan.tanggal_kepulangan', '>=', $request->tanggal_kepulangan);
-                    });
-            })->count();
+            ->where('unit_kendaraan.status', 'tersedia')
+            ->whereNull('pesanan.id')
+            ->count();
+
+        if ($unitTidakMemilikiPesanan > 0) {
+            return response()->json([
+                'data' => true
+            ]);
+        }
+
+        $query = UnitKendaraan::join('pesanan', 'pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id')
+            ->where('unit_kendaraan.kendaraan_id', $request->query('kendaraan_id'))
+            ->whereBetween('pesanan.tanggal_keberangkatan', [$request->query('tanggal_keberangkatan'), $request->query('tanggal_kepulangan')])
+            ->orWhereBetween('pesanan.tanggal_kepulangan', [$request->query('tanggal_keberangkatan'), $request->query('tanggal_kepulangan')])
+            ->orWhere(function (Builder $subQuery) use ($request): void {
+                $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $request->query('tanggal_keberangkatan'))
+                    ->where('pesanan.tanggal_kepulangan', '>=', $request->query('tanggal_keberangkatan'));
+            })
+            ->orWhere(function (Builder $subQuery) use ($request): void {
+                $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $request->query('tanggal_kepulangan'))
+                    ->where('pesanan.tanggal_kepulangan', '>=', $request->query('tanggal_kepulangan'));
+            })
+            ->count();
 
         return response()->json([
-            'data' => $count,
-        ], 200);
+            'data' => $query === 0
+        ]);
     }
 
     /**
@@ -100,6 +94,10 @@ class PemesananController extends Controller
      */
     public function cekHarga(Request $request): JsonResponse
     {
+        /**
+         * Select nominal pada tabel harga berdasarkan id_kendaraan
+         * dan id_destinasi yang dipilih oleh member.
+         */
         $harga = Harga::where('destinasi_id', $request->query('destinasi'))
             ->where('kendaraan_id', $request->query('kendaraan'))
             ->first();
@@ -107,5 +105,10 @@ class PemesananController extends Controller
         return response()->json([
             'data' => (int) $harga?->nominal,
         ], 200);
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 }

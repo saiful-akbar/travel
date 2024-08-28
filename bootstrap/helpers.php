@@ -171,33 +171,22 @@ if (!function_exists('main_menu')) {
     }
 }
 
-if (!function_exists('sub_menu')) {
-    function sub_menu(): array
+if (!function_exists('user_menu')) {
+    function user_menu(): array
     {
+        if (user()->role == 'admin') {
+            return [
+                [
+                    'name' => 'Dashboard',
+                    'url' => route('dashboard.home'),
+                ],
+            ];
+        }
+
         return [
             [
                 'name' => 'Profil',
-                'url' => 'profil',
-            ],
-            [
-                'name' => 'Pemesanan',
-                'url' => 'pemesanan',
-            ],
-            [
-                'name' => 'Pembayaran',
-                'url' => 'pembayaran',
-            ],
-            [
-                'name' => 'Riwayat Pemesanan',
                 'url' => '#',
-            ],
-            [
-                'name' => 'Riwayat Transaksi',
-                'url' => '#',
-            ],
-            [
-                'name' => 'Riwayat Pemesanan',
-                'url' => 'riwayat-pemesanan',
             ],
         ];
     }

@@ -1,5 +1,5 @@
 <x-layout.main title="Layanan" bg-color="light" footer-bg-color="dark">
-    
+
     {{-- Daftar layanan --}}
     <section class="py-15 py-xl-20">
         <div class="container mt-5 mt-xl-10">
@@ -9,20 +9,14 @@
                         <span class="fw-bold">Paket destinasi</span> yang tersedia sekarang.
                     </h1>
 
-                    <button
-                        class="btn btn-filter rounded-pill current mb-1 mb-md-0"
-                        data-filter="*"
-                        data-target="#grid1"
-                    >
+                    <button class="btn btn-filter rounded-pill current mb-1 mb-md-0" data-filter="*"
+                        data-target="#grid1">
                         semua
                     </button>
-                    
+
                     @foreach ($pakets as $paket)
-                        <button
-                            class="btn btn-filter rounded-pill mb-1 mb-md-0"
-                            data-target="#grid1"
-                            data-filter=".filter-{{ $paket->id }}"
-                        >
+                        <button class="btn btn-filter rounded-pill mb-1 mb-md-0" data-target="#grid1"
+                            data-filter=".filter-{{ $paket->id }}">
                             {{ $paket->nama }}
                         </button>
                     @endforeach
@@ -33,19 +27,22 @@
                 @foreach ($pakets as $paket)
                     @foreach ($paket->destinasi as $destinasi)
                         <div class="col-12 filter-{{ $destinasi->paket_id }}">
-                            <a href="{{ url()->query('/pemesanan', ['destinasi' => $destinasi->id]) }}" class="card bg-white card-hover-border">
+                            <a href="{{ url()->query('/pemesanan', ['destinasi' => $destinasi->id]) }}"
+                                class="card bg-white card-hover-border">
                                 <div class="card-body">
                                     <div class="row align-items-center g-2 g-md-4 text-center text-md-start">
                                         <div class="col-md-8">
                                             <p class="fs-lg mb-0">{{ $destinasi->wilayah }}</p>
+
                                             <ul class="list-inline list-inline-separated text-muted">
                                                 <li class="list-inline-item">{{ $paket->nama }}</li>
                                                 <li class="list-inline-item">{{ $destinasi->jumlah_hari }} Hari</li>
                                             </ul>
                                         </div>
-        
+
                                         <div class="col-md-4 text-lg-end">
-                                            <span>Rp{{ number_format($destinasi->harga_minimum) }} k – Rp{{ number_format($destinasi->harga_maksimum) }} k</span>
+                                            Rp{{ number_format($destinasi->harga_minimum) }} k –
+                                            Rp{{ number_format($destinasi->harga_maksimum) }} k
                                         </div>
                                     </div>
                                 </div>
@@ -80,23 +77,20 @@
                             "992": {"items": 2},
                             "1200": {"items": 3}
                         }
-                    }'
-                >
+                    }'>
                     @foreach ($kendaraans as $kendaraan)
                         <div>
                             <div class="product">
                                 <figure class="product-image bg-light p-2">
-                                    <img
-                                        src="{{ image($kendaraan->gambar) }}" alt="{{ $kendaraan->tipe }}"
-                                        width="100%"
-                                        height="350"
-                                        style="object-fit: contain; object-position: initial;"
-                                    />
+                                    <img src="{{ image($kendaraan->gambar) }}" alt="{{ $kendaraan->tipe }}"
+                                        width="100%" height="370"
+                                        style="object-fit: contain; object-position: initial;" />
                                 </figure>
 
                                 <span class="product-title fw-bold">
                                     {{ $kendaraan->merek }} - {{ $kendaraan->tipe }}
                                 </span>
+
                                 <small class="product-price text-muted">
                                     Kapasitas {{ $kendaraan->kapasitas }} penumpang
                                 </small>

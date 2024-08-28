@@ -64,12 +64,14 @@ Route::controller(KendaraanController::class)
         Route::patch('/{kendaraan}', 'update')->name('.update');
         Route::delete('/{kendaraan}', 'destroy')->name('.destroy');
 
-        Route::name('.unit')->prefix('/{kendaraan}/unit')->group(function (): void {
-            Route::get('/', 'unit');
-            Route::post('/', 'storeUnit')->name('.store');
-            Route::patch('/{unit}', 'updateUnit')->name('.update');
-            Route::delete('/{unit}', 'destroyUnit')->name('.destroy');
-        });
+        Route::name('.unit')
+            ->prefix('/{kendaraan}/unit')
+            ->group(function (): void {
+                Route::get('/', 'unit');
+                Route::post('/', 'storeUnit')->name('.store');
+                Route::patch('/{unit}', 'updateUnit')->name('.update');
+                Route::delete('/{unit}', 'destroyUnit')->name('.destroy');
+            });
     });
 
 /**

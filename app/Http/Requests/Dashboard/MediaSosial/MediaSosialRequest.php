@@ -31,7 +31,7 @@ class MediaSosialRequest extends FormRequest implements DataTableRequest
                     <a
                         href='" . route('dashboard.mediaSosial.edit', ['mediaSosial' => $model->id]) . "'
                         role='button'
-                        class='btn btn-icon btn-sm btn-light rounded-pill'
+                        class='btn btn-icon btn-sm btn-warning rounded-pill'
                         title='Edit'
                     >
                         <i class='bi-pencil'></i>
@@ -39,7 +39,7 @@ class MediaSosialRequest extends FormRequest implements DataTableRequest
 
                     <button
                         type='button'
-                        class='btn btn-icon btn-sm btn-light rounded-pill'
+                        class='btn btn-icon btn-sm btn-danger rounded-pill'
                         onclick='handleDelete(`{$model->id}`)'
                         title='Hapus'
                     >

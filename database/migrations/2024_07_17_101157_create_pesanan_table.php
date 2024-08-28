@@ -36,8 +36,9 @@ return new class extends Migration
 
             $table->date('tanggal_keberangkatan');
             $table->date('tanggal_kepulangan');
+            $table->text('alamat_tujuan');
+            $table->text('alamat_penjemputan');
             $table->time('waktu_penjemputan');
-            $table->text('lokasi_penjemputan');
             $table->string('latitude_penjemputan', 20)->nullable();
             $table->string('longitude_penjemputan', 20)->nullable();
             $table->decimal('total_tagihan', 15, 2)->default(0)->unsigned();
@@ -47,7 +48,7 @@ return new class extends Migration
                 'dipesan',
                 'dikonfirmasi',
                 'dijemput',
-                'dalam_perjalanan',
+                'dalam perjalanan',
                 'selesai',
                 'dibatalkan',
             ])->default('dipesan');

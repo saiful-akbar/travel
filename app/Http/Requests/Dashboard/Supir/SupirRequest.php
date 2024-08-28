@@ -25,7 +25,7 @@ class SupirRequest extends FormRequest implements DataTableRequest
                 return '
                     <a
                         href="' . route('dashboard.supir.edit', ['supir' => $supir->id]) . '"
-                        class="btn btn-icon btn-light btn-sm rounded-pill"
+                        class="btn btn-icon btn-warning btn-sm rounded-pill"
                         role="button"
                         title="Edit"
                     >
@@ -34,7 +34,7 @@ class SupirRequest extends FormRequest implements DataTableRequest
 
                     <button
                         type="button"
-                        class="btn btn-icon btn-light btn-sm rounded-pill"
+                        class="btn btn-icon btn-danger btn-sm rounded-pill"
                         onclick="handleDelete(`' . $supir->id . '`)"
                         title="Hapus"
                     >

@@ -33,11 +33,13 @@
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                Profil
-                            </a>
-                        </li>
+                        @foreach (user_menu() as $menu)
+                            <li>
+                                <a class="dropdown-item" href="{{ $menu['url'] }}">
+                                    {{ $menu['name'] }}
+                                </a>
+                            </li>
+                        @endforeach
 
                         <li>
                             <a class="dropdown-item text-red" href="#" onclick="return handleLogout(event)">

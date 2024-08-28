@@ -1,9 +1,13 @@
 <x-layout.main title="Pemesanan">
-    <form id="formPemesanan">
+    <form id="formPemesanan" method="post" action="{{ route('main.pemesanan.store') }}">
+        @csrf @method('post')
+
         <section class="py-15 py-xl-20">
             <div class="container mt-5">
                 <div class="row justify-content-between">
                     <div class="col-xl-7 mb-5 mb-xl-0">
+
+                        {{-- Form pemesanan kendaraan --}}
                         <section class="mt-4">
                             <h2 class="fw-bold">Pesan Kendaraan</h2>
 
@@ -35,8 +39,8 @@
                                     </label>
 
                                     <select name="destinasi" id="destinasi"
-                                        class="form-select @error('destinasi') is-invalid @enderror" disabled
-                                        required></select>
+                                        class="form-select @error('destinasi') is-invalid @enderror" disabled required>
+                                    </select>
                                 </div>
 
                                 <div class="col-12">
@@ -44,7 +48,7 @@
                                         Alamat Tujuan <span class="text-danger">*</span>
                                     </label>
 
-                                    <textarea name="alamat_tujuan" id="alamatTujuan" rows="3" placeholder="Masukan alamat tujuan anda..."
+                                    <textarea name="alamat_tujuan" id="alamatTujuan" rows="3" placeholder="Masukan alamat tujuan..."
                                         class="form-control @error('alamat_tujuan') is-invalid @enderror">{{ old('alamat_tujuan') }}</textarea>
 
                                     @error('alamat_tujuan')
@@ -99,7 +103,9 @@
                                 </div>
                             </div>
                         </section>
+                        {{-- end form pemesanan kendaraan --}}
 
+                        {{-- form penjemputan --}}
                         <section class="mt-10">
                             <h2 class="fw-bold">Penjemputan</h2>
 
@@ -133,8 +139,11 @@
                                 </div>
                             </div>
                         </section>
+                        {{-- end form penjemputan --}}
+
                     </div>
 
+                    {{-- Harga --}}
                     <div class="col-xl-5 ps-xl-10">
                         <div class="card bg-light sticky-top">
                             <div class="card-body">
@@ -143,12 +152,13 @@
 
                             <div class="card-footer">
                                 <div class="d-grid text-center">
-                                    <a href="#" class="btn btn-lg btn-primary rounded-pill">Proceed to
-                                        Checkout</a>
+                                    <button type="submit" class="btn btn-lg btn-primary">Pesan Sekarang</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {{-- end harga --}}
+
                 </div>
             </div>
         </section>
@@ -173,6 +183,7 @@
                         const {
                             data
                         } = response;
+
                         let options = `<option value="" selected disabled>Pilih Destinasi...</option>`
 
                         options += data.map((destinasi) => {
@@ -198,41 +209,39 @@
                 const tanggalKeberangkatan = $('#tanggalKeberangkatan').val();
                 const tanggalKepulangan = $('#tanggalKepulangan').val();
 
-                if (kendaraanId === null || tanggalKeberangkatan === '' || tanggalKepulangan === '') {
-                    alert('Form kendaraan, Tanggal Keberangkatan dan Tanggal Kepulangan harus diisi.')
-                } else {
-                    $('#preloader').fadeIn();
+                if (
+                    kendaraanId === null ||
+                    tanggalKeberangkatan === '' ||
+                    tanggalKepulangan === ''
+                ) {
+                    return alert('Form kendaraan, Tanggal Keberangkatan dan Tanggal Kepulangan harus diisi.')
+                }
 
-                    const baseUrl = $('meta[name=base-url]').attr('content');
-                    const request = $.ajax({
-                        type: "get",
-                        url: `${baseUrl}/pemesanan/json/ketersediaan`,
-                        dataType: "json",
-                        data: {
-                            kendaraan_id: kendaraanId,
-                            tanggal_keberangkatan: tanggalKeberangkatan,
-                            tanggal_kepulangan: tanggalKepulangan,
-                        },
-                    });
+                $('#preloader').fadeIn();
 
-                    request.done(function(response) {
-                        const data = response.data;
-
-                        $('#preloader').fadeOut();
-
+                const request = $.ajax({
+                    type: "get",
+                    url: `{{ route('main.pemesanan.json.ketersediaan') }}`,
+                    dataType: "json",
+                    data: {
+                        kendaraan_id: kendaraanId,
+                        tanggal_keberangkatan: tanggalKeberangkatan,
+                        tanggal_kepulangan: tanggalKepulangan,
+                    },
+                    success: function(response) {
                         $('#alert').html(`
-                            <div class="mt-1 alert alert-${data === 0 ? 'success' : 'danger'}">
-                                ${data === 0 ? 'Kendaraan tersedia' : 'Kendaraan tidak tersedia'}
+                            <div class="mt-1 alert alert-${response.data ? 'success' : 'danger'}">
+                                ${response.data ? 'Kendaraan tersedia' : 'Kendaraan tidak tersedia'}
                             </div>
                         `);
-                    });
-
-                    request.fail(function(error) {
-                        $('#preloader').fadeOut();
-
+                    },
+                    error: function(error) {
                         alert(`${error.status} - ${error.statusText}`);
-                    });
-                }
+                    },
+                    complete: function() {
+                        $('#preloader').fadeOut();
+                    }
+                });
             });
         </script>
 

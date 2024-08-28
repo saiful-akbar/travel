@@ -1,23 +1,13 @@
 <x-layout.dashboard title="Tambah Unit Kendaraan">
     <x-slot:header-action>
-        <x-button
-            type="link"
-            href="{{ route('dashboard.kendaraan') }}"
-            color="white"
-            start-icon="bi-chevron-left"
-        >
+        <x-button type="link" href="{{ route('dashboard.kendaraan') }}" color="white" start-icon="bi-chevron-left">
             Kembali
         </x-button>
     </x-slot:header-action>
 
     <x-slot:header-content>
-        <x-button
-            type="link"
-            href="{{ route('dashboard.kendaraan.create') }}"
-            color="primary"
-            start-icon="bi-plus-lg"
-            class="me-2"
-        >
+        <x-button type="link" href="{{ route('dashboard.kendaraan.create') }}" color="primary" start-icon="bi-plus-lg"
+            class="me-2">
             Tambah Kendaraan
         </x-button>
     </x-slot:header-content>
@@ -25,13 +15,10 @@
     {{-- Form tambah --}}
     <div class="row mb-5">
         <div class="col-12">
-            <form
-                id="formCreateUnit"
-                action="{{ route('dashboard.kendaraan.unit.store', ['kendaraan' => $kendaraan->id]) }}"
-                method="post"
-            >
+            <form id="formCreateUnit"
+                action="{{ route('dashboard.kendaraan.unit.store', ['kendaraan' => $kendaraan->id]) }}" method="post">
                 @csrf
-                
+
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -40,19 +27,13 @@
                                     No. Kendaraan <span class="text-danger">*</span>
                                 </label>
 
-                                <input
-                                    required
-                                    type="text"
-                                    name="nomor"
-                                    id="nomor"
-                                    placeholder="Masukan nomor kendaraan..."
-                                    value="{{ old('nomor') }}"
+                                <input required type="text" name="nomor" id="nomor"
+                                    placeholder="Masukan nomor kendaraan..." value="{{ old('nomor') }}"
                                     @class([
                                         'form-control',
                                         'form-control-light',
                                         'is-invalid' => $errors->has('nomor'),
-                                    ])
-                                >
+                                    ])>
 
                                 @error('nomor')
                                     <div class="invalid-feedback">
@@ -66,21 +47,13 @@
                                     Tahun <span class="text-danger">*</span>
                                 </label>
 
-                                <input
-                                    required
-                                    type="number"
-                                    max="{{ date('Y') }}"
-                                    min="{{ date('Y') - 20 }}"
-                                    name="tahun"
-                                    id="tahun"
-                                    placeholder="Masukan tahun kendaraan..."
-                                    value="{{ old('tahun') }}"
-                                    @class([
+                                <input required type="number" max="{{ date('Y') }}" min="{{ date('Y') - 20 }}"
+                                    name="tahun" id="tahun" placeholder="Masukan tahun kendaraan..."
+                                    value="{{ old('tahun') }}" @class([
                                         'form-control',
                                         'form-control-light',
                                         'is-invalid' => $errors->has('tahun'),
-                                    ])
-                                >
+                                    ])>
 
                                 @error('tahun')
                                     <div class="invalid-feedback">
@@ -95,22 +68,14 @@
                                 </label>
 
                                 <div class="tom-select-custom @error('status') is-invalid @enderror is-invalid">
-                                    <select
-                                        required
-                                        name="status"
-                                        id="status"
-                                        autocomplete="off"
-                                        data-hs-tom-select-options='{
-                                            "placeholder": "Pilih Status...",
-                                            "hideSearch": true
-                                        }'
+                                    <select required name="status" id="status" autocomplete="off"
+                                        data-hs-tom-select-options='{"placeholder": "Pilih Status...", "hideSearch": true}'
                                         @class([
-                                            "js-select",
-                                            "form-select",
-                                            "form-select-light",
-                                            "is-invalid" => $errors->has('status'),
-                                        ])
-                                    >
+                                            'js-select',
+                                            'form-select',
+                                            'form-select-light',
+                                            'is-invalid' => $errors->has('status'),
+                                        ])>
                                         <option value="">
                                             Pilih Status...
                                         </option>
@@ -150,7 +115,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="unitTable" class="table table-hover table-align-middle table-thead-bordered table-nowrap w-100">
+                    <table id="unitTable"
+                        class="table table-hover table-align-middle table-thead-bordered table-nowrap w-100">
                         <thead>
                             <tr>
                                 <th>No. Kendaraan</th>
@@ -158,7 +124,7 @@
                                 <th>Status</th>
                                 <th>Dibuat</th>
                                 <th>Diubah</th>
-                                <th>Hapus</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
 
@@ -168,38 +134,29 @@
                                     <td>{{ $unit->nomor }}</td>
                                     <td class="text-start">{{ $unit->tahun }}</td>
                                     <td>
-                                        <span
-                                            @class([
-                                                'badge',
-                                                'bg-soft-success' => $unit->status === 'tersedia',
-                                                'text-success' => $unit->status === 'tersedia',
-                                                'bg-soft-danger' => $unit->status === 'tidak_tersedia',
-                                                'text-danger' => $unit->status === 'tidak_tersedia',
-                                                'bg-soft-warning' => $unit->status === 'dalam_perbaikan',
-                                                'text-warning' => $unit->status === 'dalam_perbaikan',
-                                            ])
-                                        >
+                                        <span @class([
+                                            'badge',
+                                            'bg-soft-success' => $unit->status === 'tersedia',
+                                            'text-success' => $unit->status === 'tersedia',
+                                            'bg-soft-danger' => $unit->status === 'tidak_tersedia',
+                                            'text-danger' => $unit->status === 'tidak_tersedia',
+                                            'bg-soft-warning' => $unit->status === 'dalam_perbaikan',
+                                            'text-warning' => $unit->status === 'dalam_perbaikan',
+                                        ])>
                                             {{ ucwords(str_replace('_', ' ', $unit->status)) }}
                                         </span>
                                     </td>
                                     <td>{{ $unit->created_at }}</td>
                                     <td>{{ $unit->updated_at }}</td>
                                     <td>
-                                        <button
-                                            type="button"
-                                            class="btn btn-icon btn-sm btn-light rounded-pill"
-                                            title="Edit"
-                                            onclick="handleEdit({{ $unit }})"
-                                        >
+                                        <button type="button" class="btn btn-icon btn-sm btn-warning rounded-pill"
+                                            title="Edit" onclick="handleEdit({{ $unit }})">
                                             <i class="bi-pencil"></i>
                                         </button>
 
-                                        <button
-                                            type="button"
-                                            class="btn btn-icon btn-sm btn-light rounded-pill"
+                                        <button type="button" class="btn btn-icon btn-sm btn-danger rounded-pill"
                                             title="Hapus"
-                                            onclick="handleDelete('{{ $kendaraan->id }}', '{{ $unit->id }}')"
-                                        >
+                                            onclick="handleDelete('{{ $kendaraan->id }}', '{{ $unit->id }}')">
                                             <i class="bi-trash"></i>
                                         </button>
                                     </td>
@@ -216,22 +173,15 @@
     <form id="formEditUnit" method="post">
         @csrf @method('patch')
 
-        <div
-            class="modal fade"
-            id="modalEdit"
-            data-bs-backdrop="static"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="modalEditLable"
-            aria-hidden="true"
-        >
+        <div class="modal fade" id="modalEdit" data-bs-backdrop="static" tabindex="-1" role="dialog"
+            aria-labelledby="modalEditLable" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header py-4 border-bottom">
                         <h4 class="modal-title" id="modalEditLable">Edit Unit</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    
+
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12 mb-4">
@@ -239,14 +189,8 @@
                                     No. Kendaraan <span class="text-danger">*</span>
                                 </label>
 
-                                <input
-                                    required
-                                    type="text"
-                                    name="nomor_edit"
-                                    id="nomorEdit"
-                                    placeholder="Masukan nomor kendaraan..."
-                                    class="form-control form-control-light"
-                                >
+                                <input required type="text" name="nomor_edit" id="nomorEdit"
+                                    placeholder="Masukan nomor kendaraan..." class="form-control form-control-light">
 
                                 @error('nomor')
                                     <div class="invalid-feedback">
@@ -262,16 +206,9 @@
                                     Tahun <span class="text-danger">*</span>
                                 </label>
 
-                                <input
-                                    required
-                                    type="number"
-                                    max="{{ date('Y') }}"
-                                    min="{{ date('Y') - 20 }}"
-                                    name="tahun_edit"
-                                    id="tahunEdit"
-                                    placeholder="Masukan tahun kendaraan..."
-                                    class="form-control form-control-light"
-                                >
+                                <input required type="number" max="{{ date('Y') }}" min="{{ date('Y') - 20 }}"
+                                    name="tahun_edit" id="tahunEdit" placeholder="Masukan tahun kendaraan..."
+                                    class="form-control form-control-light">
 
                                 @error('tahun')
                                     <div class="invalid-feedback">
@@ -286,14 +223,9 @@
                                 <label for="status" class="form-label">
                                     Status <span class="text-danger">*</span>
                                 </label>
-                                
-                                <select
-                                    required
-                                    name="status_edit"
-                                    id="statusEdit"
-                                    autocomplete="off"
-                                    class="form-select form-select-light"
-                                >
+
+                                <select required name="status_edit" id="statusEdit" autocomplete="off"
+                                    class="form-select form-select-light">
                                     <option value="tersedia">Tersedia</option>
                                     <option value="tidak_tersedia">Tidak Tersedia</option>
                                     <option value="dalam_perbaikan">Dalam Perbaikan</option>
@@ -307,19 +239,19 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="modal-footer">
                         <x-button type="button" color="white" start-icon="bi-x-lg" data-bs-dismiss="modal">
                             Batal
                         </x-button>
-    
+
                         <x-button type="submit" color="primary" start-icon="bi-save" autofocus>
                             Simpan
                         </x-button>
                     </div>
                 </div>
             </div>
-          </div>
+        </div>
     </form>
 
     {{-- Form delete --}}
@@ -345,8 +277,9 @@
         <script>
             function handleDelete(kendaraanId, unitId) {
                 App.destroy('Unit', function(deleted) {
-                    if(deleted) {
-                        $('#formDeleteUnit').attr('action', App.dashboardUrl(`/kendaraan/${kendaraanId}/unit/${unitId}`));
+                    if (deleted) {
+                        $('#formDeleteUnit').attr('action', App.dashboardUrl(
+                            `/kendaraan/${kendaraanId}/unit/${unitId}`));
                         $('#formDeleteUnit').submit();
                     }
                 });
@@ -355,7 +288,7 @@
 
         {{-- Handle edit --}}
         <script>
-            function handleEdit(unit) { 
+            function handleEdit(unit) {
                 new bootstrap.Modal($('#modalEdit'), {}).show();
 
                 $('#nomorEdit').val(unit.nomor);
