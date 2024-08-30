@@ -15,8 +15,9 @@ return new class extends Migration
             $table->ulid('id')->primary();
 
             $table->foreignUlid('user_id')
+                ->nullable()
                 ->constrained('user')
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreignUlid('supir_id')
@@ -47,7 +48,6 @@ return new class extends Migration
             $table->enum('status', [
                 'dipesan',
                 'dikonfirmasi',
-                'dijemput',
                 'dalam perjalanan',
                 'selesai',
                 'dibatalkan',

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Main\Pemesanan\StorePemesananRequest;
 use App\Models\Harga;
 use App\Models\Paket;
-use App\Models\Pesanan;
 use App\Models\Destinasi;
 use App\Models\Kendaraan;
 use App\Models\UnitKendaraan;
+use DateTime;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -48,40 +49,52 @@ class PemesananController extends Controller
 
     /**
      * Memmeriksa ketersedian kendaraan.
+     * 
+     * select tabel unit_kendaraan dan left join dengan tabel pesanan.
+     * ambil data unit kendaraan berdasarkan kendaraan_id yang dipilih oleh user.
+     * lalu ambil unit kendaraan yang tidak memiliki pesanan atau unit kendaraan yang
+     * memiliki pesanan dengan status bukan "dalam perjalanan" dan periode tanggal kepergian
+     * dan tanggal kepulangaannya tidak berbentrokan dengan tanggal kepergian dan tanggal kepulangan
+     * yang dipilih oleh user.
      *
      * @param Request $request
      * @return JsonResponse
      */
     public function cekKetersediaanKendaraan(Request $request): JsonResponse
     {
-        $unitTidakMemilikiPesanan = UnitKendaraan::leftJoin('pesanan', 'pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id')
-            ->where('unit_kendaraan.kendaraan_id', $request->query('kendaraan_id'))
-            ->where('unit_kendaraan.status', 'tersedia')
-            ->whereNull('pesanan.id')
-            ->count();
+        /**
+         * Join tabel unit_kendaraan dengan tabel pesanan.
+         */
+        $query = Unitkendaraan::leftJoin('pesanan', 'pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id');
 
-        if ($unitTidakMemilikiPesanan > 0) {
-            return response()->json([
-                'data' => true
-            ]);
-        }
+        /**
+         * filter data berdasarkan id kendaraan yang yang dilih oleh user
+         * dari tabel unit_kendaraan.
+         */
+        $query->where('unit_kendaraan.kendaraan_id', $request->query('kendaraan_id'));
 
-        $query = UnitKendaraan::join('pesanan', 'pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id')
-            ->where('unit_kendaraan.kendaraan_id', $request->query('kendaraan_id'))
-            ->whereBetween('pesanan.tanggal_keberangkatan', [$request->query('tanggal_keberangkatan'), $request->query('tanggal_kepulangan')])
-            ->orWhereBetween('pesanan.tanggal_kepulangan', [$request->query('tanggal_keberangkatan'), $request->query('tanggal_kepulangan')])
-            ->orWhere(function (Builder $subQuery) use ($request): void {
-                $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $request->query('tanggal_keberangkatan'))
-                    ->where('pesanan.tanggal_kepulangan', '>=', $request->query('tanggal_keberangkatan'));
-            })
-            ->orWhere(function (Builder $subQuery) use ($request): void {
-                $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $request->query('tanggal_kepulangan'))
-                    ->where('pesanan.tanggal_kepulangan', '>=', $request->query('tanggal_kepulangan'));
-            })
-            ->count();
+        /**
+         * Filter data berdasarkan status dari unit_kendaraan yang tersedia.
+         */
+        $query->where('unit_kendaraan.status', 'tersedia');
+
+        /**
+         * Filter juga data berdasarkan id pesanan yang bernilai null
+         * atau status pesanan yang bukan "dalam perjalanan" dan
+         * periode tanggal yang dipili user tidak berbentrokan dengan
+         * jadwal pesanan yang sudah ada.
+         */
+        $query->where(function (Builder $subQuery) use ($request): void {
+            $subQuery->whereNull('pesanan.id')
+                ->orWhere(function (Builder $subQuery) use ($request): void {
+                    $subQuery->where('pesanan.status', '<>', 'dalam perjalanan')
+                        ->whereNotBetween('pesanan.tanggal_keberangkatan', [$request->query('tanggal_keberangkatan'), $request->query('tanggal_kepulangan')])
+                        ->whereNotBetween('pesanan.tanggal_kepulangan', [$request->query('tanggal_keberangkatan'), $request->query('tanggal_kepulangan')]);
+                });
+        });
 
         return response()->json([
-            'data' => $query === 0
+            'data' => (bool) $query->count() > 0
         ]);
     }
 
@@ -98,17 +111,49 @@ class PemesananController extends Controller
          * Select nominal pada tabel harga berdasarkan id_kendaraan
          * dan id_destinasi yang dipilih oleh member.
          */
-        $harga = Harga::where('destinasi_id', $request->query('destinasi'))
-            ->where('kendaraan_id', $request->query('kendaraan'))
+        $harga = Harga::where('destinasi_id', $request->query('destinasi_id'))
+            ->where('kendaraan_id', $request->query('kendaraan_id'))
             ->first();
 
+        /**
+         * Ambil nominal harga
+         */
+        $nominal = (int) $harga?->nominal;
+
+        /**
+         * Ambil selisih hari dari tanggal yang dipilih
+         */
+        $startDate = new DateTime($request->query('tanggal_keberangkatan'));
+        $endDate = new DateTime($request->query('tanggal_kepulangan'));
+        $diffDate = $startDate->diff($endDate)->days;
+
+        /**
+         * Kalikan nominal dengan jumlah hari
+         */
+        $total = ($diffDate + 1) * $nominal;
+
         return response()->json([
-            'data' => (int) $harga?->nominal,
+            'data' => [
+                'harga_per_hari' => $nominal,
+                'jumlah_hari' => $diffDate + 1,
+                'total' => $total,
+            ],
         ], 200);
     }
 
-    public function store(Request $request)
+    /**
+     * Tambah pesanan kendaraan.
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function store(StorePemesananRequest $request)
     {
-        dd($request->all());
+        $request->insert();
+
+        return to_route('main.pemesanan')->with('alert', [
+            'variant' => 'success',
+            'message' => 'Pesanan anda berhasil ditambahkan.'
+        ]);
     }
 }

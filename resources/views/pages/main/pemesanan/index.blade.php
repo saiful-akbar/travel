@@ -17,8 +17,7 @@
                                         Paket <span class="text-danger">*</span>
                                     </label>
 
-                                    <select name="paket" id="paket"
-                                        class="form-select @error('paket') is-invalid @enderror" required>
+                                    <select name="paket" id="paket" class="form-select @error('paket') is-invalid @enderror" required>
                                         <option value="" disabled selected>Pilih Paket...</option>
 
                                         @foreach ($paket as $paketItem)
@@ -38,9 +37,16 @@
                                         Destinasi <span class="text-danger">*</span>
                                     </label>
 
-                                    <select name="destinasi" id="destinasi"
-                                        class="form-select @error('destinasi') is-invalid @enderror" disabled required>
+                                    <select name="destinasi"
+                                        id="destinasi"
+                                        class="form-select @error('destinasi') is-invalid @enderror"
+                                        disabled
+                                        required>
                                     </select>
+
+                                    @error('destinasi')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="col-12">
@@ -48,8 +54,13 @@
                                         Alamat Tujuan <span class="text-danger">*</span>
                                     </label>
 
-                                    <textarea name="alamat_tujuan" id="alamatTujuan" rows="3" placeholder="Masukan alamat tujuan..."
-                                        class="form-control @error('alamat_tujuan') is-invalid @enderror">{{ old('alamat_tujuan') }}</textarea>
+                                    <textarea name="alamat_tujuan"
+                                        id="alamatTujuan"
+                                        rows="3"
+                                        placeholder="Masukan alamat tujuan..."
+                                        class="form-control @error('alamat_tujuan') is-invalid @enderror"
+                                        required
+                                    >{{ old('alamat_tujuan') }}</textarea>
 
                                     @error('alamat_tujuan')
                                         <div class="invalid-feelback">{{ $message }}</div>
@@ -61,10 +72,16 @@
                                         Tanggal Keberangkatan <span class="text-danger">*</span>
                                     </label>
 
-                                    <input type="date" name="tanggal_keberangkatan" id="tanggalKeberangkatan"
+                                    <input type="date"
+                                        name="tanggal_keberangkatan"
+                                        id="tanggalKeberangkatan"
                                         value="{{ old('tanggal_keberangkatan') }}"
                                         class="form-control @error('tanggal_keberangkatan') is-invalid @enderror"
                                         required>
+
+                                    @error('tanggal_keberangkatan')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="col-lg-6 col-12">
@@ -72,9 +89,16 @@
                                         Tanggal Kepulangan <span class="text-danger">*</span>
                                     </label>
 
-                                    <input type="date" name="tanggal_kepulangan" id="tanggalKepulangan"
+                                    <input type="date"
+                                        name="tanggal_kepulangan"
+                                        id="tanggalKepulangan"
                                         value="{{ old('tanggal_kepulangan') }}"
-                                        class="form-control @error('tanggal_kepulangan') is-invalid @enderror" required>
+                                        class="form-control @error('tanggal_kepulangan') is-invalid @enderror"
+                                        required>
+
+                                    @error('tanggal_kepulangan')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="col-12">
@@ -82,8 +106,7 @@
                                         Kendaraan <span class="text-danger">*</span>
                                     </label>
 
-                                    <select name="kendaraan" id="kendaraan"
-                                        class="form-select @error('kendaraan') is-invalid @enderror" required>
+                                    <select name="kendaraan" id="kendaraan" class="form-select @error('kendaraan') is-invalid @enderror" required>
                                         <option value="" disabled selected>Pilih Kendaraan...</option>
 
                                         @foreach ($kendaraan as $kendaraanItem)
@@ -92,6 +115,10 @@
                                             </option>
                                         @endforeach
                                     </select>
+
+                                    @error('kendaraan')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="col-12 d-grid gap-2">
@@ -115,10 +142,14 @@
                                         Waktu Penjemputan <span class="text-danger">*</span>
                                     </label>
 
-                                    <input type="time" id="waktuPenjemputan" name="waktu_penjemputan"
+                                    <input
+                                        type="time"
+                                        id="waktuPenjemputan"
+                                        name="waktu_penjemputan"
                                         value="{{ old('waktu_penjemputan') }}"
                                         placeholder="Masukan waktu penjemputan..."
-                                        class="form-control @error('waktu_penjemputan') is-invalid @enderror" required>
+                                        class="form-control @error('waktu_penjemputan') is-invalid @enderror"
+                                        required>
 
                                     @error('waktu_penjemputan')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -126,14 +157,20 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="lokasiPenjemputan" class="form-label">
+                                    <label for="alamatPenjemputan" class="form-label">
                                         Alamat Penjemputan <span class="text-danger">*</span>
                                     </label>
 
-                                    <textarea name="lokasi_penjemputan" id="lokasiPenjemputan" rows="3" placeholder="Masukan alamat penjemputan..."
-                                        class="form-control @error('lokasi_penjemputan') is-invalid @enderror">{{ old('lokasi_penjemputan') }}</textarea>
+                                    <textarea
+                                        name="alamat_penjemputan"
+                                        id="alamatPenjemputan"
+                                        rows="3"
+                                        placeholder="Masukan alamat penjemputan..."
+                                        class="form-control @error('alamat_penjemputan') is-invalid @enderror"
+                                        required
+                                    >{{ old('alamat_penjemputan') }}</textarea>
 
-                                    @error('lokasi_penjemputan')
+                                    @error('alamat_penjemputan')
                                         <div class="invalid-feelback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -209,12 +246,16 @@
                 const tanggalKeberangkatan = $('#tanggalKeberangkatan').val();
                 const tanggalKepulangan = $('#tanggalKepulangan').val();
 
-                if (
-                    kendaraanId === null ||
-                    tanggalKeberangkatan === '' ||
-                    tanggalKepulangan === ''
-                ) {
-                    return alert('Form kendaraan, Tanggal Keberangkatan dan Tanggal Kepulangan harus diisi.')
+                if (tanggalKeberangkatan === '') {
+                    return alert('Form Tanggal Keberangkatan harus diisi.')
+                }
+
+                if (tanggalKepulangan === '') {
+                    return alert('Form Tanggal Kepulangan harus diisi.')
+                }
+
+                if (kendaraanId === null) {
+                    return alert('Form kendaraan harus diisi.')
                 }
 
                 $('#preloader').fadeIn();
@@ -247,29 +288,49 @@
 
         {{-- Ambil harga --}}
         <script>
-            const cekHarga = (destinasi = null, kendaraan = null) => {
-                const baseUrl = $('meta[name=base-url]').attr('content');
+            const cekHarga = () => {
+                const destinasiId = $('#destinasi').val();
+                const tanggalKeberangkatan = $('#tanggalKeberangkatan').val();
+                const tanggalKepulangan = $('#tanggalKepulangan').val();
+                const kendaraanId = $('#kendaraan').val();
 
                 $.ajax({
-                    type: "get",
-                    url: `${baseUrl}/pemesanan/json/harga`,
+                    type: "GET",
+                    url: '<?= route('main.pemesanan.json.harga') ?>',
                     dataType: "json",
                     data: {
-                        destinasi,
-                        kendaraan,
+                        destinasi_id: destinasiId,
+                        tanggal_keberangkatan: tanggalKeberangkatan,
+                        tanggal_kepulangan: tanggalKepulangan,
+                        kendaraan_id: kendaraanId,
                     },
                     success: function(response) {
-                        $('#total').text(`Rp ${parseInt(response.data).toLocaleString()}`);
+                        $('#total').text(`Rp ${parseInt(response.data.total).toLocaleString()}`);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching price:', status, error);
                     }
                 });
             }
 
             $('#destinasi').change(function(e) {
-                cekHarga($(this).val(), $('#kendaraan').val())
+                e.preventDefault();
+                cekHarga();
+            });
+
+            $('#tanggalKeberangkatan').change(function(e) {
+                e.preventDefault();
+                cekHarga();
+            });
+
+            $('#tanggalKepulangan').change(function(e) {
+                e.preventDefault();
+                cekHarga();
             });
 
             $('#kendaraan').change(function(e) {
-                cekHarga($('#destinasi').val(), $(this).val())
+                e.preventDefault();
+                cekHarga();
             });
         </script>
 

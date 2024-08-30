@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Main\Pemesanan;
 
+use App\Models\Harga;
 use App\Models\Pesanan;
+use App\Models\UnitKendaraan;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,75 +34,26 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
             'tanggal_kepulangan'    => 'required|date',
             'kendaraan'             => 'required|exists:kendaraan,id',
             'waktu_penjemputan'     => 'required|date_format:H:i',
-            'lokasi_penjemputan'    => 'required|string|max:500',
+            'alamat_penjemputan'    => 'required|string|max:500',
         ];
     }
 
-    /**
-     * Method untuk memeriksa ketersediaan kendaraan.
-     *
-     * @return integer
-     */
-    private function cekKetersediaanKendaraan(): int
+    private function getUnitKendaraan(): ?Model
     {
-        /**
-         * select id dari tabel pesanan.
-         */
-        $query = Pesanan::select('pesanan.id');
-
-        /**
-         * Join tabel pesanan dengan tabel unit_kendaraan
-         */
-        $query->leftJoin('unit_kendaraan', 'unit_kendaraan.id', '=', 'pesanan.unit_kendaraan_id');
-
-        /**
-         * Filter unit kendaraan berdasarkan id kendaraan yang direquest.
-         */
-        $query->where('unit_kendaraan.kendaraan_id', $this->input('kendaraan'));
-
-        /**
-         * Tambahkan where untuk memfilter berdasarkan tanggal keberangkatan dan tanggal kepulangan.
-         */
-        $query->where(function (Builder $subQuery): void {
-
-            /**
-             * Perisak apakah ada tanggal_keberangkatan pada tabel pesanan yang berada
-             * diantara tanggal keberangkatan dan tanggal kepulangan yang dipilih oleh user.
-             */
-            $subQuery->whereBetween('pesanan.tanggal_keberangkatan', [
-                $this->input('tanggal_keberangkatan'),
-                $this->input('tanggal_kepulangan'),
-            ]);
-
-            /**
-             * Dan perisak apakah ada tanggal_kepulangan pada tabel pesanan yang berada
-             * diantara tanggal keberangkatan dan tanggal kepulangan yang dipilih oleh user.
-             */
-            $subQuery->orWhereBetween('pesanan.tanggal_kepulangan', [
-                $this->input('tanggal_keberangkatan'),
-                $this->input('tanggal_kepulangan'),
-            ]);
-
-            /**
-             * Dan periksa apakah ada tanggal keberangkatan yang dipilih oleh user yang berada
-             * diantara tanggal_keberangkatan dan tanggal_kepulangan yang ada pada tabel pesanan.
-             */
-            $subQuery->orWhere(function (Builder $subQuery): void {
-                $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $this->input('tanggal_keberangkatan'))
-                    ->where('pesanan.tanggal_kepulangan', '>=', $this->input('tanggal_keberangkatan'));
-            });
-
-            /**
-             * Dan periksa apakah ada tanggal kepulangan yang dipilih oleh user yang berada
-             * diantara tanggal_keberangkatan dan tanggal_kepulangan yang ada pada tabel pesanan.
-             */
-            $subQuery->orWhere(function (Builder $subQuery): void {
-                $subQuery->where('pesanan.tanggal_keberangkatan', '<=', $this->input('tanggal_kepulangan'))
-                    ->where('pesanan.tanggal_kepulangan', '>=', $this->input('tanggal_kepulangan'));
-            });
-        });
-
-        return $query->count();
+        return Unitkendaraan::select('unit_kendaraan.id')
+            ->leftJoin('pesanan', 'pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id')
+            ->where('unit_kendaraan.kendaraan_id', $this->input('kendaraan'))
+            ->where('unit_kendaraan.status', 'tersedia')
+            ->where(function (Builder $subQuery): void {
+                $subQuery->whereNull('pesanan.id')
+                    ->orWhere(function (Builder $subQuery): void {
+                        $subQuery->where('pesanan.status', '<>', 'dalam perjalanan')
+                            ->whereNotBetween('pesanan.tanggal_keberangkatan', [$this->input('tanggal_keberangkatan'), $this->input('tanggal_kepulangan')])
+                            ->whereNotBetween('pesanan.tanggal_kepulangan', [$this->input('tanggal_keberangkatan'), $this->input('tanggal_kepulangan')]);
+                    });
+            })
+            ->orderBy('pesanan.id', 'asc')
+            ->first();
     }
 
     /**
@@ -111,8 +64,41 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
     public function insert(): Model
     {
         /**
-         * Periksa apakah mobil tersedia atau tidak
-         * Jika jumlahnya lebih dari 0 atrinya mobi 
+         * Select nominal pada tabel harga berdasarkan id_kendaraan
+         * dan id_destinasi yang dipilih oleh member.
          */
+        $harga = Harga::where('destinasi_id', $this->input('destinasi'))
+            ->where('kendaraan_id', $this->input('kendaraan'))
+            ->first();
+
+        /**
+         * Ambil nominal harga
+         */
+        $nominal = (int) $harga?->nominal;
+
+        /**
+         * Ambil selisih hari dari tanggal yang dipilih
+         */
+        $startDate = new \DateTime($this->input('tanggal_keberangkatan'));
+        $endDate = new \DateTime($this->input('tanggal_kepulangan'));
+        $diffDate = $startDate->diff($endDate)->days;
+
+        /**
+         * Kalikan nominal dengan jumlah hari
+         */
+        $totalTagihan = ($diffDate + 1) * $nominal;
+
+        return Pesanan::create([
+            'user_id'               => user()->id,
+            'unit_kendaraan_id'     => $this->getUnitKendaraan()->id,
+            'destinasi_id'          => $this->input('destinasi'),
+            'tanggal_keberangkatan' => $this->input('tanggal_keberangkatan'),
+            'tanggal_kepulangan'    => $this->input('tanggal_kepulangan'),
+            'alamat_tujuan'         => $this->input('alamat_tujuan'),
+            'alamat_penjemputan'    => $this->input('alamat_penjemputan'),
+            'waktu_penjemputan'     => $this->input('waktu_penjemputan'),
+            'status_pembayaran'     => 'pending',
+            'total_tagihan'         => $totalTagihan,
+        ]);
     }
 }
