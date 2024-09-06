@@ -4,10 +4,11 @@ namespace App\Http\Requests\Main\Pemesanan;
 
 use App\Models\Harga;
 use App\Models\Pesanan;
-use App\Models\UnitKendaraan;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreRequest;
+use App\Models\UnitKendaraan;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePemesananRequest extends FormRequest implements StoreRequest
@@ -31,28 +32,29 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
             'destinasi'             => 'required|exists:destinasi,id',
             'alamat_tujuan'         => 'required|string|max:500',
             'tanggal_keberangkatan' => 'required|date',
-            'tanggal_kepulangan'    => 'required|date',
+            'tanggal_kepulangan'    => 'required|date|after_or_equal:tanggal_keberangkatan',
             'kendaraan'             => 'required|exists:kendaraan,id',
             'waktu_penjemputan'     => 'required|date_format:H:i',
             'alamat_penjemputan'    => 'required|string|max:500',
         ];
     }
 
+    /**
+     * mengambil data unit kendaraan yang tersedia.
+     *
+     * @return Model|null
+     */
     private function getUnitKendaraan(): ?Model
     {
-        return Unitkendaraan::select('unit_kendaraan.id')
-            ->leftJoin('pesanan', 'pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id')
+        return UnitKendaraan::select('unit_kendaraan.*')
+            ->leftJoin('pesanan', function (JoinClause $join): void {
+                $join->on('pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id')
+                    ->where('pesanan.tanggal_keberangkatan', '<=', $this->input('tanggal_kepulangan'))
+                    ->where('pesanan.tanggal_kepulangan', '>=', $this->input('tanggal_keberangkatan'));
+            })
             ->where('unit_kendaraan.kendaraan_id', $this->input('kendaraan'))
             ->where('unit_kendaraan.status', 'tersedia')
-            ->where(function (Builder $subQuery): void {
-                $subQuery->whereNull('pesanan.id')
-                    ->orWhere(function (Builder $subQuery): void {
-                        $subQuery->where('pesanan.status', '<>', 'dalam perjalanan')
-                            ->whereNotBetween('pesanan.tanggal_keberangkatan', [$this->input('tanggal_keberangkatan'), $this->input('tanggal_kepulangan')])
-                            ->whereNotBetween('pesanan.tanggal_kepulangan', [$this->input('tanggal_keberangkatan'), $this->input('tanggal_kepulangan')]);
-                    });
-            })
-            ->orderBy('pesanan.id', 'asc')
+            ->whereNull('pesanan.id')
             ->first();
     }
 
@@ -63,6 +65,19 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
      */
     public function insert(): Model
     {
+        /**
+         * Ambil data unit kendaraan yang tersedia.
+         */
+        $unitkendaraan = $this->getUnitKendaraan();
+
+        /**
+         * Periksa jika unit kendaraan tidak tersedia (null)
+         * kirimkan pesan bahwa kendaraan tidak tersedia.
+         */
+        if (is_null($unitkendaraan)) {
+            throw new \Exception("Unit kendaraan tidak tersedia.", 1);
+        }
+
         /**
          * Select nominal pada tabel harga berdasarkan id_kendaraan
          * dan id_destinasi yang dipilih oleh member.
@@ -90,7 +105,7 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
 
         return Pesanan::create([
             'user_id'               => user()->id,
-            'unit_kendaraan_id'     => $this->getUnitKendaraan()->id,
+            'unit_kendaraan_id'     => $unitkendaraan->id,
             'destinasi_id'          => $this->input('destinasi'),
             'tanggal_keberangkatan' => $this->input('tanggal_keberangkatan'),
             'tanggal_kepulangan'    => $this->input('tanggal_kepulangan'),

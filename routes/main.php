@@ -32,8 +32,8 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
                 ->prefix('/json')
                 ->group(function (): void {
                     Route::get('/destinasi/{paket}', 'getDestinasiJson')->name('.destinasi');
-                    Route::get('/ketersediaan', 'cekKetersediaanKendaraan')->name('.ketersediaan');
-                    Route::get('/harga', 'cekHarga')->name('.harga');
+                    Route::get('/ketersediaan', 'periksaKetersediaanKendaraan')->name('.ketersediaan');
+                    Route::get('/harga', 'periksaHarga')->name('.harga');
                 });
         });
 });

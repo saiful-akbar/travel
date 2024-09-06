@@ -15,14 +15,14 @@ return new class extends Migration
             $table->ulid('id')->primary();
 
             $table->foreignUlid('user_id')
-                ->nullable()
                 ->constrained('user')
-                ->nullOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreignUlid('supir_id')
+                ->nullable()
                 ->constrained('supir')
-                ->restrictOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
 
             $table->foreignUlid('unit_kendaraan_id')

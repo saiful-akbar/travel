@@ -4,6 +4,16 @@
 
         <section class="py-15 py-xl-20">
             <div class="container mt-5">
+                @session('alert')
+                    <div class="row mb-10">
+                        <div class="col-12">
+                            <div class="alert alert-{{ session('alert')['variant'] }}">
+                                {{ session('alert')['message'] }}
+                            </div>
+                        </div>
+                    </div>
+                @endsession
+
                 <div class="row justify-content-between">
                     <div class="col-xl-7 mb-5 mb-xl-0">
 
@@ -21,7 +31,7 @@
                                         <option value="" disabled selected>Pilih Paket...</option>
 
                                         @foreach ($paket as $paketItem)
-                                            <option value="{{ $paketItem->id }}" @selected(old('paket') == $paketItem->id)>
+                                            <option value="{{ $paketItem->id }}" @selected(old('paket') == $paketItem->id || request('paket') == $paketItem->id)>
                                                 {{ $paketItem->nama }}
                                             </option>
                                         @endforeach
@@ -202,6 +212,41 @@
     </form>
 
     <x-slot:script>
+        
+        @if(old('paket') || request('paket'))
+            @php
+                $paketId = old('paket') ?? request('paket');
+            @endphp
+
+            <script>
+                $(document).ready(function () {
+                    const destinasiId = "{{ request('destinasi') }}";
+
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('main.pemesanan.json.destinasi', ['paket' => $paketId]) }}",
+                        dataType: "json",
+                        success: function(response) {
+                            let options = `<option value="" selected disabled>Pilih Destinasi...</option>`
+                            
+                            options += response.data.map((destinasi) => {
+                                return `
+                                    <option value="${destinasi.id}" ${destinasi.id === destinasiId ? 'selected' : ''}>
+                                        ${destinasi.wilayah}
+                                    </option>
+                                `;
+                            });
+
+                            $('#destinasi').removeAttr('disabled');
+                            $('#destinasi').html(options);
+                        },
+                        error: function(error) {
+                            alert(`${error.status} - ${error.statusText}`)
+                        }
+                    });
+                });
+            </script>
+        @endif
 
         {{-- mengambil data destinasi dari paket yang dipilih --}}
         <script>
@@ -217,13 +262,9 @@
                     url: url,
                     dataType: "json",
                     success: function(response) {
-                        const {
-                            data
-                        } = response;
-
                         let options = `<option value="" selected disabled>Pilih Destinasi...</option>`
 
-                        options += data.map((destinasi) => {
+                        options += response.data.map((destinasi) => {
                             return `<option value="${destinasi.id}">${destinasi.wilayah}</option>`
                         });
 
@@ -272,7 +313,7 @@
                     success: function(response) {
                         $('#alert').html(`
                             <div class="mt-1 alert alert-${response.data ? 'success' : 'danger'}">
-                                ${response.data ? 'Kendaraan tersedia' : 'Kendaraan tidak tersedia'}
+                                ${response.data ? 'Kendaraan tersedia.' : 'Kendaraan tidak tesedia.'}
                             </div>
                         `);
                     },

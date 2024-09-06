@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Main\Pemesanan\StorePemesananRequest;
+use DateTime;
 use App\Models\Harga;
 use App\Models\Paket;
 use App\Models\Destinasi;
 use App\Models\Kendaraan;
-use App\Models\UnitKendaraan;
-use DateTime;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\JoinClause;
+use App\Http\Requests\Main\Pemesanan\StorePemesananRequest;
 
 class PemesananController extends Controller
 {
@@ -48,53 +48,27 @@ class PemesananController extends Controller
     }
 
     /**
-     * Memmeriksa ketersedian kendaraan.
-     * 
-     * select tabel unit_kendaraan dan left join dengan tabel pesanan.
-     * ambil data unit kendaraan berdasarkan kendaraan_id yang dipilih oleh user.
-     * lalu ambil unit kendaraan yang tidak memiliki pesanan atau unit kendaraan yang
-     * memiliki pesanan dengan status bukan "dalam perjalanan" dan periode tanggal kepergian
-     * dan tanggal kepulangaannya tidak berbentrokan dengan tanggal kepergian dan tanggal kepulangan
-     * yang dipilih oleh user.
+     * Periksa ketersedian kendaraan.
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function cekKetersediaanKendaraan(Request $request): JsonResponse
+    public function periksaKetersediaanKendaraan(Request $request): JsonResponse
     {
-        /**
-         * Join tabel unit_kendaraan dengan tabel pesanan.
-         */
-        $query = Unitkendaraan::leftJoin('pesanan', 'pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id');
-
-        /**
-         * filter data berdasarkan id kendaraan yang yang dilih oleh user
-         * dari tabel unit_kendaraan.
-         */
-        $query->where('unit_kendaraan.kendaraan_id', $request->query('kendaraan_id'));
-
-        /**
-         * Filter data berdasarkan status dari unit_kendaraan yang tersedia.
-         */
-        $query->where('unit_kendaraan.status', 'tersedia');
-
-        /**
-         * Filter juga data berdasarkan id pesanan yang bernilai null
-         * atau status pesanan yang bukan "dalam perjalanan" dan
-         * periode tanggal yang dipili user tidak berbentrokan dengan
-         * jadwal pesanan yang sudah ada.
-         */
-        $query->where(function (Builder $subQuery) use ($request): void {
-            $subQuery->whereNull('pesanan.id')
-                ->orWhere(function (Builder $subQuery) use ($request): void {
-                    $subQuery->where('pesanan.status', '<>', 'dalam perjalanan')
-                        ->whereNotBetween('pesanan.tanggal_keberangkatan', [$request->query('tanggal_keberangkatan'), $request->query('tanggal_kepulangan')])
-                        ->whereNotBetween('pesanan.tanggal_kepulangan', [$request->query('tanggal_keberangkatan'), $request->query('tanggal_kepulangan')]);
-                });
-        });
+        $count = DB::table('unit_kendaraan')
+            ->leftJoin('pesanan', function (JoinClause $join) use ($request): void {
+                $join->on('pesanan.unit_kendaraan_id', '=', 'unit_kendaraan.id')
+                    ->where('pesanan.tanggal_keberangkatan', '<=', $request->query('tanggal_kepulangan'))
+                    ->where('pesanan.tanggal_kepulangan', '>=', $request->query('tanggal_keberangkatan'));
+            })
+            ->select('unit_kendaraan.*')
+            ->where('unit_kendaraan.kendaraan_id', $request->query('kendaraan_id'))
+            ->where('unit_kendaraan.status', 'tersedia')
+            ->whereNull('pesanan.id')
+            ->count();
 
         return response()->json([
-            'data' => (bool) $query->count() > 0
+            'data' => $count > 0 ? true : false,
         ]);
     }
 
@@ -105,7 +79,7 @@ class PemesananController extends Controller
      * @param Kendaraan $kendaraan
      * @return JsonResponse
      */
-    public function cekHarga(Request $request): JsonResponse
+    public function periksaHarga(Request $request): JsonResponse
     {
         /**
          * Select nominal pada tabel harga berdasarkan id_kendaraan
@@ -149,11 +123,18 @@ class PemesananController extends Controller
      */
     public function store(StorePemesananRequest $request)
     {
-        $request->insert();
+        try {
+            $request->insert();
+        } catch (\Throwable $e) {
+            return back()->withInput($request->all())->with('alert', [
+                'variant' => 'danger',
+                'message' => $e->getMessage(),
+            ]);
+        }
 
         return to_route('main.pemesanan')->with('alert', [
             'variant' => 'success',
-            'message' => 'Pesanan anda berhasil ditambahkan.'
+            'message' => 'Pesanan anda berhasil dibuat.'
         ]);
     }
 }

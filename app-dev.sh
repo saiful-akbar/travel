@@ -6,4 +6,4 @@ php artisan key:generate
 php artisan optimize:clear
 php artisan storage:link
 
-npm ci
+npm install
