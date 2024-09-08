@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\DestinasiController;
 use App\Http\Controllers\Dashboard\KendaraanController;
 use App\Http\Controllers\Dashboard\MediaSosialController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
+use App\Http\Controllers\Dashboard\PesananController;
 
 /**
  * Home
@@ -143,4 +144,14 @@ Route::controller(MediaSosialController::class)
         Route::get('/{mediaSosial}', 'edit')->name('.edit');
         Route::patch('/{mediaSosial}', 'update')->name('.update');
         Route::delete('/{mediaSosial}', 'destroy')->name('.destroy');
+    });
+
+/**
+ * Pesanan
+ */
+Route::controller(PesananController::class)
+    ->name('.pesanan')
+    ->prefix('/pesanan')
+    ->group(function (): void {
+        Route::get('/', 'index');
     });

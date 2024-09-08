@@ -16,7 +16,7 @@
             </h1>
         </a>
 
-        {{-- secondary menu --}}
+        {{-- desktop user menu --}}
         <ul class="navbar-nav navbar-nav-secondary order-lg-3">
             @auth
                 <li class="nav-item d-lg-none">
@@ -33,17 +33,17 @@
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        @foreach (user_menu() as $menu)
+                        @foreach (user_menu() as $userMenu)
                             <li>
-                                <a class="dropdown-item" href="{{ $menu['url'] }}">
-                                    {{ $menu['name'] }}
+                                <a class="dropdown-item" href="{{ url($userMenu['path']) }}">
+                                    {{ $userMenu['name'] }}
                                 </a>
                             </li>
                         @endforeach
 
                         <li>
                             <a class="dropdown-item text-red" href="#" onclick="return handleLogout(event)">
-                                Log Out
+                                Keluar
                             </a>
                         </li>
                     </ul>
@@ -58,7 +58,7 @@
                         'btn-outline-dark' => $bgColor === 'light',
                         'btn-outline-dark' => $bgColor === 'white',
                     ])>
-                        Log In
+                        Masuk
                     </a>
                 </li>
             @endauth
@@ -71,19 +71,21 @@
             </li>
         </ul>
 
-        {{-- user menu --}}
+        {{-- mobile user menu --}}
         @auth
             <div class="collapse account-collapse" id="userNav" data-bs-parent="#mainNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{ url('/profil') }}">
-                            Profil
-                        </a>
-                    </li>
+                    @foreach (user_menu() as $userMenu)
+                        <li class="nav-item">
+                            <a class="nav-link " href="{{ url($userMenu['path']) }}">
+                                {{ $userMenu['name'] }}
+                            </a>
+                        </li>
+                    @endforeach
 
                     <li class="nav-item">
                         <a class="nav-link text-red" href="#" onclick="return handleLogout(event)">
-                            Log Out
+                            Keluar
                         </a>
                     </li>
                 </ul>

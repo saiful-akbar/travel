@@ -9,16 +9,14 @@
                         </div>
 
                         <div class="card-body bg-white">
-                            <form
-                                action="{{ route('login.store', ['redirect' => request('redirect', route('main.home'))]) }}"
-                                method="post" id="formLogin">
+                            <form action="{{ route('login.store', ['redirect' => request('redirect', route('main.home'))]) }}" method="post" id="formLogin">
                                 @csrf
 
                                 <div class="mb-3">
                                     <div class="form-floating @error('email') is-invalid @enderror">
                                         <input required type="email" name="email" id="email"
                                             placeholder="Alamat Email" value="{{ old('email') }}"
-                                            class="form-control @error('email') is-invalid @enderror">
+                                            class="form-control @error('email') is-invalid @enderror" autofocus>
 
                                         <label for="email">Email</label>
                                     </div>

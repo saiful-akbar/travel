@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasTimestamp;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -28,8 +29,6 @@ class Pesanan extends Model
         'waktu_penjemputan',
         'latitude_penjemputan',
         'longitude_penjemputan',
-        'total_tagihan',
-        'status_pembayaran',
         'status',
     ];
 
@@ -71,5 +70,15 @@ class Pesanan extends Model
     public function destinasi(): BelongsTo
     {
         return $this->belongsTo(Destinasi::class, 'destinasi_id', 'id');
+    }
+
+    /**
+     * Get all of the tagihan for the Pesanan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tagihan(): HasMany
+    {
+        return $this->hasMany(Tagihan::class, 'pesanan_id', 'id');
     }
 }

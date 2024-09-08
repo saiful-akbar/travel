@@ -14,18 +14,22 @@ class MediaSosialSeeder extends Seeder
             [
                 'nama' => 'Facebook',
                 'url' => 'https://facebook.com',
+                'icon' => 'bi-facebook',
             ],
             [
                 'nama' => 'Twitter',
-                'url' => 'https://x.com',
+                'url' => 'https://twitter.com',
+                'icon' => 'bi-twitter',
             ],
             [
                 'nama' => 'Instagram',
                 'url' => 'https://instagram.com',
+                'icon' => 'bi-instagram',
             ],
             [
                 'nama' => 'Youtube',
                 'url' => 'https://youtube.com',
+                'icon' => 'bi-youtube',
             ],
         ];
     }

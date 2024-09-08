@@ -178,7 +178,8 @@ if (!function_exists('user_menu')) {
             return [
                 [
                     'name' => 'Dashboard',
-                    'url' => route('dashboard.home'),
+                    'path' => 'dashboard',
+                    'route' => 'dashboard'
                 ],
             ];
         }
@@ -186,7 +187,18 @@ if (!function_exists('user_menu')) {
         return [
             [
                 'name' => 'Profil',
-                'url' => '#',
+                'path' => 'profil',
+                'route' => 'main.profil'
+            ],
+            [
+                'name' => 'Riwayat Pemesanan',
+                'path' => 'riwayat-pemesanan',
+                'route' => '#'
+            ],
+            [
+                'name' => 'Tagihan',
+                'path' => 'tagihan',
+                'route' => '#'
             ],
         ];
     }

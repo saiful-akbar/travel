@@ -61,59 +61,72 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
     /**
      * Tambahkan pesanan baru ke database.
      *
-     * @return Model
+     * @return Model|null
      */
-    public function insert(): Model
+    public function insert(): ?Model
     {
-        /**
-         * Ambil data unit kendaraan yang tersedia.
-         */
-        $unitkendaraan = $this->getUnitKendaraan();
+        DB::transaction(function (): void {
 
-        /**
-         * Periksa jika unit kendaraan tidak tersedia (null)
-         * kirimkan pesan bahwa kendaraan tidak tersedia.
-         */
-        if (is_null($unitkendaraan)) {
-            throw new \Exception("Unit kendaraan tidak tersedia.", 1);
-        }
+            /**
+             * Ambil data unit kendaraan yang tersedia.
+             */
+            $unitkendaraan = $this->getUnitKendaraan();
 
-        /**
-         * Select nominal pada tabel harga berdasarkan id_kendaraan
-         * dan id_destinasi yang dipilih oleh member.
-         */
-        $harga = Harga::where('destinasi_id', $this->input('destinasi'))
-            ->where('kendaraan_id', $this->input('kendaraan'))
-            ->first();
+            /**
+             * Periksa jika unit kendaraan tidak tersedia (null)
+             * kirimkan pesan bahwa kendaraan tidak tersedia.
+             */
+            if (is_null($unitkendaraan)) {
+                throw new \Exception("Unit kendaraan tidak tersedia.", 1);
+            }
 
-        /**
-         * Ambil nominal harga
-         */
-        $nominal = (int) $harga?->nominal;
+            /**
+             * insert data pesanan
+             */
+            $pesanan = Pesanan::create([
+                'user_id'               => user()->id,
+                'unit_kendaraan_id'     => $unitkendaraan->id,
+                'destinasi_id'          => $this->input('destinasi'),
+                'tanggal_keberangkatan' => $this->input('tanggal_keberangkatan'),
+                'tanggal_kepulangan'    => $this->input('tanggal_kepulangan'),
+                'alamat_tujuan'         => $this->input('alamat_tujuan'),
+                'alamat_penjemputan'    => $this->input('alamat_penjemputan'),
+                'waktu_penjemputan'     => $this->input('waktu_penjemputan'),
+            ]);
 
-        /**
-         * Ambil selisih hari dari tanggal yang dipilih
-         */
-        $startDate = new \DateTime($this->input('tanggal_keberangkatan'));
-        $endDate = new \DateTime($this->input('tanggal_kepulangan'));
-        $diffDate = $startDate->diff($endDate)->days;
+            /**
+             * Select nominal pada tabel harga berdasarkan id_kendaraan
+             * dan id_destinasi yang dipilih oleh member.
+             */
+            $harga = Harga::where('destinasi_id', $this->input('destinasi'))
+                ->where('kendaraan_id', $this->input('kendaraan'))
+                ->first();
 
-        /**
-         * Kalikan nominal dengan jumlah hari
-         */
-        $totalTagihan = ($diffDate + 1) * $nominal;
+            /**
+             * Ambil nominal harga
+             */
+            $nominal = (int) $harga?->nominal;
 
-        return Pesanan::create([
-            'user_id'               => user()->id,
-            'unit_kendaraan_id'     => $unitkendaraan->id,
-            'destinasi_id'          => $this->input('destinasi'),
-            'tanggal_keberangkatan' => $this->input('tanggal_keberangkatan'),
-            'tanggal_kepulangan'    => $this->input('tanggal_kepulangan'),
-            'alamat_tujuan'         => $this->input('alamat_tujuan'),
-            'alamat_penjemputan'    => $this->input('alamat_penjemputan'),
-            'waktu_penjemputan'     => $this->input('waktu_penjemputan'),
-            'status_pembayaran'     => 'pending',
-            'total_tagihan'         => $totalTagihan,
-        ]);
+            /**
+             * Ambil selisih hari dari tanggal yang dipilih
+             */
+            $startDate = new \DateTime($this->input('tanggal_keberangkatan'));
+            $endDate = new \DateTime($this->input('tanggal_kepulangan'));
+            $diffDate = $startDate->diff($endDate)->days;
+
+            /**
+             * Kalikan nominal dengan jumlah hari
+             */
+            $jumlahTagihan = ($diffDate + 1) * $nominal;
+
+            /**
+             * Insert data tagihan
+             */
+            $pesanan->tagihan()->create([
+                'jumlah' => $jumlahTagihan,
+            ]);
+        });
+
+        return null;
     }
 }

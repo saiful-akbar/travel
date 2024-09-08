@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\TentangKamiController;
 
@@ -35,5 +37,26 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
                     Route::get('/ketersediaan', 'periksaKetersediaanKendaraan')->name('.ketersediaan');
                     Route::get('/harga', 'periksaHarga')->name('.harga');
                 });
+        });
+
+    /**
+     * Profil
+     */
+    Route::controller(ProfilController::class)
+        ->name('.profil')
+        ->prefix('/profil')
+        ->group(function (): void {
+            Route::get('/', 'index');
+        });
+
+    /**
+     * Tagihan
+     */
+    Route::controller(TagihanController::class)
+        ->name('.tagihan')
+        ->prefix('/tagihan')
+        ->group(function (): void {
+            Route::get('/', 'index');
+            Route::get('/{tagihan}', 'show')->name('.show');
         });
 });

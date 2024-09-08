@@ -160,7 +160,7 @@ class App {
    * @param {object} options
    */
   static dataTable(element, options) {
-    $(element).DataTable({
+    return $(element).DataTable({
       processing: true,
       serverSide: true,
       responsive: true,
