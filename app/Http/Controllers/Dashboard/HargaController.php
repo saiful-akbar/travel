@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Harga;
 use App\Models\Paket;
+use App\Models\Destinasi;
 use App\Models\Kendaraan;
 use Illuminate\View\View;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Harga\DeleteHargaRequest;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Dashboard\Harga\HargaRequest;
 use App\Http\Requests\Dashboard\Harga\StoreHargaRequest;
+use App\Http\Requests\Dashboard\Harga\DeleteHargaRequest;
 use App\Http\Requests\Dashboard\Harga\UpdateHargaRequest;
 
 class HargaController extends Controller
@@ -48,13 +49,31 @@ class HargaController extends Controller
         /**
          * Select data paket dan destinasi.
          */
-        $paket = Paket::with(['destinasi'])
-            ->select('id', 'nama')
+        $paket = Paket::select('id', 'nama')
             ->where('aktif', true)
             ->orderBy('nama', 'asc')
             ->get();
 
         return view('pages.dashboard.harga.create', compact('kendaraan', 'paket'));
+    }
+
+    /**
+     * Mengambil data destinasi dari id paket yang dikirim.
+     *
+     * @param Paket $paket
+     * @return JsonResponse
+     */
+    public function getDestinasi(Paket $paket): JsonResponse
+    {
+        $destinasi = Destinasi::select('id', 'wilayah', 'jumlah_hari')
+            ->where('paket_id', $paket->id)
+            ->where('aktif', true)
+            ->orderBy('wilayah', 'asc')
+            ->get();
+
+        return response()->json([
+            'data' => $destinasi,
+        ]);
     }
 
     /**
@@ -90,13 +109,18 @@ class HargaController extends Controller
         /**
          * Select data paket dan destinasi.
          */
-        $paket = Paket::with(['destinasi'])
-            ->select('id', 'nama')
+        $paket = Paket::select('id', 'nama')
+            ->with('destinasi')
             ->where('aktif', true)
             ->orderBy('nama', 'asc')
             ->get();
 
-        return view('pages.dashboard.harga.edit', compact('harga', 'kendaraan', 'paket'));
+        /**
+         * Select data destinasi.
+         */
+        $destinasi = Destinasi::where('id', $harga->destinasi_id)->first();
+
+        return view('pages.dashboard.harga.edit', compact('harga', 'kendaraan', 'paket', 'destinasi'));
     }
 
     /**

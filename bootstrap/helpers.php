@@ -191,8 +191,8 @@ if (!function_exists('user_menu')) {
                 'route' => 'main.profil'
             ],
             [
-                'name' => 'Riwayat Pemesanan',
-                'path' => 'riwayat-pemesanan',
+                'name' => 'Pesanan',
+                'path' => 'pesanan',
                 'route' => '#'
             ],
             [

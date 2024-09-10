@@ -33,6 +33,7 @@ class UpdateHargaRequest extends FormRequest implements UpdateRequest
                     ->ignore($this->harga->id, 'id')
                     ->where('destinasi_id', $this->input('destinasi'))
             ],
+            'paket' => ['required', 'exists:paket,id'],
             'destinasi' => ['required', 'exists:destinasi,id'],
             'nominal' => ['required', 'numeric', 'min:0'],
         ];
@@ -49,7 +50,7 @@ class UpdateHargaRequest extends FormRequest implements UpdateRequest
         $destinasi = Destinasi::where('id', $this->input('destinasi'))->first();
 
         return [
-            'kendaraan.unique' => "Kendaraan $kendaraan->merek - $kendaraan->tipe dengan destinasi $destinasi->wilayah - $destinasi->jumlah_hari hari sudah ada."
+            'kendaraan.unique' => "Kendaraan <b>$kendaraan?->merek - $kendaraan?->tipe</b> dengan destinasi <b>$destinasi?->wilayah</b> sudah memiliki harga."
         ];
     }
 

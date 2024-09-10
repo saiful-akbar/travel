@@ -41,6 +41,11 @@
             .table-responsive table tr th,
             .table-responsive table tr td {
                 white-space: nowrap;
+                vertical-align: middle;
+            }
+
+            .cursor-pointer {
+                cursor: pointer;
             }
         </style>
 
@@ -69,7 +74,6 @@
         {{-- javascript --}}
         <script src="{{ main_asset('js/vendor.bundle.js') }}"></script>
         <script src="{{ main_asset('js/index.bundle.js') }}"></script>
-        <script src="{{ main_asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
         <script src="{{ main_asset('vendor/jquery/jquery.min.js') }}"></script>
 
         {{-- Logout --}}
@@ -78,7 +82,7 @@
                 e.preventDefault();
                 $('#formLogout').submit()
             }
-            </script>
+        </script>
 
         {{-- Stop preloader --}}
         <script>

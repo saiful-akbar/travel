@@ -1,13 +1,7 @@
 <x-layout.dashboard title="Paket Perjalanan">
     <x-slot:header-action>
-        <x-button
-            type="link"
-            href="{{ route('dashboard.paket.create') }}"
-            color="primary"
-            start-icon="bi-plus-lg"
-            role="button"
-        >
-            Tambah Paket
+        <x-button type="link" href="{{ route('dashboard.paket.create') }}" start-icon="bi-plus-lg">
+            Tambah
         </x-button>
     </x-slot:header-action>
 
@@ -23,7 +17,7 @@
     </div>
 
     {{-- Form delete --}}
-    <form action="#" method="post" id="formDeletePaket" class="d-none">
+    <form method="post" id="formDeletePaket" class="d-none">
         @csrf @method('delete')
     </form>
 

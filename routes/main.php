@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\TentangKamiController;
 
 Route::get('/', [HomeController::class, 'index'])->name('.home');
@@ -22,7 +23,7 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
      */
     Route::controller(PemesananController::class)
         ->name('.pemesanan')
-        ->prefix('/pemesanan')
+        ->prefix('pemesanan')
         ->group(function (): void {
             Route::get('/', 'index');
             Route::post('/', 'store')->name('.store');
@@ -31,7 +32,7 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
              * Json response.
              */
             Route::name('.json')
-                ->prefix('/json')
+                ->prefix('json')
                 ->group(function (): void {
                     Route::get('/destinasi/{paket}', 'getDestinasiJson')->name('.destinasi');
                     Route::get('/ketersediaan', 'periksaKetersediaanKendaraan')->name('.ketersediaan');
@@ -44,7 +45,7 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
      */
     Route::controller(ProfilController::class)
         ->name('.profil')
-        ->prefix('/profil')
+        ->prefix('profil')
         ->group(function (): void {
             Route::get('/', 'index');
         });
@@ -54,9 +55,17 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
      */
     Route::controller(TagihanController::class)
         ->name('.tagihan')
-        ->prefix('/tagihan')
+        ->prefix('tagihan')
         ->group(function (): void {
             Route::get('/', 'index');
             Route::get('/{tagihan}', 'show')->name('.show');
+        });
+
+    Route::controller(PesananController::class)
+        ->name('.pesanan')
+        ->prefix('pesanan')
+        ->group(function (): void {
+            Route::get('/', 'index');
+            Route::get('/{pesanan}', 'show')->name('.show');
         });
 });

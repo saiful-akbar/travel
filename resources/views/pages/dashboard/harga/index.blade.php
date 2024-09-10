@@ -1,12 +1,7 @@
 <x-layout.dashboard title="Harga">
     <x-slot:header-action>
-        <x-button
-            type="link"
-            href="{{ route('dashboard.harga.create') }}"
-            color="primary"
-            start-icon="bi-plus-lg"
-        >
-            Tambah Harga
+        <x-button type="link" href="{{ route('dashboard.harga.create') }}" start-icon="bi-plus-lg">
+            Tambah
         </x-button>
     </x-slot:header-action>
 
@@ -26,7 +21,7 @@
 
         {{-- Datatable --}}
         <script>
-            App.dataTable('#hargaTable', {
+            const hargaTable = App.dataTable('#hargaTable', {
                 ajax: '{{ route("dashboard.harga") }}',
                 columns: [
                     {

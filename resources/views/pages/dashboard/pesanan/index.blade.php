@@ -67,35 +67,6 @@
                         title: 'Tgl Pulang',
                     },
                     {
-                        data: 'pesanan_total_tagihan',
-                        name: 'pesanan.total_tagihan',
-                        title: 'Tagihan',
-                        render: (data) => {
-                            return `Rp ${App.numberFormat(parseFloat(data))}`
-                        }
-                    },
-                    {
-                        data: 'pesanan_status_pembayaran',
-                        name: 'pesanan.status_pembayaran',
-                        title: 'Pembayaran',
-                        render: (data) => {
-                            let color = 'primary';
-
-                            if (data === 'Lunas') {
-                                color = 'success';
-                            }
-
-                            if (data === 'Gagal') {
-                                color = 'danger';
-                            }
-
-                            return `
-                                <span class="legend-indicator bg-${color}"></span>
-                                <span>${data}</span>
-                            `;
-                        }
-                    },
-                    {
                         data: 'action',
                         name: 'action',
                         title: 'Aksi',

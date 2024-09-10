@@ -1,13 +1,7 @@
 <x-layout.dashboard title="Destinasi">
     <x-slot:header-action>
-        <x-button
-            type="link"
-            role="button"
-            href="{{ route('dashboard.destinasi.create') }}"
-            color="primary"
-            start-icon="bi-plus-lg"
-        >
-            Tambah Destinasi
+        <x-button type="link" href="{{ route('dashboard.destinasi.create') }}" start-icon="bi-plus-lg">
+            Tambah
         </x-button>
     </x-slot:header-action>
 

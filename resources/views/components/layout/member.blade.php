@@ -8,7 +8,7 @@
                             <ul class="nav nav-minimal flex-column" id="toc-nav">
                                 @foreach (user_menu() as $userMenu)
                                     <li class="nav-item">
-                                        <a class="nav-link fs-lg {{ Request::is($userMenu['path']) ? 'active' : ''}}" href="{{ url($userMenu['path']) }}">
+                                        <a class="nav-link fs-lg {{ Request::is($userMenu['path'] . '*') ? 'active' : ''}}" href="{{ url($userMenu['path']) }}">
                                             {{ $userMenu['name'] }}
                                         </a>
                                     </li>
@@ -16,7 +16,7 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link fs-lg text-red" href="#" onclick="return handleLogout(event)">
-                                        Log Out
+                                        Keluar
                                     </a>
                                 </li>
                             </ul>

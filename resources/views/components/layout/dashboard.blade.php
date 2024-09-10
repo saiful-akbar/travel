@@ -79,8 +79,7 @@
         <main id="content" role="main" class="main splitted-content-main">
             <div class="splitted-content-fluid content-space">
                 <div class="d-flex d-xl-none justify-content-end">
-                    <button type="button"
-                        class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler position-static">
+                    <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler position-static">
                         <i class="bi-arrow-bar-left navbar-toggler-short-align"></i>
                         <i class="bi-arrow-bar-right navbar-toggler-full-align"></i>
                     </button>
@@ -120,7 +119,7 @@
                         <x-alert variant="danger" class="mb-5">
                             <ul class="m-0">
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                    <li>{!! $error !!}</li>
                                 @endforeach
                             </ul>
                         </x-alert>

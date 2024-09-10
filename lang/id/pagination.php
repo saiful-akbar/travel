@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'previous' => '&laquo; Sebelumnya',
-    'next' => 'Berikutnya &raquo;',
+    'previous' => '<i class="bi-chevron-left"></i>',
+    'next' => '<i class="bi-chevron-right"></i>',
 
 ];

@@ -126,9 +126,13 @@ Route::controller(HargaController::class)
         Route::get('/', 'index');
         Route::get('/create', 'create')->name('.create');
         Route::post('/', 'store')->name('.store');
-        Route::get('/{harga}', 'edit')->name('.edit');
+        Route::get('/{harga}/edit', 'edit')->name('.edit');
         Route::patch('/{harga}', 'update')->name('.update');
         Route::delete('/{harga}', 'destroy')->name('.destroy');
+
+        Route::name('.json')->prefix('/json')->group(function (): void {
+            Route::get('/paket/{paket}/destinasi', 'getDestinasi')->name('.paket.destinasi');
+        });
     });
 
 /**

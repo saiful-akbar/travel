@@ -27,7 +27,8 @@
                                         Paket <span class="text-danger">*</span>
                                     </label>
 
-                                    <select name="paket" id="paket" class="form-select @error('paket') is-invalid @enderror" required>
+                                    <select name="paket" id="paket" class="form-select @error('paket') is-invalid @enderror"
+                                        required>
                                         <option value="" disabled selected>Pilih Paket...</option>
 
                                         @foreach ($paket as $paketItem)
@@ -47,11 +48,9 @@
                                         Destinasi <span class="text-danger">*</span>
                                     </label>
 
-                                    <select name="destinasi"
-                                        id="destinasi"
-                                        class="form-select @error('destinasi') is-invalid @enderror"
-                                        disabled
-                                        required>
+                                    <select disabled required name="destinasi" id="destinasi"
+                                        class="form-select @error('destinasi') is-invalid @enderror">
+                                        <option disabled selected>Pilih Destinasi...</option>
                                     </select>
 
                                     @error('destinasi')
@@ -64,13 +63,8 @@
                                         Alamat Tujuan <span class="text-danger">*</span>
                                     </label>
 
-                                    <textarea name="alamat_tujuan"
-                                        id="alamatTujuan"
-                                        rows="3"
-                                        placeholder="Masukan alamat tujuan..."
-                                        class="form-control @error('alamat_tujuan') is-invalid @enderror"
-                                        required
-                                    >{{ old('alamat_tujuan') }}</textarea>
+                                    <textarea name="alamat_tujuan" id="alamatTujuan" rows="3" placeholder="Masukan alamat tujuan..."
+                                        class="form-control @error('alamat_tujuan') is-invalid @enderror" required>{{ old('alamat_tujuan') }}</textarea>
 
                                     @error('alamat_tujuan')
                                         <div class="invalid-feelback">{{ $message }}</div>
@@ -82,12 +76,9 @@
                                         Tanggal Keberangkatan <span class="text-danger">*</span>
                                     </label>
 
-                                    <input type="date"
-                                        name="tanggal_keberangkatan"
-                                        id="tanggalKeberangkatan"
+                                    <input type="date" name="tanggal_keberangkatan" id="tanggalKeberangkatan"
                                         value="{{ old('tanggal_keberangkatan') }}"
-                                        class="form-control @error('tanggal_keberangkatan') is-invalid @enderror"
-                                        required>
+                                        class="form-control @error('tanggal_keberangkatan') is-invalid @enderror" required>
 
                                     @error('tanggal_keberangkatan')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -99,12 +90,9 @@
                                         Tanggal Kepulangan <span class="text-danger">*</span>
                                     </label>
 
-                                    <input type="date"
-                                        name="tanggal_kepulangan"
-                                        id="tanggalKepulangan"
+                                    <input type="date" name="tanggal_kepulangan" id="tanggalKepulangan"
                                         value="{{ old('tanggal_kepulangan') }}"
-                                        class="form-control @error('tanggal_kepulangan') is-invalid @enderror"
-                                        required>
+                                        class="form-control @error('tanggal_kepulangan') is-invalid @enderror" required>
 
                                     @error('tanggal_kepulangan')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -116,7 +104,8 @@
                                         Kendaraan <span class="text-danger">*</span>
                                     </label>
 
-                                    <select name="kendaraan" id="kendaraan" class="form-select @error('kendaraan') is-invalid @enderror" required>
+                                    <select name="kendaraan" id="kendaraan"
+                                        class="form-select @error('kendaraan') is-invalid @enderror" required>
                                         <option value="" disabled selected>Pilih Kendaraan...</option>
 
                                         @foreach ($kendaraan as $kendaraanItem)
@@ -152,14 +141,9 @@
                                         Waktu Penjemputan <span class="text-danger">*</span>
                                     </label>
 
-                                    <input
-                                        type="time"
-                                        id="waktuPenjemputan"
-                                        name="waktu_penjemputan"
-                                        value="{{ old('waktu_penjemputan') }}"
-                                        placeholder="Masukan waktu penjemputan..."
-                                        class="form-control @error('waktu_penjemputan') is-invalid @enderror"
-                                        required>
+                                    <input type="time" id="waktuPenjemputan" name="waktu_penjemputan"
+                                        value="{{ old('waktu_penjemputan') }}" placeholder="Masukan waktu penjemputan..."
+                                        class="form-control @error('waktu_penjemputan') is-invalid @enderror" required>
 
                                     @error('waktu_penjemputan')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -171,14 +155,8 @@
                                         Alamat Penjemputan <span class="text-danger">*</span>
                                     </label>
 
-                                    <textarea
-                                        name="alamat_penjemputan"
-                                        id="alamatPenjemputan"
-                                        rows="3"
-                                        placeholder="Masukan alamat penjemputan..."
-                                        class="form-control @error('alamat_penjemputan') is-invalid @enderror"
-                                        required
-                                    >{{ old('alamat_penjemputan') }}</textarea>
+                                    <textarea name="alamat_penjemputan" id="alamatPenjemputan" rows="3" placeholder="Masukan alamat penjemputan..."
+                                        class="form-control @error('alamat_penjemputan') is-invalid @enderror" required>{{ old('alamat_penjemputan') }}</textarea>
 
                                     @error('alamat_penjemputan')
                                         <div class="invalid-feelback">{{ $message }}</div>
@@ -212,14 +190,14 @@
     </form>
 
     <x-slot:script>
-        
-        @if(old('paket') || request('paket'))
+
+        @if (old('paket') || request('paket'))
             @php
                 $paketId = old('paket') ?? request('paket');
             @endphp
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     const destinasiId = "{{ request('destinasi') }}";
 
                     $.ajax({
@@ -228,7 +206,7 @@
                         dataType: "json",
                         success: function(response) {
                             let options = `<option value="" selected disabled>Pilih Destinasi...</option>`
-                            
+
                             options += response.data.map((destinasi) => {
                                 return `
                                     <option value="${destinasi.id}" ${destinasi.id === destinasiId ? 'selected' : ''}>
@@ -256,6 +234,8 @@
                 const paketId = $(this).val();
                 const baseUrl = $('meta[name=base-url]').attr('content');
                 const url = `${baseUrl}/pemesanan/json/destinasi/${paketId}`;
+
+                $('#destinasi').attr('disabled', 'disabled');
 
                 $.ajax({
                     type: "get",

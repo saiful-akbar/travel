@@ -1,7 +1,7 @@
 <x-layout.dashboard title="User">
     <x-slot:header-action>
         <x-button type="link" href="{{ route('dashboard.user.create') }}" start-icon="bi-person-plus-fill">
-            Tambah User
+            Tambah
         </x-button>
     </x-slot:header-action>
 
@@ -57,6 +57,7 @@
                         render: (data) => {
                             const color = data === 'admin' ? 'danger' : 'primary';
                             const content = data === 'admin' ? 'Administrator' : 'Member';
+                            
                             return `
                                 <span class="badge bg-soft-${color} text-${color}">
                                     ${content}
@@ -71,6 +72,7 @@
                         render: (data) => {
                             const color = data ? 'success' : 'danger';
                             const content = data ? 'Aktif' : 'Tidak Aktif';
+                            
                             return `
                                 <span class="badge bg-soft-${color} text-${color}">
                                     ${content}

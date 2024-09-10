@@ -65,7 +65,7 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
      */
     public function insert(): ?Model
     {
-        DB::transaction(function (): void {
+        return DB::transaction(function () {
 
             /**
              * Ambil data unit kendaraan yang tersedia.
@@ -125,8 +125,8 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
             $pesanan->tagihan()->create([
                 'jumlah' => $jumlahTagihan,
             ]);
-        });
 
-        return null;
+            return $pesanan;
+        });
     }
 }

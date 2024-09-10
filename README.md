@@ -2,43 +2,68 @@
 
 # Persyaratan
 
-- Laragon untuk web server.
-- PHP v8.2 atau yang lebih terbaru.
-- Composer.
-- Node JS & NPM
-- Database MySQL.
+- Laragon untuk web server
+- PHP v8.2.x atau yang lebih terbaru
+- Composer v2.4.x
+- NodeJS v20.11.x
+- Database MySQL atau MariaDB
 
 # Instalasi
 
-## Instalasi Pengembangan
+- Clone repository
 
-```bash
-git clone https://github.com/saiful-akbar/travel.git && cd travel
+  ```bash
+  git clone https://github.com/saiful-akbar/travel.git && cd travel
 
-```
+  ```
 
-```bash
-sh app-dev.sh
+- Install devDependencies
 
-```
+  ```bash
+  sh app-dev.sh
 
-```bash
-php artisan migrate:fresh --seed && npm run dev
+  ```
 
-```
+- Sesuaikan pengaturan database pada file .env
 
-## Instalasi Produksi
+  ```php
+  DB_HOST=
+  DB_PORT=
+  DB_DATABASE=
+  DB_USERNAME=
+  DB_PASSWORD=
 
-```bash
-sh app-build.sh
+  ```
 
-```
+- Jalankan migrasi database
 
-# Catatan
+  ```bash
+  php artisan migrate:fresh --seed
+  ```
 
-rule pengecekan ketersediaan kendaraan
+- Jalankan local server
 
-- ambil data unit_kendaraan berdasarkan id kendaraan yang dipilih.
-- filter berdasarkan status dari unit_krndaraan yang tersedia.
-- periksa apakah ada data tanggal_keberangkatan yang berada diantara periode keberangkatan member.
-- periksa apakah ada data tanggal_kepulangan yang berada diantara periode keberangkatan member.
+  ```bash
+  npm run dev
+
+  ```
+
+# Fitur
+
+### Admin
+
+- Autentikasi
+  - Login admin
+- Data Master
+  - Mengelola data user
+  - Mengelola data supir
+  - Mengelola data kendaraan
+  - Mengelola data perusahaan
+  - Mengelola data media sosial
+- Perjalanan
+  - Mengelola data paket perjalanan
+  - Mengelola data destinasi
+  - Mengelola data harga
+- Transaksi
+  - Mengelola data pesanan
+  - Mengelola data jadwal

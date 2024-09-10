@@ -6,8 +6,7 @@
     </x-slot:header-action>
 
     <x-slot:header-content>
-        <x-button type="link" href="{{ route('dashboard.kendaraan.create') }}" color="primary" start-icon="bi-plus-lg"
-            class="me-2">
+        <x-button type="link" href="{{ route('dashboard.kendaraan.create') }}" start-icon="bi-plus-lg" class="me-2">
             Tambah Kendaraan
         </x-button>
     </x-slot:header-content>
@@ -15,9 +14,8 @@
     {{-- Form tambah --}}
     <div class="row mb-5">
         <div class="col-12">
-            <form id="formCreateUnit"
-                action="{{ route('dashboard.kendaraan.unit.store', ['kendaraan' => $kendaraan->id]) }}" method="post">
-                @csrf
+            <form id="formCreateUnit" action="{{ route('dashboard.kendaraan.unit.store', ['kendaraan' => $kendaraan->id]) }}" method="post">
+                @csrf @method('post')
 
                 <div class="card">
                     <div class="card-body">
@@ -28,17 +26,11 @@
                                 </label>
 
                                 <input required type="text" name="nomor" id="nomor"
-                                    placeholder="Masukan nomor kendaraan..." value="{{ old('nomor') }}"
-                                    @class([
-                                        'form-control',
-                                        'form-control-light',
-                                        'is-invalid' => $errors->has('nomor'),
-                                    ])>
+                                    placeholder="Nomor kendaraan..." value="{{ old('nomor') }}"
+                                    class="form-control form-control-light @error('nomor') is-invalid @enderror">
 
                                 @error('nomor')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -48,12 +40,9 @@
                                 </label>
 
                                 <input required type="number" max="{{ date('Y') }}" min="{{ date('Y') - 20 }}"
-                                    name="tahun" id="tahun" placeholder="Masukan tahun kendaraan..."
-                                    value="{{ old('tahun') }}" @class([
-                                        'form-control',
-                                        'form-control-light',
-                                        'is-invalid' => $errors->has('tahun'),
-                                    ])>
+                                    name="tahun" id="tahun" placeholder="Tahun kendaraan..."
+                                    value="{{ old('tahun') }}"
+                                    class="form-control form-control-light @error('tahun') is-invalid @enderror">
 
                                 @error('tahun')
                                     <div class="invalid-feedback">
@@ -68,33 +57,22 @@
                                 </label>
 
                                 <div class="tom-select-custom @error('status') is-invalid @enderror is-invalid">
-                                    <select required name="status" id="status" autocomplete="off"
-                                        data-hs-tom-select-options='{"placeholder": "Pilih Status...", "hideSearch": true}'
-                                        @class([
-                                            'js-select',
-                                            'form-select',
-                                            'form-select-light',
-                                            'is-invalid' => $errors->has('status'),
-                                        ])>
-                                        <option value="">
-                                            Pilih Status...
-                                        </option>
-                                        <option value="tersedia" @selected(old('status') == 'tersedia')>
-                                            Tersedia
-                                        </option>
-                                        <option value="tidak_tersedia" @selected(old('status') == 'tidak_tersedia')>
-                                            Tidak Tersedia
-                                        </option>
-                                        <option value="dalam_perbaikan" @selected(old('status') == 'dalam_perbaikan')>
-                                            Dalam Perbaikan
-                                        </option>
+                                    <select
+                                        required
+                                        name="status"
+                                        id="status"
+                                        autocomplete="off"
+                                        class="form-select form-select-light @error('status') is-invalid @enderror"
+                                    >
+                                        <option value="" disabled selected>Pilih Status...</option>
+                                        <option value="tersedia" @selected(old('status') == 'tersedia')>Tersedia</option>
+                                        <option value="tidak_tersedia" @selected(old('status') == 'tidak_tersedia')>Tidak Tersedia</option>
+                                        <option value="dalam_perbaikan" @selected(old('status') == 'dalam_perbaikan')>Dalam Perbaikan</option>
                                     </select>
                                 </div>
 
                                 @error('status')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>

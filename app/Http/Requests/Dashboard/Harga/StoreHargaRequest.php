@@ -33,6 +33,7 @@ class StoreHargaRequest extends FormRequest implements StoreRequest
                 'exists:kendaraan,id',
                 Rule::unique('harga', 'kendaraan_id')->where('destinasi_id', $this->input('destinasi')),
             ],
+            'paket' => ['required', 'exists:paket,id'],
             'destinasi' => ['required', 'exists:destinasi,id'],
             'nominal' => ['required', 'numeric', 'min:0'],
         ];
@@ -49,7 +50,7 @@ class StoreHargaRequest extends FormRequest implements StoreRequest
         $destinasi = Destinasi::where('id', $this->input('destinasi'))->first();
 
         return [
-            'kendaraan.unique' => "Kendaraan $kendaraan->merek - $kendaraan->tipe dengan destinasi $destinasi->wilayah - $destinasi->jumlah_hari hari sudah ada."
+            'kendaraan.unique' => "Kendaraan <b>$kendaraan?->merek - $kendaraan?->tipe</b> dengan destinasi <b>$destinasi?->wilayah</b> sudah memiliki harga."
         ];
     }
 

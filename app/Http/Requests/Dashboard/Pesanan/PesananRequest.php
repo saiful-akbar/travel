@@ -33,8 +33,6 @@ class PesananRequest extends FormRequest implements DataTableRequest
             'pesanan.id as pesanan_id',
             'pesanan.tanggal_keberangkatan as pesanan_tanggal_keberangkatan',
             'pesanan.tanggal_kepulangan as pesanan_tanggal_kepulangan',
-            'pesanan.total_tagihan as pesanan_total_tagihan',
-            'pesanan.status_pembayaran as pesanan_status_pembayaran',
             'pesanan.status as pesanan_status',
             'user.id as user_id',
             'user.nama_lengkap as user_nama_lengkap',
@@ -54,7 +52,7 @@ class PesananRequest extends FormRequest implements DataTableRequest
                 return "
                     <button
                         type='button'
-                        class='btn btn-icon btn-sm btn-info rounded-pill'
+                        class='btn btn-icon btn-sm btn-info rounded-circle'
                         title='Detail'
                         onclick='showDetail(`{$model->id}`)'
                     >
@@ -63,7 +61,7 @@ class PesananRequest extends FormRequest implements DataTableRequest
 
                     <button
                         type='button'
-                        class='btn btn-icon btn-sm btn-warning rounded-pill'
+                        class='btn btn-icon btn-sm btn-warning rounded-circle'
                         title='Edit'
                         onclick='handleEdit(`{$model->id}`)'
                     >
@@ -72,7 +70,7 @@ class PesananRequest extends FormRequest implements DataTableRequest
 
                     <button
                         type='button'
-                        class='btn btn-icon btn-sm btn-danger rounded-pill'
+                        class='btn btn-icon btn-sm btn-danger rounded-circle'
                         title='Hapus'
                         onclick='handleDelete(`{$model->id}`)'
                     >

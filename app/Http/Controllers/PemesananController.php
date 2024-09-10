@@ -124,17 +124,19 @@ class PemesananController extends Controller
     public function store(StorePemesananRequest $request)
     {
         try {
-            $request->insert();
-        } catch (\Throwable $e) {
-            return back()->withInput($request->all())->with('alert', [
-                'variant' => 'danger',
-                'message' => $e->getMessage(),
-            ]);
-        }
+            $pemesananBaru = $request->insert();
 
-        return to_route('main.pemesanan')->with('alert', [
-            'variant' => 'success',
-            'message' => 'Pesanan anda berhasil dibuat.'
-        ]);
+            return to_route('main.pesanan.show', ['pesanan' => $pemesananBaru->id])->with('alert', [
+                'variant' => 'success',
+                'message' => 'Pesanan anda berhasil dibuat.'
+            ]);
+        } catch (\Throwable $e) {
+            return back()
+                ->withInput($request->all())
+                ->with('alert', [
+                    'variant' => 'danger',
+                    'message' => $e->getMessage(),
+                ]);
+        }
     }
 }

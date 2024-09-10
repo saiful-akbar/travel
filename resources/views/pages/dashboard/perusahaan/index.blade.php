@@ -6,8 +6,14 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-10">
                 <div class="card">
-                    <img src="{{ image($perusahaan?->logo) }}" alt="Logo" class="card-img-top p-3" id="logoPreview"
-                        loading="lazy" height="250" style="object-fit: contain; object-position: center;">
+                    <img src="{{ image($perusahaan?->logo) }}"
+                        alt="Logo"
+                        class="card-img-top p-3"
+                        id="logoPreview"
+                        loading="lazy"
+                        height="250"
+                        style="object-fit: contain; object-position: center;"
+                    >
 
                     <div class="card-body">
                         <div class="row mb-4">
@@ -113,7 +119,7 @@
                             </label>
 
                             <div class="col-sm-9">
-                                <textarea name="visi" id="visi" rows="10" placeholder="Masukan visi perusahaan..."
+                                <textarea name="visi" id="visi" rows="5" placeholder="Masukan visi perusahaan..."
                                     class="form-control form-control-light @error('visi') is-invalid @enderror">{{ old('visi', $perusahaan?->visi) }}</textarea>
 
                                 @error('visi')
@@ -126,7 +132,7 @@
                             <label for="misi" class="col-sm-3 col-form-label form-label">Misi</label>
 
                             <div class="col-sm-9">
-                                <textarea name="misi" id="misi" rows="10" placeholder="Masukan misi perusahaan..."
+                                <textarea name="misi" id="misi" rows="5" placeholder="Masukan misi perusahaan..."
                                     class="form-control form-control-light @error('misi') is-invalid @enderror">{{ old('misi', $perusahaan?->misi) }}</textarea>
 
                                 @error('misi')
@@ -148,7 +154,7 @@
                     </div>
 
                     <div class="card-body">
-                        <textarea name="profil" id="profil" rows="10" placeholder="Masukan profil perusahaan..."
+                        <textarea name="profil" id="profil" rows="5" placeholder="Masukan profil perusahaan..."
                             class="form-control form-control-light @error('profil') is-invalid @enderror">{{ old('profil', $perusahaan?->profil) }}</textarea>
 
                         @error('profil')

@@ -1,7 +1,7 @@
 <x-layout.dashboard title="Media Sosial">
     <x-slot:header-action>
         <x-button type="link" href="{{ route('dashboard.mediaSosial.create') }}" start-icon="bi-plus-lg">
-            Tambah Media Sosial
+            Tambah
         </x-button>
     </x-slot:header-action>
 
@@ -18,10 +18,9 @@
 
     {{-- Form delete --}}
     <form id="formDeleteMediaSosial" method="post" class="d-none">
-        @csrf
-        @method('delete')
+        @csrf @method('delete')
     </form>
-
+    
     <x-slot:script>
 
         {{-- DataTable --}}
@@ -50,11 +49,11 @@
                         title: 'Url',
                         render: (data) => {
                             return `
-                            <a href="${data}" target="_blank" rel="noopener noreferrer">
-                                <span class="d-block h5 text-primary mb-0">
-                                    ${data}
-                                </span>
-                            </a>
+                                <a href="${data}" target="_blank" rel="noopener noreferrer">
+                                    <span class="d-block h5 text-primary mb-0">
+                                        ${data}
+                                    </span>
+                                </a>
                             `;
                         }
                     },
