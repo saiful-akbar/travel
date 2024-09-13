@@ -19,12 +19,12 @@ class PesananController extends Controller
         /**
          * Select data pesanan berserta detailnya.
          */
-        $pesanans = Pesanan::with(['destinasi'])
+        $pesanan = Pesanan::with(['destinasi'])
             ->where('user_id', user()->id)
             ->orderBy('created_at', 'desc')
-            ->simplePaginate(10);
+            ->get();
 
-        return view('pages.main.pesanan.index', compact('pesanans'));
+        return view('pages.main.pesanan.index', compact('pesanan'));
     }
 
     /**

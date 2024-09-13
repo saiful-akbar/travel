@@ -42,14 +42,15 @@ return new class extends Migration
             $table->time('waktu_penjemputan');
             $table->string('latitude_penjemputan', 20)->nullable();
             $table->string('longitude_penjemputan', 20)->nullable();
+            $table->text('catatan')->nullable();
 
             $table->enum('status', [
                 'Dipesan',
-                'Konfirmasi',
-                'Proses',
+                'Dikonfirmasi',
+                'Dalam Perjalanan',
                 'Selesai',
-                'Batal',
-            ])->default('dipesan');
+                'Dibatalkan',
+            ])->default('Dipesan');
 
             $table->timestamps();
         });

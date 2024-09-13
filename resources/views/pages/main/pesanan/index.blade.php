@@ -1,68 +1,65 @@
-<x-layout.member title="Pesanan Anda">
-    <h2>Pesanan Anda</h2>
-
-    <section>
-        <div class="card bg-white">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Status</th>
-                                <th>Destinasi</th>
-                                <th>Jadwal</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($pesanans as $pesanan)
-                                <tr>
-                                    <td>
-                                        <span
-                                            @class([
-                                                'badge',
-                                                'rounded-pill',
-                                                'bg-primary' => $pesanan->status === 'Dipesan',
-                                                'bg-secondary' => $pesanan->status === 'Konfirmasi',
-                                                'bg-warning' => $pesanan->status === 'Proses',
-                                                'bg-success' => $pesanan->status === 'Selesai',
-                                                'bg-danger' => $pesanan->status === 'Batal',
-                                            ])
-                                        >
-                                            {{ $pesanan->status }}
-                                        </span>
-                                    </td>
-                                    <td>{{ $pesanan->destinasi->wilayah }}</td>
-                                    <td>{{ date("d M Y", strtotime($pesanan->tanggal_keberangkatan)) }} s/d {{ date("d M Y", strtotime($pesanan->tanggal_kepulangan)) }}</td>
-                                    <td>
-                                        <a href="{{ route('main.pesanan.show', ['pesanan' => $pesanan->id]) }}" class="btn btn-sm btn-dark rounded-pill">
-                                            <span>Detail</span>
-                                            <i class="bi-arrow-right ms-1"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="card-footer d-flex justify-content-center align-item-center">
-                {{ $pesanans->links() }}
-            </div>
+<x-layout.main title="Pesanan">
+    <section class="py-15 py-xl-20 pb-xl-15">
+        <div class="container mt-10">
+            <h1>Pesanan Anda</h1>
+            <p class="text-secondary">Daftar riwayat pesanan anda.</p>
         </div>
     </section>
 
-    <x-slot:script>
+    <section class="py-10 py-xl-15 border-top bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card bg-white">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>ID Pesanan</th>
+                                            <th>Destinasi</th>
+                                            <th>Tanggal</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
 
-        <script>
-            function toDetail(id) {
-                const baseUrl = "{{ url('/') }}";
-
-                console.log(`${baseUrl}/pesanan/${id}`);
-            }
-        </script>
-
-    </x-slot:script>
-</x-layout.member>
+                                    <tbody>
+                                        @foreach ($pesanan as $item)
+                                            <tr>
+                                                <td>
+                                                    <span
+                                                        @class([
+                                                            'badge',
+                                                            'bg-primary' => $item->status == 'Dipesan',
+                                                            'bg-secondary' => $item->status == 'Dikonfirmasi',
+                                                            'bg-warning' => $item->status == 'Dalam Perjalanan',
+                                                            'bg-success' => $item->status == 'Selesai',
+                                                            'bg-danger' => $item->status == 'Dibatalkan',
+                                                        ])
+                                                    >
+                                                        {{ $item->status }}
+                                                    </span>
+                                                </td>
+                                                <td>{{ $item->id }}</td>
+                                                <td>{{ $item->destinasi->wilayah }}</td>
+                                                <td>{{ date('d M Y', strtotime($item->tanggal_keberangkatan)) }}</td>
+                                                <td>
+                                                    <a href="{{ route('main.pesanan.show', ['pesanan' => $item->id]) }}"
+                                                        class="btn btn-sm btn-outline-dark">
+                                                        <span>Detail</span>
+                                                        <i class="ms-1 bi-arrow-right"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</x-layout.main>

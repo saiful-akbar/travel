@@ -36,6 +36,7 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
             'kendaraan'             => 'required|exists:kendaraan,id',
             'waktu_penjemputan'     => 'required|date_format:H:i',
             'alamat_penjemputan'    => 'required|string|max:500',
+            'catatan'               => 'nullable|string|max:500',
         ];
     }
 
@@ -92,6 +93,7 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
                 'alamat_tujuan'         => $this->input('alamat_tujuan'),
                 'alamat_penjemputan'    => $this->input('alamat_penjemputan'),
                 'waktu_penjemputan'     => $this->input('waktu_penjemputan'),
+                'catatan'               => $this->input('catatan'),
             ]);
 
             /**

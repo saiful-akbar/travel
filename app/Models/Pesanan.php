@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasTimestamp;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +30,7 @@ class Pesanan extends Model
         'waktu_penjemputan',
         'latitude_penjemputan',
         'longitude_penjemputan',
+        'catatan',
         'status',
     ];
 
@@ -72,13 +74,14 @@ class Pesanan extends Model
         return $this->belongsTo(Destinasi::class, 'destinasi_id', 'id');
     }
 
+
     /**
-     * Get all of the tagihan for the Pesanan
+     * Get the tagihan associated with the Pesanan
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function tagihan(): HasMany
+    public function tagihan(): HasOne
     {
-        return $this->hasMany(Tagihan::class, 'pesanan_id', 'id');
+        return $this->hasOne(Tagihan::class, 'pesanan_id', 'id');
     }
 }

@@ -1,78 +1,74 @@
 <x-layout.main title="Tentang Kami" footer-bg-color="dark" header-bg-color="white">
-    <section class="overflow-hidden py-15 py-xl-20">
+    <section class="py-15 py-xl-20 pb-xl-15">
+        <div class="container mt-10">
+            <h1>Tentang {{ perusahaan()->nama }}</h1>
+        </div>
+    </section>
+
+    {{-- Profil perusahaan --}}
+    <section class="py-10 py-xl-15 border-top">
         <div class="container">
-            <div class="row align-items-end mt-5">
-                <div class="col-12 mb-1 mb-md-0">
-                    <h1>Tentang {{ perusahaan()?->nama }}</h1>
+            <div class="row g-4 justify-content-between">
+                <div class="col-md-4">
+                    <h2 class="fs-5">Profil</h2>
+                </div>
+
+                <div class="col-md-8">
+                    <p class="text-secondary">{{ perusahaan()->profil }}</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="pb-15 pb-xl-20">
+    {{-- Visi --}}
+    <section class="py-10 py-xl-15 border-top">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-10">
-                    <span class="eyebrow text-primary mb-4">Tentang Kami</span>
-                    <h3 class="fs-4">{{ perusahaan()?->profil }}</h3>
+            <div class="row g-4 justify-content-between">
+                <div class="col-md-4">
+                    <h2 class="fs-5">Visi</h2>
+                </div>
+
+                <div class="col-md-8">
+                    <p class="text-secondary">{{ perusahaan()->visi }}</p>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- Visi & Misi --}}
-    <div class="py-15 py-xl-20 bg-light" data-center-top="@class: py-15 py-xl-20 bg-color-active;"
-        data-top-bottom="@class: py-15 py-xl-20 bg-color-active;" data-edge-strategy="reset">
-        <span class="bg-color bg-light"></span>
+    {{-- Misi --}}
+    <section class="py-10 py-xl-15 border-top">
+        <div class="container">
+            <div class="row g-4 justify-content-between">
+                <div class="col-md-4">
+                    <h2 class="fs-5">Misi</h2>
+                </div>
 
-        <section class="mb-10" data-aos="fade-up" data-aos-delay="150">
-            <div class="container">
-                <div class="row g-0 bg-white">
-                    <div class="col-lg-6 p-4 p-md-10 order-lg-2">
-                        <h3 class="fw-bold">Visi</h3>
-                        <p class="fs-lg text-secondary">{{ perusahaan()?->visi }}</p>
-                    </div>
-
-                    <div class="col-lg-6 order-lg-1 position-relative">
-                        <span class="background"
-                            style="background-image: url('{{ main_asset('images/bg-1.jpg') }}')"></span>
-                    </div>
+                <div class="col-md-8">
+                    <p class="text-secondary">{{ perusahaan()->misi }}</p>
                 </div>
             </div>
-        </section>
-
-        <section data-aos="fade-up" data-aos-delay="150">
-            <div class="container">
-                <div class="row g-0 bg-white">
-                    <div class="col-lg-6 order-lg-2 position-relative">
-                        <span class="background"
-                            style="background-image: url('{{ main_asset('images/bg-6.jpg') }}')"></span>
-                    </div>
-
-                    <div class="col-lg-6 p-4 p-md-10 order-lg-1">
-                        <h3 class="fw-bold">Misi</h3>
-                        <p class="fs-lg text-secondary">{{ perusahaan()?->misi }}</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
     {{-- Kontak --}}
-    <section class="py-15 py-xl-20 border-bottom">
+    <section class="py-15 py-xl-20 border-bottom border-top">
         <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <h1>Kontak Kami</h1>
+
                     <p>{{ perusahaan()?->profil }}</p>
+                    
                     <hr class="my-4 fw-25 ml-0">
+
                     <ul class="list-group list-group-minimal">
                         <li class="list-group-item d-flex align-items-center">
                             <span class="w-25 text-muted">Email</span>
                             {{ perusahaan()?->email }}
                         </li>
+
                         <li class="list-group-item d-flex align-items-center">
-                            <span class="w-25 text-muted">Phone</span>
+                            <span class="w-25 text-muted">Telepon</span>
                             {{ perusahaan()?->telepon }}
                         </li>
                     </ul>

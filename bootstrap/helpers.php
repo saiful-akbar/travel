@@ -191,15 +191,15 @@ if (!function_exists('user_menu')) {
                 'route' => 'main.profil'
             ],
             [
-                'name' => 'Pesanan',
+                'name' => 'Pesanan Saya',
                 'path' => 'pesanan',
                 'route' => '#'
             ],
-            [
-                'name' => 'Tagihan',
-                'path' => 'tagihan',
-                'route' => '#'
-            ],
+            // [
+            //     'name' => 'Tagihan',
+            //     'path' => 'tagihan',
+            //     'route' => '#'
+            // ],
         ];
     }
 }

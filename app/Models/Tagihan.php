@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasTimestamp;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,5 +34,17 @@ class Tagihan extends Model
     public function pesanan(): BelongsTo
     {
         return $this->belongsTo(Pesanan::class, 'pesanan_id', 'id');
+    }
+
+    /**
+     * Merubah value dari field jumlah.
+     *
+     * @return Attribute
+     */
+    public function jumlah(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => (float) $value
+        );
     }
 }

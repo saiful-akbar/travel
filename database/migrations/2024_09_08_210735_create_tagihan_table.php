@@ -21,8 +21,8 @@ return new class extends Migration
 
             $table->enum('status', ['Belum Bayar', 'Lunas'])->default('Belum Bayar');
             $table->decimal('jumlah', 15, 2)->unsigned()->default(0);
-            $table->string('bukti_pembayaran', 100)->nullable();
             $table->timestamp('tanggal_pembayaran')->nullable();
+            $table->string('bukti_pembayaran', 100)->nullable();
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

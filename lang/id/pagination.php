@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'previous' => '<i class="bi-chevron-left"></i>',
-    'next' => '<i class="bi-chevron-right"></i>',
+    'previous' => 'Sebelumnya',
+    'next' => 'Berikutnya',
 
 ];

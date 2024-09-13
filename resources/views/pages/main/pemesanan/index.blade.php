@@ -1,4 +1,4 @@
-<x-layout.main title="Pemesanan">
+<x-layout.main title="Pemesanan" footer-bg-color="darkx">
     <form id="formPemesanan" method="post" action="{{ route('main.pemesanan.store') }}">
         @csrf @method('post')
 
@@ -159,6 +159,19 @@
                                         class="form-control @error('alamat_penjemputan') is-invalid @enderror" required>{{ old('alamat_penjemputan') }}</textarea>
 
                                     @error('alamat_penjemputan')
+                                        <div class="invalid-feelback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="catatan" class="form-label">
+                                        Catatan
+                                    </label>
+
+                                    <textarea name="catatan" id="catatan" rows="3" placeholder="Catatan..."
+                                        class="form-control @error('catatan') is-invalid @enderror" required>{{ old('catatan') }}</textarea>
+
+                                    @error('catatan')
                                         <div class="invalid-feelback">{{ $message }}</div>
                                     @enderror
                                 </div>
