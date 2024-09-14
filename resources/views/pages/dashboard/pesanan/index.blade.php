@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-end">
-                    <x-button color="primary" start-icon="bi-arrow-clockwise" size="sm" id="btnReload">
+                    <x-button color="white" start-icon="bi-arrow-clockwise" size="sm" id="btnReload">
                         Segarkan
                     </x-button>
                 </div>
@@ -24,47 +24,65 @@
                     {
                         data: 'pesanan_id',
                         name: 'pesanan.id',
-                        title: 'ID Pesanan'
+                        title: 'ID Pesanan',
+                    },
+                    {
+                        data: 'user_nama_lengkap',
+                        name: 'user.nama_lengkap',
+                        title: 'Member',
+                    },
+                    {
+                        data: 'tagihan_jumlah',
+                        name: 'tagihan.jumlah',
+                        title: 'Jumlah Tagihan',
+                        render: (data) => `Rp ${App.numberFormat(parseFloat(data))}`
                     },
                     {
                         data: 'pesanan_status',
-                        name: 'pesanan_status',
+                        name: 'pesanan.status',
                         title: 'Status',
                         render: (data) => {
                             let color = 'secondary';
 
-                            if (data === 'Konfirmasi') {
-                                color = 'primary';
+                            if (data === 'Dibayar') {
+                                color = 'warning';
                             }
 
-                            if (data === 'Proses') {
-                                color = 'warning';
+                            if (data === 'Konfirmasi') {
+                                color = 'primary';
                             }
 
                             if (data === 'Selesai') {
                                 color = 'success';
                             }
 
-                            if (data === 'Batalkan') {
+                            if (data === 'Dibatalkan') {
                                 color = 'danger';
                             }
 
                             return `
-                                <button class="btn btn-xs btn-${color}">
+                                <span class="badge bg-soft-${color} text-${color}">
+                                    <span class="legend-indicator bg-${color}"></span>
                                     ${data}
-                                </button>
+                                </span>
                             `;
                         }
                     },
                     {
-                        data: 'pesanan_tanggal_keberangkatan',
-                        name: 'pesanan.tanggal_keberangkatan',
-                        title: 'Tgl Berangkat',
+                        data: 'kendaraan_merek',
+                        name: 'kendaraan.merek',
+                        title: 'Kendaraan',
+                        render: (data, type, row) => `${data} ${row.kendaraan_tipe}`,
                     },
                     {
-                        data: 'pesanan_tanggal_kepulangan',
-                        name: 'pesanan.tanggal_kepulangan',
-                        title: 'Tgl Pulang',
+                        data: 'destinasi_wilayah',
+                        name: 'destinasi.wilayah',
+                        title: 'Destinasi',
+                    },
+                    {
+                        data: 'pesanan_created_at',
+                        name: 'pesanan.created_at',
+                        title: 'Tanggal',
                     },
                     {
                         data: 'action',

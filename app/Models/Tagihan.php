@@ -19,7 +19,6 @@ class Tagihan extends Model
 
     protected $fillable = [
         'pesanan_id',
-        'status',
         'jumlah',
         'bukti_pembayaran',
         'tanggal_pembayaran',

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Main\Pesanan\BuktiPembayaranPesananRequest;
 use App\Models\Pesanan;
-use DateTime;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,16 @@ class PesananController extends Controller
      */
     public function index(): View
     {
+        /**
+         * Update status pesanan yang sudah dikonfirmasi menjadi selesai jika tanggal saat ini
+         * sudah melewati tanggal keberangkatan dan tanggal kepulangan.
+         */
+        Pesanan::where('user_id', user()->id)
+            ->where('status', 'Dikonfirmasi')
+            ->where('tanggal_keberangkatan', '<', date('Y-m-d'))
+            ->where('tanggal_kepulangan', '<', date('Y-m-d'))
+            ->update(['status' => 'Selesai']);
+
         /**
          * Select data pesanan berserta detailnya.
          */
@@ -51,5 +62,20 @@ class PesananController extends Controller
         }
 
         return view('pages.main.pesanan.show', compact('pesanan'));
+    }
+
+    /**
+     * Upload bukti pembayaran pesanan.
+     *
+     * @return void
+     */
+    public function uploadBuktiPembayaran(BuktiPembayaranPesananRequest $request, Pesanan $pesanan): RedirectResponse
+    {
+        $request->update();
+
+        return to_route('main.pesanan.show', ['pesanan' => $pesanan->id])->with('alert', [
+            'variant' => 'success',
+            'message' => 'Bukti pembayaran berhasil diunggah.'
+        ]);
     }
 }

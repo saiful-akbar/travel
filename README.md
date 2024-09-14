@@ -67,3 +67,7 @@
 - Transaksi
   - Mengelola data pesanan
   - Mengelola data jadwal
+
+# Catatan
+
+1. Update status pesanan menjadi selesai jika tanggal saat ini sudah melebihi tanggal keberangkatan dan tanggal kepulangan pada halaman pesanan admin dan pesanan member.

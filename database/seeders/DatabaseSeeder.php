@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             SupirSeeder::class,
             KendaraanSeeder::class,
             PaketSeeder::class,
-            PesananSeeder::class,
+            // PesananSeeder::class,
             MediaSosialSeeder::class,
             PerusahaanSeeder::class,
         ]);

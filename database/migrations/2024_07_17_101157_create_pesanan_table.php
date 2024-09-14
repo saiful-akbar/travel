@@ -45,12 +45,12 @@ return new class extends Migration
             $table->text('catatan')->nullable();
 
             $table->enum('status', [
-                'Dipesan',
+                'Menunggu Pembayaran',
+                'Dibayar',
                 'Dikonfirmasi',
-                'Dalam Perjalanan',
                 'Selesai',
                 'Dibatalkan',
-            ])->default('Dipesan');
+            ])->default('Menunggu Pembayaran');
 
             $table->timestamps();
         });

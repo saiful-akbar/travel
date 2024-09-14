@@ -1,6 +1,22 @@
 <x-layout.main title="Detail Pesanan" footer-bg-color="dark">
     <section class="py-20">
         <div class="container mt-10">
+            @if (session('alert'))
+                <div class="mb-10 alert alert-{{ session('alert')['variant'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger mb-10">
+                    <ul class="m-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="row g-5 justify-content-center justify-content-lg-between">
                 <div class="col-lg-6 position-relative">
                     <div class="row g-1">
@@ -15,6 +31,7 @@
                 <div class="col-lg-6">
                     <h1 class="mb-5">{{ $pesanan->destinasi->wilayah }}</h1>
 
+                    {{-- Deskripsi --}}
                     <section class="border-top py-5">
                         <div class="accordion accordion-minimal" id="detailPesanan">
                             <div class="accordion-item">
@@ -58,10 +75,9 @@
                                                 <span
                                                     @class([
                                                         'badge',
-                                                        'rounded-pill',
-                                                        'bg-primary' => $pesanan->status == 'Dipesan',
-                                                        'bg-secondary' => $pesanan->status == 'Dikonfirmasi',
-                                                        'bg-warning' => $pesanan->status == 'Dalam Perjalanan',
+                                                        'bg-secondary' => $pesanan->status == 'Menunggu Pembayaran',
+                                                        'bg-warning' => $pesanan->status == 'Dibayar',
+                                                        'bg-primary' => $pesanan->status == 'Dikonfirmasi',
                                                         'bg-success' => $pesanan->status == 'Selesai',
                                                         'bg-danger' => $pesanan->status == 'Dibatalkan',
                                                     ])
@@ -117,31 +133,17 @@
                                         <ul class="list-group list-group-minimal">
                                             <li class="list-group-item d-flex align-items-center">
                                                 <span class="w-50 text-muted">Jumlah</span>
-                                                Rp {{ number_format($pesanan->tagihan?->jumlah) }}
-                                            </li>
-    
-                                            <li class="list-group-item d-flex align-items-center">
-                                                <span class="w-50 text-muted">Status</span>
-                                                <span
-                                                    @class([
-                                                    'badge',
-                                                    'rounded-pill',
-                                                    'bg-danger' => $pesanan->tagihan?->status == 'Belum Bayar',
-                                                    'bg-success' => $pesanan->tagihan?->status == 'Lunas',
-                                                    ])
-                                                >
-                                                    {{ $pesanan->tagihan?->status }}
-                                                </span>
+                                                Rp {{ number_format($pesanan->tagihan->jumlah) }}
                                             </li>
     
                                             <li class="list-group-item d-flex align-items-center">
                                                 <span class="w-50 text-muted">Tanggal Pembayaran</span>
-                                                {{ $pesanan->tagihan?->tanggal_pembayaran }}
+                                                {{ date('d M Y, H:i', strtotime($pesanan->tagihan->tanggal_pembayaran)) }}
                                             </li>
     
                                             <li class="list-group-item d-flex align-items-center">
                                                 <span class="w-50 text-muted">Catatan</span>
-                                                {{ $pesanan->tagihan?->catatan }}
+                                                {{ $pesanan->tagihan->catatan }}
                                             </li>
                                         </ul>
                                     </div>
@@ -150,108 +152,104 @@
                         </div>
                     </section>
 
+                    {{-- Metode Pembayaran --}}
                     <section class="border-top py-5">
                         <h3 class="fs-4 mb-5">Metode Pembayaran</h3>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="d-flex p-4 border align-items-center">
-                                    <div class="col">
-                                        <span class="text-secondary">
-                                            <span class="d-block fw-bold text-primary">Mastercard</span>
-                                            <small>ending in</small>
-                                        </span>
-                                    </div>
+                        <div class="row p-4 border">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <div class="text-secondary">No. Rekening</div>
+                                    <div class="h5 mt-1">014 - 2040264127</div>
+                                </div>
 
-                                    <div class="col-auto text-end">
-                                        <div class="dropdown">
-                                            <a class="btn btn-sm btn-white btn-icon rounded-circle" href="#" role="button" id="dropdownMenuLink-2" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="bi bi-three-dots-vertical"></i>
-                                            </a>
-            
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-2">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div class="mb-3">
+                                    <div class="text-secondary">Atas Nama</div>
+                                    <div class="h5 mt-1">Saipul Aji</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="text-secondary">Jumlah yang harus dibayar</div>
+                                    <div class="h5 mt-1">Rp {{ number_format($pesanan->tagihan->jumlah) }}</div>
                                 </div>
                             </div>
-                            
-                            <div class="col-md-6">
-                                <div class="d-flex p-4 border align-items-center">
-                                    <div class="col">
-                                        <span class="text-secondary">
-                                            <span class="d-block fw-bold text-primary">Paypal</span>
-                                            <small>example@example.com</small>
-                                        </span>
-                                    </div>
 
-                                    <div class="col-auto text-end">
-                                        <div class="dropdown">
-                                            <a class="btn btn-sm btn-white btn-icon rounded-circle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="bi bi-three-dots-vertical"></i>
-                                            </a>
-            
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-lg-6 d-flex justify-content-center align-item-center">
+                                <img src="{{ main_asset('images/bca-logo.svg') }}" alt="BCA" width="250" height="100%">
                             </div>
                         </div>
                     </section>
 
-                    <section class="border-top pt-5">
-                        <div class="d-grid">
-                            <button data-bs-toggle="modal" data-bs-target="#modalUploadBuktiPembayaran" class="btn btn-dark">
-                                Unggah Bukti Pembayaran
-                            </button>
-                        </div>
-                    </section>
+                    {{-- Upload bukti pembayaran --}}
+                    @if ($pesanan->status == 'Menunggu Pembayaran')
+                        <section class="border-top pt-5">
+                            <div class="d-grid">
+                                <button data-bs-toggle="modal" data-bs-target="#modalUploadBuktiPembayaran" class="btn btn-dark">
+                                    Unggah Bukti Pembayaran
+                                </button>
+                            </div>
+                        </section>
+                    @endif
+
                 </div>
             </div>
         </div>
     </section>
 
     {{-- Modal form upload bukti pembayaran --}}
-    <form action="post" action="#" autocomplete="off" id="formUploadBuktiPembayaran">
-        @csrf @method('post')
+    @if ($pesanan->status == 'Menunggu Pembayaran')
+        <form method="post" action="{{ route('main.pesanan.buktiPembayaran', ['pesanan' => $pesanan->id]) }}"
+            autocomplete="off" id="formUploadBuktiPembayaran" enctype="multipart/form-data">
+            @csrf @method('post')
 
-        <div class="modal fade" id="modalUploadBuktiPembayaran" tabindex="-1" aria-labelledby="modalLabel"
-            aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h5 class="modal-title mb-5">Unggah Bukti Pembayaran</h5>
-                        
-                        <div class="mb-3">
-                            <label for="file" class="form-label">Unggah File</label>
-                            <input type="file" id="file" name="file"
-                                accept=".jpeg,.jpg,.png,.pdf,.docx"
-                                value="{{ old('file') }}"
-                                class="form-control form-control-sm @error('file') is-invalid @enderror">
+            <div class="modal fade" id="modalUploadBuktiPembayaran" tabindex="-1" aria-labelledby="modalLabel"
+                aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h5 class="modal-title mb-5">Unggah Bukti Pembayaran</h5>
+                            
+                            <div class="mb-3">
+                                <label for="file" class="form-label">Unggah File</label>
+                                <input type="file" id="file" name="file"
+                                    accept=".jpeg,.jpg,.png,.pdf,.docx"
+                                    value="{{ old('file') }}"
+                                    class="form-control form-control-sm @error('file') is-invalid @enderror">
+
+                                @error('file')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-5">
+                                <label for="catatan" class="form-label">Catatan</label>
+                                <textarea name="catatan" id="catatan" rows="3"
+                                    class="form-control @error('catatan') is-invalid @enderror"
+                                    placeholder="Masukan catatan...">{{ old('catatan') }}</textarea>
+
+                                @error('catatan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-sm btn-dark" data-bs-dismiss="modal" aria-label="Close">Tutup</button>
+                                <button type="submit" class="btn btn-sm btn-primary ms-1">Kirim</button>
+                            </div>
                         </div>
 
-                        <div class="mb-5">
-                            <label for="catatan" class="form-label">Catatan</label>
-                            <textarea name="catatan" id="catatan" rows="3"
-                                class="form-control @error('catatan') is-invalid @enderror"
-                                placeholder="Masukan catatan...">{{ old('catatan') }}</textarea>
-                        </div>
-
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-sm btn-dark" data-bs-dismiss="modal" aria-label="Close">Tutup</button>
-                            <button type="submit" class="btn btn-sm btn-primary ms-1">Kirim</button>
-                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    @endif
+
+    {{-- Javascript --}}
+    <x-slot:script>
+        <script>
+            $('#formUploadBuktiPembayaran').submit(function (e) { 
+                $('#preloader').fadeIn();
+            });
+        </script>
+    </x-slot:script>
 </x-layout.main>

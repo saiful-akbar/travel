@@ -76,9 +76,7 @@
 
                 <div class="col-lg-5">
                     <div class="media equal-1-1 border border-3">
-                        <iframe width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1048.2725071993561!2d106.72015427715367!3d-6.3303649371991915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e56307403f2d%3A0x7dc5996b20197dd9!2sMP9C%2BP2C%2C%20Benda%20Baru%2C%20Kec.%20Pamulang%2C%20Kota%20Tangerang%20Selatan%2C%20Banten%2015415!5e0!3m2!1sid!2sid!4v1723040549297!5m2!1sid!2sid"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1321.2616360762754!2d106.77016800668781!3d-6.375943507704589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ef240ec57e7b%3A0x783e87872a51971d!2sAwsy%20Futsal!5e0!3m2!1sid!2sid!4v1726321533040!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
                     <div class="card bg-black text-white">

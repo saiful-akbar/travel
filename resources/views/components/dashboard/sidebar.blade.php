@@ -1,4 +1,3 @@
-
 <aside class="{{ implode(' ', $classes) }}">
     <div class="navbar-vertical-container">
         <div class="navbar-vertical-content">
@@ -12,10 +11,16 @@
     
                         <div id="{{ str_replace(' ', '', $menu['name']) }}">
                             @foreach ($menu['sub_menu'] as $subMenu)
-                                <div class="nav-item">
-                                    <a class="nav-link {{ Request::is("{$subMenu['path']}*") ? 'active' : '' }}" href="{{ url($subMenu['path']) }}" data-placement="left">
-                                        <i class="nav-icon {{ $subMenu['icon'] ?? 'bi-dot' }}"></i>
-                                        <span class="nav-link-title">{{ $subMenu['name'] }}</span>
+                            <div class="nav-item">
+                                <a class="nav-link {{ Request::is("{$subMenu['path']}*") ? 'active' : '' }}" href="{{ url($subMenu['path']) }}" data-placement="left">
+                                    <i class="nav-icon {{ $subMenu['icon'] ?? 'bi-dot' }}"></i>
+                                    <span class="nav-link-title">{{ $subMenu['name'] }}</span>
+                                    
+                                    @if ($subMenu['name'] == 'Pesanan' && $pesananDibayar > 0)
+                                        <span class="badge bg-info rounded-circle ms-2">
+                                            {{ $pesananDibayar }}
+                                        </span>
+                                    @endif
                                     </a>
                                 </div>
                             @endforeach

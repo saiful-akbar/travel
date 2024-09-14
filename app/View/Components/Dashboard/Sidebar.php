@@ -3,8 +3,9 @@
 namespace App\View\Components\Dashboard;
 
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Pesanan;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
 class Sidebar extends Component
 {
@@ -109,11 +110,19 @@ class Sidebar extends Component
     ];
 
     /**
+     * Mengambil data tagihan yang sudah dibayar
+     *
+     * @var integer
+     */
+    public int $pesananDibayar = 0;
+
+    /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        //
+        // Select data tagihan dengan status yang sudah dibayar
+        $this->pesananDibayar = Pesanan::where('status', 'Dibayar')->count();
     }
 
     /**

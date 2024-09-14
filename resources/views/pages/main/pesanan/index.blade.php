@@ -31,9 +31,9 @@
                                                     <span
                                                         @class([
                                                             'badge',
-                                                            'bg-primary' => $item->status == 'Dipesan',
-                                                            'bg-secondary' => $item->status == 'Dikonfirmasi',
-                                                            'bg-warning' => $item->status == 'Dalam Perjalanan',
+                                                            'bg-secondary' => $item->status == 'Menunggu Pembayaran',
+                                                            'bg-warning' => $item->status == 'Dibayar',
+                                                            'bg-primary' => $item->status == 'Dikonfirmasi',
                                                             'bg-success' => $item->status == 'Selesai',
                                                             'bg-danger' => $item->status == 'Dibatalkan',
                                                         ])

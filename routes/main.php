@@ -61,11 +61,15 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
             Route::get('/{tagihan}', 'show')->name('.show');
         });
 
+    /**
+     * Pesanan
+     */
     Route::controller(PesananController::class)
         ->name('.pesanan')
         ->prefix('pesanan')
         ->group(function (): void {
             Route::get('/', 'index');
             Route::get('/{pesanan}', 'show')->name('.show');
+            Route::post('/{pesanan}/bukti-pembayaran', 'uploadBuktiPembayaran')->name('.buktiPembayaran');
         });
 });
