@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Pesanan;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -23,5 +24,29 @@ class PesananController extends Controller
         }
 
         return view('pages.dashboard.pesanan.index');
+    }
+
+    /**
+     * Menampilkan halaman edit pesanan
+     *
+     * @param Pesanan $pesanan
+     * @return View
+     */
+    public function edit(Pesanan $pesanan): View
+    {
+        return view('pages.dashboard.pesanan.edit', [
+            'pesanan' => $pesanan->load([
+                'user',
+                'supir',
+                'unitKendaraan.kendaraan',
+                'destinasi',
+                'tagihan',
+            ]),
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        dd($request->all());
     }
 }

@@ -60,11 +60,6 @@ class App {
 
     // INITIALIZATION OF QUILLJS EDITOR
     HSCore.components.HSQuill.init(".js-quill");
-
-    // hide preloader
-    $(document).ready(function () {
-      $("#preloader").fadeOut();
-    });
   }
 
   /**
@@ -202,6 +197,3 @@ class App {
     });
   }
 }
-
-App.init();
-App.styleSwitcher();

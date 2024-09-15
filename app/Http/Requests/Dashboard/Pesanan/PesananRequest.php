@@ -82,7 +82,7 @@ class PesananRequest extends FormRequest implements DataTableRequest
          * Datatable
          */
         return DataTables::of($query)
-            ->addColumn('action', function (Model $model) {
+            ->addColumn('action', function (Pesanan $model) {
                 return "
                     <button
                         class='btn btn-sm btn-icon btn-info rounded-circle'
@@ -92,13 +92,14 @@ class PesananRequest extends FormRequest implements DataTableRequest
                         <i class='bi-eye'></i>
                     </button>
 
-                    <button
+                    <a
+                        href='" . route('dashboard.pesanan.edit', ['pesanan' => $model->pesanan_id]) . "'
                         class='btn btn-sm btn-icon btn-warning rounded-circle'
-                        type='button'
+                        role='button'
                         title='Edit Pesanan'
                     >
                         <i class='bi-pencil'></i>
-                    </button>
+                    </a>
                     
                     <button
                         class='btn btn-sm btn-icon btn-danger rounded-circle'

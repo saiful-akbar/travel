@@ -158,4 +158,6 @@ Route::controller(PesananController::class)
     ->prefix('/pesanan')
     ->group(function (): void {
         Route::get('/', 'index');
+        Route::get('/{pesanan}/edit', 'edit')->name('.edit');
+        Route::patch('/{pesanan}', 'update')->name('.update');
     });

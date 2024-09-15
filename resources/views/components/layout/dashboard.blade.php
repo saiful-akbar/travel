@@ -94,16 +94,12 @@
                             </div>
 
                             @isset($headerAction)
-                                <div class="col-sm-auto">
-                                    {{ $headerAction }}
-                                </div>
+                                <div class="col-sm-auto">{{ $headerAction }}</div>
                             @endisset
                         </div>
 
                         @isset($headerContent)
-                            <div class="mt-3">
-                                {{ $headerContent }}
-                            </div>
+                            <div class="mt-3">{{ $headerContent }}</div>
                         @endisset
                     </div>
 
@@ -131,7 +127,7 @@
         </main>
 
         {{-- Form logout --}}
-        <form action="{{ route('logout') }}" method="post" id="formLogout">
+        <form action="{{ route('logout') }}" method="post" id="formLogout" class="d-none">
             @method('delete') @csrf
         </form>
 
@@ -143,7 +139,20 @@
         <script src="{{ dashboard_asset('vendor/datatables/datatables.min.js') }}"></script>
         <script src="{{ dashboard_asset('js/app.js') }}"></script>
 
-        {{-- Logout --}}
+        {{-- Menjalankan init vendor --}}
+        <script>
+            App.init();
+            App.styleSwitcher();
+        </script>
+
+        {{-- Hide preloader --}}
+        <script>
+            $(function () {
+                $("#preloader").fadeOut();
+            });
+        </script>
+
+        {{-- Handle Logout --}}
         <script>
             $('#logout').click(function(e) {
                 e.preventDefault();
@@ -152,6 +161,8 @@
         </script>
 
         {{-- Page script --}}
-        @isset($script) {{ $script }} @endisset
+        @isset($script)
+            {{ $script }}
+        @endisset
     </body>
 </html>
