@@ -53,6 +53,10 @@
                 align-items: center;
                 opacity: 0.75;
             }
+
+            body {
+                overflow-x: hidden;
+            }
         </style>
 
         {{-- Head script --}}
@@ -145,6 +149,11 @@
             App.styleSwitcher();
         </script>
 
+        {{-- Page script --}}
+        @isset($script)
+            {{ $script }}
+        @endisset
+
         {{-- Hide preloader --}}
         <script>
             $(function () {
@@ -159,10 +168,5 @@
                 $('#formLogout').submit();
             });
         </script>
-
-        {{-- Page script --}}
-        @isset($script)
-            {{ $script }}
-        @endisset
     </body>
 </html>

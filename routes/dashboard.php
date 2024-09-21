@@ -158,6 +158,10 @@ Route::controller(PesananController::class)
     ->prefix('/pesanan')
     ->group(function (): void {
         Route::get('/', 'index');
-        Route::get('/{pesanan}/edit', 'edit')->name('.edit');
-        Route::patch('/{pesanan}', 'update')->name('.update');
+        Route::get('/{pesanan}', 'show')->name('.show');
+        Route::patch('/tagihan/{tagihan}/konfirmasi-pembayaran', 'konfirmasiTagihanPembayaran')->name('.tagihan.konfirmasiPembayaran');
+
+        Route::name('.json')->prefix('/json')->group(function (): void {
+            Route::get('/tagihan/{tagihan}/bukti-pembayaran', 'getBuktiPembayaran')->name('.tagihan.buktiPembayaran');
+        });
     });

@@ -38,7 +38,11 @@
                                                             'bg-danger' => $item->status == 'Dibatalkan',
                                                         ])
                                                     >
-                                                        {{ $item->status }}
+                                                        @if ($item->status == 'Dibayar')
+                                                            Dibayar / Menunggu Konfirmasi
+                                                        @else
+                                                            {{ $item->status }}
+                                                        @endif
                                                     </span>
                                                 </td>
                                                 <td>{{ $item->id }}</td>

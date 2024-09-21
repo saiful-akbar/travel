@@ -82,7 +82,11 @@
                                                         'bg-danger' => $pesanan->status == 'Dibatalkan',
                                                     ])
                                                 >
-                                                    {{ $pesanan->status }}
+                                                    @if ($pesanan->status == 'Dibayar')
+                                                        Dibayar / Menunggu Konfirmasi
+                                                    @else
+                                                        {{ $pesanan->status }}
+                                                    @endif
                                                 </span>
                                             </li>
                                         </ul>
@@ -138,7 +142,11 @@
     
                                             <li class="list-group-item d-flex align-items-center">
                                                 <span class="w-50 text-muted">Tanggal Pembayaran</span>
-                                                {{ date('d M Y, H:i', strtotime($pesanan->tagihan->tanggal_pembayaran)) }}
+                                                @isset($pesanan->tagihan->tanggal_pembayaran)
+                                                    {{ date('d M Y, H:i', strtotime($pesanan->tagihan->tanggal_pembayaran)) }}
+                                                @else
+                                                    -
+                                                @endisset
                                             </li>
     
                                             <li class="list-group-item d-flex align-items-center">

@@ -25,7 +25,7 @@ class BuktiPembayaranPesananRequest extends FormRequest implements UpdateRequest
     public function rules(): array
     {
         return [
-            'file' => 'required|mimes:png,jpg,jpeg,pdf,docx|max:1024',
+            'file' => 'required|mimes:png,jpg,jpeg,pdf,docx|max:2048',
             'catatan' => 'required|string|max:500',
         ];
     }
