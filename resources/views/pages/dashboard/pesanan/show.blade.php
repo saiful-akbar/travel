@@ -20,7 +20,7 @@
             <div class="card mb-3 mb-lg-5">
                 <div class="card-header card-header-content-between">
                     <h4 class="card-header-title">Detail pesanan</h4>
-                    <a class="link" href="javascript:;">Edit</a>
+                    {{-- <a class="link" href="javascript:;">Edit</a> --}}
                 </div>
 
                 <div class="card-body">
@@ -39,31 +39,92 @@
                                     </h5>
 
                                     <div class="fs-6 text-body">
-                                        <span>Gender:</span>
-                                        <span class="fw-semibold">Women</span>
+                                        <span>Kapasitas :</span>
+                                        <span class="fw-semibold">{{ $pesanan->unitKendaraan->kendaraan->kapasitas }} Penumpang</span>
                                     </div>
                                     <div class="fs-6 text-body">
-                                        <span>Color:</span>
-                                        <span class="fw-semibold">Green</span>
+                                        <span>Supir :</span>
+                                        <span class="fw-semibold">{{ $pesanan->supir?->nama_lengkap }}</span>
                                     </div>
-                                    <div class="fs-6 text-body">
-                                        <span>Size:</span>
-                                        <span class="fw-semibold">UK 7</span>
-                                    </div>
-                                </div>
-
-                                <div class="col col-md-2 align-self-center">
-                                    <h5>$21.00</h5>
-                                </div>
-
-                                <div class="col col-md-2 align-self-center">
-                                    <h5>2</h5>
-                                </div>
-
-                                <div class="col col-md-2 align-self-center text-end">
-                                    <h5>$42.00</h5>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="fs-5 text-body">Destinasi :</div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 d-flex justify-content-md-end">
+                            <span class="fw-semibold">{{ $pesanan->destinasi->wilayah }}</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="fs-5 text-body">Keberangkatan :</div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 d-flex justify-content-md-end">
+                            <span class="fw-semibold">{{ $pesanan->tanggal_keberangkatan }}</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="fs-5 text-body">Kepulangan :</div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 d-flex justify-content-md-end">
+                            <span class="fw-semibold">{{ $pesanan->tanggal_kepulangan }}</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="fs-5 text-body">Alamat Tujuan :</div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 d-flex justify-content-md-end">
+                            <span class="fw-semibold">{{ $pesanan->alamat_tujuan }}</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="fs-5 text-body">Alamat Penjemputan :</div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 d-flex justify-content-md-end">
+                            <span class="fw-semibold">{{ $pesanan->alamat_penjemputan }}</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="fs-5 text-body">Waktu Penjemputan :</div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 d-flex justify-content-md-end">
+                            <span class="fw-semibold">{{ $pesanan->waktu_penjemputan }}</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="fs-5 text-body">Catatan :</div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 d-flex justify-content-md-end">
+                            <span class="fw-semibold">{{ $pesanan->catatan }}</span>
                         </div>
                     </div>
 
@@ -72,16 +133,8 @@
                     <div class="row justify-content-md-end mb-3">
                         <div class="col-md-8 col-lg-7">
                             <dl class="row text-sm-end">
-                                <dt class="col-sm-6">Subtotal:</dt>
-                                <dd class="col-sm-6">$65.00</dd>
-                                <dt class="col-sm-6">Shipping fee:</dt>
-                                <dd class="col-sm-6">$0.00</dd>
-                                <dt class="col-sm-6">Tax:</dt>
-                                <dd class="col-sm-6">$7.00</dd>
-                                <dt class="col-sm-6">Total:</dt>
-                                <dd class="col-sm-6">$65.00</dd>
-                                <dt class="col-sm-6">Amount paid:</dt>
-                                <dd class="col-sm-6">$65.00</dd>
+                                <dt class="col-sm-6">Total :</dt>
+                                <dd class="col-sm-6">Rp {{ number_format($pesanan->tagihan->jumlah) }}</dd>
                             </dl>
                         </div>
                     </div>

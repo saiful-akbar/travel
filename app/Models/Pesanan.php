@@ -28,8 +28,6 @@ class Pesanan extends Model
         'alamat_tujuan',
         'alamat_penjemputan',
         'waktu_penjemputan',
-        'latitude_penjemputan',
-        'longitude_penjemputan',
         'catatan',
         'status',
     ];

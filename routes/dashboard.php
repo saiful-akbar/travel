@@ -160,6 +160,7 @@ Route::controller(PesananController::class)
         Route::get('/', 'index');
         Route::get('/{pesanan}', 'show')->name('.show');
         Route::patch('/tagihan/{tagihan}/konfirmasi-pembayaran', 'konfirmasiTagihanPembayaran')->name('.tagihan.konfirmasiPembayaran');
+        Route::delete('/{pesanan}', 'destroy')->name('.destroy');
 
         Route::name('.json')->prefix('/json')->group(function (): void {
             Route::get('/tagihan/{tagihan}/bukti-pembayaran', 'getBuktiPembayaran')->name('.tagihan.buktiPembayaran');

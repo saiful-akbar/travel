@@ -147,6 +147,7 @@ class PesananRequest extends FormRequest implements DataTableRequest
                         class='btn btn-sm btn-icon btn-danger rounded-circle'
                         type='button'
                         title='Hapus Pesanan'
+                        onclick='return deletePesanan(`{$model->pesanan_id}`)'
                     >
                         <i class='bi-trash'></i>
                     </button>

@@ -40,8 +40,6 @@ return new class extends Migration
             $table->text('alamat_tujuan');
             $table->text('alamat_penjemputan');
             $table->time('waktu_penjemputan');
-            $table->string('latitude_penjemputan', 20)->nullable();
-            $table->string('longitude_penjemputan', 20)->nullable();
             $table->text('catatan')->nullable();
 
             $table->enum('status', [

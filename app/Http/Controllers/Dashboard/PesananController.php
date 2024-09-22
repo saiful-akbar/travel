@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Dashboard\Pesanan\PesananRequest;
 use App\Http\Requests\Dashboard\Pembayaran\KonfirmasiTagihanPembayaranRequest;
+use App\Http\Requests\Dashboard\Pesanan\DeletePesananRequest;
 
 class PesananController extends Controller
 {
@@ -70,6 +71,29 @@ class PesananController extends Controller
                 'destinasi.paket',
                 'tagihan',
             ]),
+        ]);
+    }
+
+    /**
+     * Menghapus data pesanan.
+     *
+     * @param Pesanan $pesanan
+     * @return RedirectResponse
+     */
+    public function destroy(DeletePesananRequest $request, Pesanan $pesanan): RedirectResponse
+    {
+        try {
+            $request->destroy();
+        } catch (\Throwable $e) {
+            return back()->with('alert', [
+                'variant' => 'danger',
+                'message' => $e->getMessage(),
+            ]);
+        }
+
+        return to_route('dashboard.pesanan')->with('alert', [
+            'variant' => 'success',
+            'message' => 'Pesanan berhasil dihapus.'
         ]);
     }
 }

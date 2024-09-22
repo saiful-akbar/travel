@@ -95,6 +95,11 @@
         </div>
     </form>
 
+    {{-- Form delete pesanan --}}
+    <form action="" method="post" id="formDeletePesanan" class="d-none">
+        @csrf @method('delete')
+    </form>
+
     {{-- Script --}}
     <x-slot:script>
 
@@ -299,6 +304,21 @@
             $('#formKonfirmasiPembayaran').submit(function (e) { 
                 $('#preloader').fadeIn();
             });
+        </script>
+
+        {{-- Hapus pesanan --}}
+        <script>
+            function deletePesanan(pesananId) {
+                App.destroy('Pesanan', (deleted) => {
+                    if (deleted) {
+                        const baseUrl = $('meta[name=base-url]').attr('content');
+                        const formDelete = $('#formDeletePesanan');
+
+                        formDelete.attr('action', `${baseUrl}/dashboard/pesanan/${pesananId}`);
+                        formDelete.submit();
+                    }
+                })
+            }
         </script>
 
     </x-slot:script>

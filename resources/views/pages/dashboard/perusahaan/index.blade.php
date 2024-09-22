@@ -167,11 +167,11 @@
 
         {{-- Button submit dan reset --}}
         <div class="position-fixed start-50 bottom-0 translate-middle-x w-100 zi-99 mb-3 zi-999"
-            style="max-width: 40rem;">
+            style="max-width: 30rem;">
             <div class="card card-sm bg-dark border-dark mx-2">
                 <div class="card-body">
                     <div class="d-flex justify-content-center justify-content-center">
-                        <button type="reset" class="btn btn-ghost-light btn-sm me-2">
+                        <button type="reset" class="btn btn-ghost-whhite btn-sm me-2">
                             <i class="bi-x-lg me-1"></i>
                             <span>Reset</span>
                         </button>

@@ -67,13 +67,6 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <a class="dropdown-item" href="#">
-                        <i class="bi-person dropdown-item-icon"></i>
-                        Profil
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
                     <a class="dropdown-item" href="#" id="logout">
                         <i class="bi-box-arrow-right dropdown-item-icon"></i>
                         Log Out
