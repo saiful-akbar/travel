@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\HargaController;
 use App\Http\Controllers\Dashboard\PaketController;
 use App\Http\Controllers\Dashboard\SupirController;
 use App\Http\Controllers\Dashboard\DestinasiController;
+use App\Http\Controllers\Dashboard\JadwalController;
 use App\Http\Controllers\Dashboard\KendaraanController;
 use App\Http\Controllers\Dashboard\MediaSosialController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
@@ -165,4 +166,14 @@ Route::controller(PesananController::class)
         Route::name('.json')->prefix('/json')->group(function (): void {
             Route::get('/tagihan/{tagihan}/bukti-pembayaran', 'getBuktiPembayaran')->name('.tagihan.buktiPembayaran');
         });
+    });
+
+/**
+ * Jadwal
+ */
+Route::controller(JadwalController::class)
+    ->name('.jadwal')
+    ->prefix('/jadwal')
+    ->group(function (): void {
+        Route::get('/', 'index');
     });

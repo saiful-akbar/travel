@@ -95,6 +95,10 @@
                         <div class="row align-items-end">
                             <div class="col-sm mb-2 mb-sm-0">
                                 <h1 class="page-header-title">{{ $title }}</h1>
+                                
+                                @isset($subTitle)
+                                    <p class="page-header-text">{{ $subTitle }}</p>
+                                @endisset
                             </div>
 
                             @isset($headerAction)
