@@ -48,6 +48,8 @@ Route::middleware(['auth', 'role:member'])->group(function (): void {
         ->prefix('profil')
         ->group(function (): void {
             Route::get('/', 'index');
+            Route::patch('/', 'update')->name('.update');
+            Route::patch('/password', 'updatePassword')->name('.updatePassword');
         });
 
     /**

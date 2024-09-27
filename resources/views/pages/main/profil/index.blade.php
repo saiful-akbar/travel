@@ -1,3 +1,200 @@
-<x-layout.member title="Profil">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet error deleniti ex fuga pariatur mollitia, eos tempore. Expedita accusantium eos eius asperiores excepturi deleniti error pariatur similique ea distinctio, dolorem perferendis obcaecati. Reprehenderit dolores vel fugit deserunt alias blanditiis impedit earum quod architecto quisquam corrupti, enim in neque non aut provident minus animi nostrum harum cumque ducimus similique id sunt perspiciatis. Aut aliquam molestiae repudiandae vero fuga nulla dolores laboriosam non eaque aperiam, magni ipsam, voluptates rerum blanditiis facere, eius assumenda. Itaque vel placeat nobis odio culpa? Quo, necessitatibus ipsam. Et dolore laudantium, corrupti veniam consequatur odit explicabo facilis, recusandae ex cumque asperiores veritatis commodi adipisci expedita iure dolor quia, voluptatem excepturi vitae distinctio temporibus nemo! Cupiditate iusto dignissimos impedit atque ab ea veniam exercitationem cum aliquid, accusantium molestias, fugiat at earum nihil nisi incidunt aut modi culpa delectus nulla expedita non similique optio enim. Quis vero odio tempora officia similique laudantium incidunt debitis molestiae totam minima. Temporibus earum magnam modi neque doloremque numquam aspernatur, a consequuntur optio! Similique quibusdam eaque amet culpa! Consectetur adipisci distinctio ullam, incidunt nulla minus placeat dolore impedit id beatae quaerat doloremque repellat reiciendis in totam quae vero suscipit quam autem. Vel odio quod quas distinctio, deserunt nihil ducimus, exercitationem harum veniam doloribus, laborum quae optio illo modi at consectetur dolorem voluptas quos nisi veritatis a tenetur. Deleniti voluptatum sequi enim non ipsum veritatis aspernatur tempora quaerat, aperiam sit reiciendis quidem maxime earum praesentium veniam facilis libero a maiores dolore inventore, nemo expedita. Iure nobis, dolorem blanditiis similique magni optio odit deserunt voluptatum aliquam impedit natus fugit. Laborum, dignissimos et mollitia veritatis neque ad, quod eos explicabo quam nemo minima praesentium atque earum? Rem totam velit beatae? Provident tenetur vitae ex optio dolore eligendi dolor non aut veniam eum veritatis iste doloremque nisi, reprehenderit impedit at. Incidunt esse quibusdam dolores culpa, quis illum architecto similique facere delectus vitae? Assumenda iusto quaerat inventore. Tempora cupiditate ratione eaque enim cumque animi, aliquam quod, vel consequatur odit eum natus veniam obcaecati magnam rem libero aspernatur maiores perspiciatis exercitationem consequuntur? Distinctio eaque optio eius minus unde repellat quod, tenetur obcaecati vel error illo rerum, veritatis quibusdam numquam architecto maxime. Odio incidunt voluptatum reprehenderit esse facere reiciendis? At neque saepe odio reiciendis hic? Suscipit error, eaque saepe animi totam repudiandae quaerat expedita, vitae aliquid corrupti impedit deleniti laudantium corporis cupiditate. Deserunt dolorum placeat et labore doloribus assumenda veniam. Quod aperiam recusandae est nostrum quas vel officiis quaerat dolore vero dolor dignissimos corporis, quae nihil aspernatur reiciendis a natus debitis eum obcaecati consequuntur porro sed nobis non. Fugit voluptas culpa modi qui alias aspernatur cum numquam, distinctio nesciunt omnis? Pariatur eum quas tempore ut non reiciendis laboriosam quasi ratione doloribus consequuntur quo aliquam, quae ex quam culpa quis, odio molestiae sit facilis quidem architecto nesciunt explicabo? Assumenda corrupti earum atque impedit fuga consectetur maxime eaque deleniti voluptate vel, aut fugit molestiae a hic sunt repellendus illum quia ratione laborum? Quis alias mollitia error maiores cumque, quam illo adipisci laboriosam sequi sed in consequatur consectetur ut odio facilis ullam ipsum aut sit aspernatur? Natus provident dolores omnis? Blanditiis aut maxime pariatur iste hic ratione amet voluptatum debitis! Nisi ex cupiditate sed. Tempora saepe, minus eius natus maiores asperiores porro autem vitae rerum in. Rem quisquam aut cumque fugiat provident! Consequuntur commodi nisi, distinctio quod error molestiae natus consectetur fuga laborum fugiat placeat quis sit ipsam ad, sapiente deleniti incidunt ipsum accusamus ullam obcaecati! Reiciendis autem possimus beatae ullam quasi enim quidem nostrum magni, ab eaque voluptatum illum repellendus velit rem libero distinctio soluta dolores non a sed necessitatibus quia quis dolore modi. Quaerat explicabo perferendis possimus quam, cumque reprehenderit accusantium voluptatum expedita facilis neque provident vero quod eligendi labore iusto minus. Culpa quidem molestiae harum? Officiis sint consequuntur atque odit eveniet. Autem porro, expedita suscipit id voluptates adipisci doloremque quaerat enim, iusto, ipsa unde dicta. Iusto laboriosam commodi nobis dolorem mollitia amet quasi sed, esse, enim architecto, fugit ea repellat atque. Commodi, voluptatem vero ad illo dolor sint corrupti. Voluptas iusto vero possimus sit nulla asperiores illum reiciendis corrupti optio nam molestias molestiae dicta provident, voluptatibus officiis consequuntur voluptatem harum a aliquam. Sequi, id fugiat iure accusantium voluptatibus assumenda! Molestias neque error recusandae quis natus vitae consequatur delectus nobis perspiciatis. Veniam, saepe laborum enim odit eos pariatur, quos voluptatibus, laudantium animi inventore nobis voluptates omnis. Dolore optio impedit repellat maxime quibusdam aut, suscipit iusto sed odio corrupti, quas maiores minus voluptatum eveniet consequatur atque nemo sapiente, reiciendis fuga quisquam aperiam voluptate aliquam unde! Iste nostrum voluptatum dolore consectetur, commodi cum aut nam explicabo excepturi, facere quisquam harum minima accusamus delectus reiciendis rerum ullam architecto sint mollitia adipisci obcaecati porro. Necessitatibus magnam dolore earum, suscipit asperiores aliquam ipsam sunt nesciunt ratione, minima facere adipisci quae eum ea eius voluptatem dicta quo consequuntur, error quaerat. Reprehenderit hic nihil quam odit mollitia excepturi minima fugiat voluptas vero cupiditate? Maxime debitis quam possimus veniam non fugit fuga ab fugiat provident laudantium qui incidunt a tenetur dolore, eius eaque deleniti. Consequuntur dolores architecto ea molestiae voluptatibus non quibusdam? Recusandae illum voluptatibus quae unde nobis excepturi ratione. Reprehenderit veniam accusamus ea eum a provident ipsum laboriosam? Reprehenderit nemo quidem sed explicabo excepturi culpa aliquam eveniet illum praesentium minus accusantium incidunt cumque dolorum optio reiciendis voluptatum ad sapiente corporis harum quas odio, nam consequuntur officia. Ullam unde quo neque non cumque. Animi id cum itaque tempora in temporibus unde saepe perspiciatis nisi voluptatibus, ipsa amet explicabo harum minima eos necessitatibus? Ullam molestiae incidunt eaque ipsam dolor quas, ratione ab voluptas totam fugiat ea soluta fugit iure non eveniet beatae debitis officia deleniti eum molestias! Molestiae quod quasi minus commodi dolorum. Ipsum expedita error accusantium minima, voluptatum perferendis quam vel odit hic libero doloribus, molestias unde quos optio eligendi corrupti ullam. Consectetur temporibus earum ab? Adipisci voluptatem a earum rem odio, alias eius obcaecati enim illo nesciunt perferendis molestiae reprehenderit fuga, ipsa eligendi iure accusamus, impedit aspernatur officiis sint vitae commodi! Excepturi eveniet, eos quam adipisci cum temporibus eaque distinctio?
-</x-layout.member>
+<x-layout.main title="Profil">
+    <section class="py-20">
+        <div class="container mt-10">
+            @if (session('alert'))
+                <div class="mb-10 alert alert-{{ session('alert')['variant'] }}">
+                    {{ session('alert')['message'] }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger mb-10">
+                    <ul class="m-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <div class="row g-5 justify-content-center justify-content-lg-between">
+                <div class="col-lg-6 position-relative">
+                    <div class="row g-1">
+                        <div class="col-md-10 order-md-2">
+                            <img src="{{ photo(user()->foto) }}" alt="foto" width="100%" height="400"
+                                style="object-fit: contain; object-position: initial;" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <h1 class="mb-5">Profil</h1>
+
+                    {{-- Update profil --}}
+                    <section class="border-top py-5">
+                        <form action="{{ route('main.profil.update') }}" method="post" id="formEditProfile" enctype="multipart/form-data">
+                            @csrf
+                            @method('patch')
+
+                            <div class="row">
+
+                                {{-- form Foto --}}
+                                <div class="col-12 mb-3">
+                                    <label for="foto" class="form-label">Unggah Foto</label>
+    
+                                    <input type="file" name="foto" id="foto" accept=".jpg,.jpeg,.png,.webp"
+                                        class="form-control @error('foto') is-invalid @enderror">
+    
+                                    @error('foto')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                
+                                {{-- form nama lengkap --}}
+                                <div class="col-md-6 col-12 mb-3">
+                                    <label for="nama_lengkap" class="form-label">
+                                        Nama Lengkap <span class="text-danger">*</span>
+                                    </label>
+    
+                                    <input required type="text" name="nama_lengkap"
+                                        id="nama_lengkap" placeholder="Masukan nama lengkap..."
+                                        value="{{ old('nama_lengkap', user()->nama_lengkap) }}"
+                                        class="form-control @error('nama_lengkap') is-invalid @enderror">
+    
+                                    @error('nama_lengkap')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                {{-- Form jenis kelamin --}}
+                                <div class="col-md-6 col-12 mb-3">
+                                    <label for="jenis_kelamin" class="form-label">
+                                        Jenis Kelamin <span class="text-danger">*</span>
+                                    </label>
+
+                                    <select required name="jenis_kelamin" id="jenis_kelamin"
+                                        class="form-select @error('jenis_kelamin') is-invalid @enderror">
+                                        <option value="" selected disabled>Pilih jenis kelamin...</option>
+                                        <option value="L" @selected(old('jenis_kelamin', user()->jenis_kelamin) == 'L')>Laki-Laki</option>
+                                        <option value="P" @selected(old('jenis_kelamin', user()->jenis_kelamin) == 'P')>Perempuan</option>
+                                    </select>
+
+                                    @error('jenis_kelamin')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                {{-- email --}}
+                                <div class="col-12 mb-3">
+                                    <label for="email" class="form-label">
+                                        Email <span class="text-danger">*</span>
+                                    </label>
+
+                                    <input type="email" name="email" id="email"
+                                        placeholder="Masukan email..." value="{{ old('email', user()->email) }}"
+                                        class="form-control @error('email') is-invalid @enderror" required>
+
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                {{-- telepon --}}
+                                <div class="col-12 mb-3">
+                                    <label for="telepon" class="form-label">
+                                        Telepon
+                                    </label>
+
+                                    <input type="number" name="telepon" id="telepon" inputmode="number"
+                                        placeholder="Masukan nomer telepon..." value="{{ old('telepon', user()->telepon) }}"
+                                        class="form-control @error('telepon') is-invalid @enderror">
+
+                                    @error('telepon')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">
+                                            Perbarui Profil
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </section>
+
+                    {{-- Update password --}}
+                    <section class="border-top py-5">
+                        <form action="{{ route('main.profil.updatePassword') }}" method="post" id="formEditPassword">
+                            @csrf
+                            @method('patch')
+
+                            <h3 class="fs-4 mb-5">Ubah Password</h3>
+                            
+                            <div class="card border">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <label for="password_lama" class="form-label">
+                                                Password lama <span class="text-danger">*</span>
+                                            </label>
+            
+                                            <input type="password" name="password_lama" id="password_lama"
+                                                class="form-control @error('password_lama') is-invalid @enderror"
+                                                placeholder="Masukan password lama anda..." required>
+            
+                                            @error('password_lama')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+        
+                                        <div class="col-12 mb-3">
+                                            <label for="password_baru" class="form-label">
+                                                Password baru <span class="text-danger">*</span>
+                                            </label>
+            
+                                            <input type="password" name="password_baru" id="password_baru"
+                                                class="form-control @error('password_baru') is-invalid @enderror"
+                                                placeholder="Masukan password baru anda..." required>
+            
+                                            @error('password_baru')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+        
+                                        <div class="col-12 mb-3">
+                                            <label for="password_konfirmasi" class="form-label">
+                                                Konfirmasi password baru <span class="text-danger">*</span>
+                                            </label>
+            
+                                            <input type="password" name="password_konfirmasi" id="password_konfirmasi"
+                                                class="form-control @error('password_konfirmasi') is-invalid @enderror"
+                                                placeholder="Ketik ulang password baru anda..." required>
+            
+                                            @error('password_konfirmasi')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="d-grid">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Perbarui Password
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </form>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</x-layout.main>
