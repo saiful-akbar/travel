@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paket;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {

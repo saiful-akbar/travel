@@ -42,8 +42,8 @@ window.hs_config = {
   },
   skipFilesFromBundle: {
     dist: [
-      "assets/js/hs.theme-appearance.js",
-      "assets/js/hs.theme-appearance-charts.html",
+      "assets/js/theme-appearance.js",
+      "assets/js/theme-appearance-charts.html",
       "assets/js/demo.js",
     ],
     build: [
@@ -53,8 +53,8 @@ window.hs_config = {
       "assets/css/theme-dark.html",
       "assets/css/docs.html",
       "assets/vendor/icon-set/style.html",
-      "assets/js/hs.theme-appearance.html",
-      "assets/js/hs.theme-appearance-charts.html",
+      "assets/js/theme-appearance.html",
+      "assets/js/theme-appearance-charts.html",
       "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.html",
       "assets/js/demo.js",
     ],

@@ -142,6 +142,7 @@
         {{-- JS Plugins --}}
         <script src="{{ dashboard_asset('js/vendor.min.js') }}"></script>
         <script src="{{ dashboard_asset('js/theme.min.js') }}"></script>
+        <script src="{{ dashboard_asset('js/theme-appearance-charts.js') }}"></script>
         <script src="{{ dashboard_asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ dashboard_asset('vendor/bootbox/bootbox.all.min.js') }}"></script>
         <script src="{{ dashboard_asset('vendor/datatables/datatables.min.js') }}"></script>

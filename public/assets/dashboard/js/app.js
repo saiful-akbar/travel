@@ -60,6 +60,9 @@ class App {
 
     // INITIALIZATION OF QUILLJS EDITOR
     HSCore.components.HSQuill.init(".js-quill");
+
+    // INITIALIZATION OF CHARTJS
+    HSCore.components.HSChartJS.init(".js-chart");
   }
 
   /**
