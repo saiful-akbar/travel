@@ -138,7 +138,7 @@
                                 color = 'warning';
                             }
 
-                            if (data === 'Konfirmasi') {
+                            if (data === 'Dikonfirmasi') {
                                 color = 'primary';
                             }
 

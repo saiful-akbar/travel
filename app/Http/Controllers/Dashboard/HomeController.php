@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Pesanan;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,23 +17,49 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        $sql = " SELECT status_enum.status, COALESCE(COUNT(pesanan.status), 0) AS `total`
-        FROM (
-            SELECT 'Menunggu Pembayaran' AS status
-            UNION ALL
-            SELECT 'Dibayar'
-            UNION ALL
-            SELECT 'Dikonfirmasi'
-            UNION ALL
-            SELECT 'Delesai'
-            UNION ALL
-            SELECT 'Dibatalkan'
-        ) AS status_enum
-        LEFT JOIN pesanan ON pesanan.status = status_enum.status
-        GROUP BY status_enum.status";
+        $data = [
+            [
+                'status' => 'Menunggu Pembayaran',
+                'month' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'value' => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ],
+            [
+                'status' => 'Dibayar',
+                'month' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'value' => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ],
+            [
+                'status' => 'Dikonfirmasi',
+                'month' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'value' => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ],
+            [
+                'status' => 'Selesai',
+                'month' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'value' => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ],
+            [
+                'status' => 'Dibatalkan',
+                'month' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'value' => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ],
+        ];
 
-        $statusPesanan = DB::select($sql);
+        $pesanan = Pesanan::select('status')
+            ->selectRaw("date_format(created_at, '%b') as month")
+            ->selectRaw('count(status) as total')
+            ->whereRaw('year(created_at) = ?', date('Y'))
+            ->groupBy('status', 'month')
+            ->get();
 
-        return view('pages.dashboard.home.index', compact('statusPesanan'));
+        foreach ($pesanan as $keyPesanan => $valuePesanan) {
+            foreach ($data as $keyData => $valueData) {
+                if ($valuePesanan->status == $valueData['status']) {
+                    $data[$keyData]['value'][array_search($valuePesanan->month, $valueData['month'])] = $valuePesanan->total;
+                }
+            }
+        }
+
+        return view('pages.dashboard.home.index', compact('data'));
     }
 }
