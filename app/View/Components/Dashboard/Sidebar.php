@@ -107,6 +107,23 @@ class Sidebar extends Component
                 ],
             ],
         ],
+        [
+            'name' => 'Artikel',
+            'sub_menu' => [
+                [
+                    'name' => 'Kategori',
+                    'path' => 'dashboard/kategori',
+                    'route' => 'dashboard.kategori',
+                    'icon' => 'bi-journals',
+                ],
+                [
+                    'name' => 'Artikel',
+                    'path' => 'dashboard/artikel',
+                    'route' => 'dashboard.artikel',
+                    'icon' => 'bi-book-half',
+                ],
+            ]
+        ]
     ];
 
     /**

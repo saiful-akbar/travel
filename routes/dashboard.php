@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\PaketController;
 use App\Http\Controllers\Dashboard\SupirController;
 use App\Http\Controllers\Dashboard\DestinasiController;
 use App\Http\Controllers\Dashboard\JadwalController;
+use App\Http\Controllers\Dashboard\KategoriController;
 use App\Http\Controllers\Dashboard\KendaraanController;
 use App\Http\Controllers\Dashboard\MediaSosialController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
@@ -176,4 +177,18 @@ Route::controller(JadwalController::class)
     ->prefix('/jadwal')
     ->group(function (): void {
         Route::get('/', 'index');
+    });
+
+/**
+ * Kategori
+ */
+Route::controller(KategoriController::class)
+    ->name('.kategori')
+    ->prefix('/kategori')
+    ->group(function (): void {
+        Route::get('/', 'index');
+        Route::post('/', 'store')->name('.store');
+        Route::get('/{kategori}/edit', 'edit')->name('.edit');
+        Route::patch('/{kategori}', 'update')->name('.update');
+        Route::delete('/{kategori}', 'destroy')->name('.destroy');
     });

@@ -70,4 +70,22 @@
 
 # Catatan
 
-1. Update status pesanan menjadi selesai jika tanggal saat ini sudah melebihi tanggal keberangkatan dan tanggal kepulangan pada halaman pesanan admin dan pesanan member.
+## Tambahan fitur artikel
+
+### Database
+
+- kategori
+- artikel
+
+### Halaman Tambahan
+
+- Member
+  - Halaman list artikel
+  - Halaman detail (post) artikel
+- Admin
+  - Kategori
+    - Halaman index list data kategori atrikel
+  - Artikel
+    - Halaman index list data artikel
+    - Halaman tambah data artikel
+    - Halaman edit data artikel
