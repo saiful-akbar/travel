@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\ArtikelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -191,4 +192,20 @@ Route::controller(KategoriController::class)
         Route::get('/{kategori}/edit', 'edit')->name('.edit');
         Route::patch('/{kategori}', 'update')->name('.update');
         Route::delete('/{kategori}', 'destroy')->name('.destroy');
+    });
+
+/**
+ * Artikel
+ */
+Route::controller(ArtikelController::class)
+    ->name('.artikel')
+    ->prefix('/artikel')
+    ->group(function (): void {
+        Route::get('/', 'index');
+        Route::get('/create', 'create')->name('.create');
+        Route::post('/', 'store')->name('.store');
+        Route::get('/{artikel}', 'show')->name('.show');
+        Route::get('/{artikel}/edit', 'edit')->name('.edit');
+        Route::patch('/{artikel}', 'update')->name('.update');
+        Route::delete('/{artikel}', 'destroy')->name('.destroy');
     });

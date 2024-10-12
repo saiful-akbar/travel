@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
@@ -12,6 +13,8 @@ use App\Http\Controllers\TentangKamiController;
 Route::get('/', [HomeController::class, 'index'])->name('.home');
 Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('.tentangKami');
 Route::get('/layanan', [LayananController::class, 'index'])->name('.layanan');
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('.artikel');
+Route::get('/artikel/{artikel}', [ArtikelController::class, 'show'])->name('.artikel.show');
 
 /**
  * Auth member

@@ -34,3 +34,8 @@ html[data-color-scheme="default"] {
     }
   }
 }
+
+.nowrap {
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -25,6 +25,18 @@ class Artikel extends Model
     ];
 
     /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'publikasikan' => 'boolean',
+        ];
+    }
+
+    /**
      * Get the kategori that owns the Artikel
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

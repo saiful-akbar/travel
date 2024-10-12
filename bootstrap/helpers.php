@@ -167,6 +167,11 @@ if (!function_exists('main_menu')) {
                 'path' => '/pemesanan',
                 'route' => 'main.pemesanan',
             ],
+            [
+                'name' => 'Artikel',
+                'path' => '/artikel',
+                'route' => 'main.artikel',
+            ],
         ];
     }
 }
