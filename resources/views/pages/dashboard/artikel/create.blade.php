@@ -256,7 +256,7 @@
         {{-- Mengisikan kembali isi konten jika ada form yang salah --}}
         @if (old('konten'))
             <script>
-                quill.pasteHTML("{!! old('konten') !!}");
+                quill.pasteHTML(`{!! old('konten') !!}`);
             </script>
         @endif
     </x-slot:script>
