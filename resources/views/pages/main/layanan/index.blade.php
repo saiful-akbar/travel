@@ -38,8 +38,7 @@
                                         </div>
 
                                         <div class="col-md-4 text-lg-end">
-                                            Rp{{ number_format($destinasi->harga_minimum) }} k –
-                                            Rp{{ number_format($destinasi->harga_maksimum) }} k
+                                            Rp{{ number_format($destinasi->harga_minimum) }} - Rp{{ number_format($destinasi->harga_maksimum) }}
                                         </div>
                                     </div>
                                 </div>

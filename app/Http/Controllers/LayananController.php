@@ -30,8 +30,8 @@ class LayananController extends Controller
                     'destinasi.paket_id as paket_id',
                     'destinasi.wilayah as wilayah',
                     'destinasi.jumlah_hari as jumlah_hari',
-                    DB::raw('COALESCE((FLOOR(MIN(harga.nominal) / 1000)), 0) as harga_minimum'),
-                    DB::raw('COALESCE((FLOOR(MAX(harga.nominal) / 1000)), 0) as harga_maksimum'),
+                    DB::raw('FLOOR(MIN(harga.nominal)) as harga_minimum'),
+                    DB::raw('FLOOR(MAX(harga.nominal)) as harga_maksimum'),
                 )
                     ->join('harga', 'harga.destinasi_id', '=', 'destinasi.id')
                     ->where('destinasi.aktif', true)
