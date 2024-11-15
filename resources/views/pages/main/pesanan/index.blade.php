@@ -17,7 +17,7 @@
                                     <thead>
                                         <tr>
                                             <th>Status</th>
-                                            <th>ID Pesanan</th>
+                                            <th>Kode Pesanan</th>
                                             <th>Destinasi</th>
                                             <th>Tanggal</th>
                                             <th></th>
@@ -45,7 +45,7 @@
                                                         @endif
                                                     </span>
                                                 </td>
-                                                <td>{{ $item->id }}</td>
+                                                <td>{{ $item->kode }}</td>
                                                 <td>{{ $item->destinasi->wilayah }}</td>
                                                 <td>{{ date('d M Y', strtotime($item->tanggal_keberangkatan)) }}</td>
                                                 <td>

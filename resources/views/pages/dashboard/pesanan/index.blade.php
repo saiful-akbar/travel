@@ -118,9 +118,9 @@
                 },
                 columns: [
                     {
-                        data: 'pesanan_id',
-                        name: 'pesanan.id',
-                        title: 'ID Pesanan',
+                        data: 'pesanan_kode',
+                        name: 'pesanan.kode',
+                        title: 'Kode Pesanan',
                     },
                     {
                         data: 'user_nama_lengkap',

@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Traits\HasTimestamp;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -23,6 +23,7 @@ class Pesanan extends Model
         'supir_id',
         'unit_kendaraan_id',
         'destinasi_id',
+        'kode',
         'tanggal_keberangkatan',
         'tanggal_kepulangan',
         'alamat_tujuan',
@@ -81,5 +82,13 @@ class Pesanan extends Model
     public function tagihan(): HasOne
     {
         return $this->hasOne(Tagihan::class, 'pesanan_id', 'id');
+    }
+
+    /**
+     * Mengambil kode pemesanan terakhir pada bulan berjalan.
+     */
+    public function scopeLastCode(Builder $query): void
+    {
+        $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [date('Y-m')])->latest();
     }
 }

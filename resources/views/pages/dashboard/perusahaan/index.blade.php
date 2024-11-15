@@ -33,8 +33,7 @@
                         </div>
 
                         {{-- Nama --}}
-                        <div class="row
-                                    mb-4">
+                        <div class="row mb-4">
                             <label for="nama" class="col-sm-3 col-form-label form-label">
                                 Nama Perusahaan
                             </label>
@@ -79,6 +78,21 @@
                                     class="form-control form-control-light @error('telepon') is-invalid @enderror">
 
                                 @error('telepon')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- Telepon --}}
+                        <div class="row mb-4">
+                            <label for="whatsapp" class="col-sm-3 col-form-label form-label">WhatsApp</label>
+
+                            <div class="col-sm-9">
+                                <input type="number" min="0" placeholder="Masukan no whatsapp..." name="whatsapp"
+                                    id="whatsapp" value="{{ old('whatsapp', $perusahaan?->whatsapp) }}"
+                                    class="form-control form-control-light @error('whatsapp') is-invalid @enderror">
+
+                                @error('whatsapp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

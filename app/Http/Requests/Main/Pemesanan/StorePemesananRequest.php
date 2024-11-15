@@ -60,6 +60,25 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
     }
 
     /**
+     * Membuat kode pesanan (order) otomatis.
+     */
+    private function generateCode(): string
+    {
+        $pesananTerakhir = Pesanan::lastCode()->first();
+        $tanggal = date('Y/m');
+        $prefix = "ORDER-$tanggal";
+
+        if (is_null($pesananTerakhir)) {
+            return "{$prefix}-0001";
+        }
+
+        $nomorTerakhir = (int) substr($pesananTerakhir?->kode, -4);
+        $nomorBaru = (string) str_pad(($nomorTerakhir + 1), 4, 0, STR_PAD_LEFT);
+
+        return "{$prefix}-{$nomorBaru}";
+    }
+
+    /**
      * Tambahkan pesanan baru ke database.
      *
      * @return Model|null
@@ -88,6 +107,7 @@ class StorePemesananRequest extends FormRequest implements StoreRequest
                 'user_id'               => user()->id,
                 'unit_kendaraan_id'     => $unitkendaraan->id,
                 'destinasi_id'          => $this->input('destinasi'),
+                'kode'                  => $this->generateCode(),
                 'tanggal_keberangkatan' => $this->input('tanggal_keberangkatan'),
                 'tanggal_kepulangan'    => $this->input('tanggal_kepulangan'),
                 'alamat_tujuan'         => $this->input('alamat_tujuan'),

@@ -21,6 +21,7 @@ class Perusahaan extends Model
         'pt',
         'logo',
         'telepon',
+        'whatsapp',
         'email',
         'alamat',
         'visi',

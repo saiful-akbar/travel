@@ -18,7 +18,7 @@
             @endif
 
             <div class="row g-5 justify-content-center justify-content-lg-between">
-                <div class="col-lg-6 position-relative">
+                <div class="col-lg-5 position-relative">
                     <div class="row g-1">
                         <div class="col-md-10 order-md-2">
                             <figure class="product-image bg-light p-2">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <h1 class="mb-5">{{ $pesanan->destinasi->wilayah }}</h1>
 
                     {{-- Deskripsi --}}
@@ -45,6 +45,11 @@
                                 <div id="bodyDeskripsi" class="accordion-collapse collapse" aria-labelledby="headingDeskripsi" data-bs-parent="#detailPesanan">
                                     <div class="accordion-body">
                                         <ul class="list-group list-group-minimal">
+                                            <li class="list-group-item d-flex align-items-center">
+                                                <span class="w-50 text-muted">Kode</span>
+                                                {{ $pesanan->kode }}
+                                            </li>
+
                                             <li class="list-group-item d-flex align-items-center">
                                                 <span class="w-50 text-muted">Keberangkatan</span>
                                                 {{ date('d M Y', strtotime($pesanan->tanggal_keberangkatan)) }}
@@ -165,7 +170,7 @@
                         <h3 class="fs-4 mb-5">Metode Pembayaran</h3>
 
                         <div class="row p-4 border">
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <div class="mb-3">
                                     <div class="text-secondary">No. Rekening</div>
                                     <div class="h5 mt-1">014 - 2040264127</div>
@@ -180,9 +185,15 @@
                                     <div class="text-secondary">Jumlah yang harus dibayar</div>
                                     <div class="h5 mt-1">Rp {{ number_format($pesanan->tagihan->jumlah) }}</div>
                                 </div>
+
+                                <div class="mb-3">
+                                    <small class="text-secondary">
+                                        Sebelum melakukan pembayaran silahkan konfirmasi ke nomor WhatsApp yang tertera ({{ perusahaan()->whatsapp }}).
+                                    </small>
+                                </div>
                             </div>
 
-                            <div class="col-lg-6 d-flex justify-content-center align-item-center">
+                            <div class="col-lg-5 d-flex justify-content-center align-item-center">
                                 <img src="{{ main_asset('images/bca-logo.svg') }}" alt="BCA" width="250" height="100%">
                             </div>
                         </div>

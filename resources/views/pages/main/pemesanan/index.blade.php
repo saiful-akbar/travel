@@ -169,7 +169,7 @@
                                     </label>
 
                                     <textarea name="catatan" id="catatan" rows="3" placeholder="Catatan..."
-                                        class="form-control @error('catatan') is-invalid @enderror" required>{{ old('catatan') }}</textarea>
+                                        class="form-control @error('catatan') is-invalid @enderror">{{ old('catatan') }}</textarea>
 
                                     @error('catatan')
                                         <div class="invalid-feelback">{{ $message }}</div>
@@ -241,10 +241,7 @@
 
         {{-- mengambil data destinasi dari paket yang dipilih --}}
         <script>
-            $('#paket').change(function(e) {
-                e.preventDefault();
-
-                const paketId = $(this).val();
+            function getDestinasi(paketId = null) {
                 const baseUrl = $('meta[name=base-url]').attr('content');
                 const url = `${baseUrl}/pemesanan/json/destinasi/${paketId}`;
 
@@ -255,20 +252,29 @@
                     url: url,
                     dataType: "json",
                     success: function(response) {
-                        let options = `<option value="" selected disabled>Pilih Destinasi...</option>`
-
-                        options += response.data.map((destinasi) => {
-                            return `<option value="${destinasi.id}">${destinasi.wilayah}</option>`
-                        });
-
-                        $('#destinasi').removeAttr('disabled');
-                        $('#destinasi').html(options);
+                        $('#destinasi').empty();
+                        $('#destinasi').append(`<option value="" selected disabled>Pilih Destinasi...</option>`);
+                        $('#destinasi').append(response.data.map((destinasi) => `<option value="${destinasi.id}">${destinasi.wilayah}</option>`));
                     },
                     error: function(error) {
                         alert(`${error.status} - ${error.statusText}`)
+                    },
+                    complete: function() {
+                        $('#destinasi').removeAttr('disabled');
                     }
                 });
+            }
+
+            $('#paket').change(function(e) {
+                e.preventDefault();
+                getDestinasi($(this).val());
             });
+
+            @if(old('destinasi'))
+                $(function () {
+                    getDestinasi("{{ old('destinasi') }}")
+                });
+            @endif
         </script>
 
         {{-- Periksa ketersediaan kendaraan --}}

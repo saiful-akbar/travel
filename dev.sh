@@ -3,7 +3,7 @@ cp .env.example .env
 php artisan key:generate
 php artisan optimize:clear
 
-# Buat ulang folder storage pada public
+# Hapus dan buat ulang folder storage pada public
 rm -rf public/storage
 php artisan storage:link
 

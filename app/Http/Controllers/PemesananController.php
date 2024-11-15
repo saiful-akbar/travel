@@ -131,12 +131,10 @@ class PemesananController extends Controller
                 'message' => 'Pesanan anda berhasil dibuat.'
             ]);
         } catch (\Throwable $e) {
-            return back()
-                ->withInput($request->all())
-                ->with('alert', [
-                    'variant' => 'danger',
-                    'message' => $e->getMessage(),
-                ]);
+            return back()->withInput($request->all())->with('alert', [
+                'variant' => 'danger',
+                'message' => $e->getMessage(),
+            ]);
         }
     }
 }

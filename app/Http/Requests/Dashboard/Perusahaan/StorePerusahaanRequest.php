@@ -27,14 +27,15 @@ class StorePerusahaanRequest extends FormRequest implements StoreRequest
     public function rules(): array
     {
         return [
-            'nama' => 'nullable|string|max:100',
-            'logo' => 'nullable|mimes:jpg,jpeg,png,webp|max:1024',
-            'email' => 'nullable|email:filter|max:100',
-            'telepon' => 'nullable|regex:/^[0-9]{10,13}+$/',
-            'alamat' => 'nullable|string|max:300',
-            'visi' => 'nullable|string|max:500',
-            'misi' => 'nullable|string|max:500',
-            'profil' => 'nullable|string|max:500',
+            'nama'     => 'nullable|string|max:100',
+            'logo'     => 'nullable|mimes:jpg,jpeg,png,webp|max:1024',
+            'email'    => 'nullable|email:filter|max:100',
+            'telepon'  => 'nullable|regex:/^[0-9]{10,13}+$/',
+            'whatsapp' => 'nullable|regex:/^[0-9]{10,13}+$/',
+            'alamat'   => 'nullable|string|max:300',
+            'visi'     => 'nullable|string|max:500',
+            'misi'     => 'nullable|string|max:500',
+            'profil'   => 'nullable|string|max:500',
         ];
     }
 
@@ -57,6 +58,7 @@ class StorePerusahaanRequest extends FormRequest implements StoreRequest
             'nama',
             'email',
             'telepon',
+            'whatsapp',
             'alamat',
             'visi',
             'misi',

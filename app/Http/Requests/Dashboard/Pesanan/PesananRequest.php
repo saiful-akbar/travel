@@ -95,6 +95,7 @@ class PesananRequest extends FormRequest implements DataTableRequest
             'user.nama_lengkap as user_nama_lengkap',
             'user.email as user_email',
             'pesanan.id as pesanan_id',
+            'pesanan.kode as pesanan_kode',
             'pesanan.status as pesanan_status',
             'pesanan.created_at as pesanan_created_at',
             'pesanan.updated_at as updated_at',
